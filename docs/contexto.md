@@ -86,7 +86,17 @@ Link: https://www.kaggle.com/datasets/yasserh/titanic-dataset/data
 
 # Canvas analítico
 
-Nesta seção, você deverá estruturar o seu Canvas Analítico. O Canvas Analítico tem o papel de registrar a organização das ideias e apresentar o modelo de negócio.
+## Software Analytics Canvas
+**Project:** Titanic Dataset
+| |              |                   |  
+|-|--------------| ----------------- |
+|<img src="/home/cleverson/Workspace/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/docs/img/sac_img-01.png" width="25"> |**1. Question**       |Qual perfil de pessoas teriam mais probabilidade de sobreviver?|
+|<img src="/home/cleverson/Workspace/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/docs/img/sac_img-02.png" width="25"> |**2. Data Source**    |Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo nec libero tincidunt fermentum. <br>Nullam euismod, velit at ultricies ultrices, justo nisi tincidunt justo, nec ultricies nunc eros vel libero. <br>Maecenas auctor, velit id fermentum lacinia, odio sapien tincidunt justo, nec ultricies nunc eros vel libero. <br>Integer auctor, velit id fermentum lacinia, odio sapien tincidunt justo.                |
+|<img src="/home/cleverson/Workspace/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/docs/img/sac_img-03.png" width="25"> |**3. Heuristics**     |                   |
+|<img src="/home/cleverson/Workspace/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/docs/img/sac_img-04.png" width="25"> |**4. Validation**     |                   |
+|<img src="/home/cleverson/Workspace/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/docs/img/sac_img-05.png" width="25"> |**5. Implementation** |                   |
+|<img src="/home/cleverson/Workspace/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/docs/img/sac_img-06.png" width="25"> |**6. Results**        |                   |
+|<img src="/home/cleverson/Workspace/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/docs/img/sac_img-07.png" width="25"> |**7. Next Steps**     |                   |
 
 > **Links Úteis**:
 > - [Modelo do Canvas Analítico](https://github.com/ICEI-PUC-Minas-PMV-SI/PesquisaExperimentacao-Template/blob/main/help/Software-Analtics-Canvas-v1.0.pdf)
