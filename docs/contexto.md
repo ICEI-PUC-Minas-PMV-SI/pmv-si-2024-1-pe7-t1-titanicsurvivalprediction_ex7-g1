@@ -82,7 +82,7 @@ https://ieeexplore.ieee.org/abstract/document/8229835
 
 O Dataset  consiste em várias variáveis que descrevem os passageiros a bordo do navio, como idade, sexo, classe socioeconômica, número de irmãos/cônjuges a bordo, número de pais/filhos a bordo, tarifa paga, número do ticket, número da cabine e se sobreviveram ou não. 
 
-![Titanic Survival Prediction Dataset](/docs/img/titanic.png))
+![Titanic Survival Prediction Dataset](/docs/img/titanic.png)
 Link: https://www.kaggle.com/datasets/yasserh/titanic-dataset/data
 
 # Canvas analítico
