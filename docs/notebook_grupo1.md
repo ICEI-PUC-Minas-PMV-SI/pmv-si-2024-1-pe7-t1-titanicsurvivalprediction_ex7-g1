@@ -364,19 +364,19 @@ plt.show()
 
 
     
-![png](output_7_0.png)
+![](/docs/img/output_7_0.png)
     
 
 
 
     
-![png](output_7_1.png)
+!](/docs/img/output_7_1.png)
     
 
 
 
     
-![png](output_7_2.png)
+![](/docs/img/output_7_2.png)
     
 
 
