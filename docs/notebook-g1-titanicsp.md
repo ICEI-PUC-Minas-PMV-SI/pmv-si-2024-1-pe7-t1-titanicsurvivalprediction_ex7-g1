@@ -530,25 +530,25 @@ plt.show()
 
 
     
-![png](output_11_0.png)
+![](/docs/img/output_11_0.png)
     
 
 
 
     
-![png](output_11_1.png)
+![](/docs/img/output_11_1.png)
     
 
 
 
     
-![png](output_11_2.png)
+![](/docs/img/output_11_2.png)
     
 
 
 
     
-![png](output_11_3.png)
+![](/docs/img/output_11_3.png)
     
 
 
@@ -562,7 +562,7 @@ plt.show()
 
 
     
-![png](output_11_5.png)
+![](/docs/img/output_11_5.png)
     
 
 
@@ -756,7 +756,7 @@ sns.pairplot(df, x_vars=['Parch', 'SibSp', 'Age', 'Pclass'], y_vars=['Parch', 'S
 
 
     
-![png](output_14_3.png)
+![](/docs/img/output_14_3.png)
     
 
 
