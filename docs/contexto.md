@@ -80,20 +80,29 @@ https://ieeexplore.ieee.org/abstract/document/8229835
 
 # Descrição do _dataset_ selecionado
 
-O Dataset consiste de um conjunto de dados relacionados ao RMS Titanic e seu acidente no ano de 1912, sendo esse fonte para geração de dashboards e reports.
+O Dataset consiste de um conjunto de dados relacionados ao RMS Titanic e seu acidente no ano de 1912, sendo esse fonte para geração de dashboards e reports, seja para estudos acadêmicos ou profissionais, sendo base para a aplicação de machine learning.
 
 **Origem do Dataset:** https://www.kaggle.com/
 
 **Glossário:** o termo "passageiro" se aplica ao passageiro ou tribulante que estava à bordo do RMS Titanic
 
 **Variáveis do Dataset:**
--> PassengerID: número de identificação único atribuído a cada registro do Dataset
--> Survived: descreve se o passageiro sobreviu, representado pelos valores 0 = No e 1 = Yes
--> Pclass: descreve a classe do ticket do passageiro, representado pelos valores 1 = 1º Classe; 2 = 2º Classe; 3 = 3º Classe
--> 
+- **PassengerID:** número de identificação único atribuído a cada registro do Dataset
+- **Survived:** descreve se o passageiro sobreviu, representado pelos valores 0 = No e 1 = Yes
+- **Pclass:** descreve a classe do ticket do passageiro, representado pelos valores 1 = 1º Classe; 2 = 2º Classe; 3 = 3º Classe
+- **Name:** descreve o nome do passageiro
+- **Sex:** descreve o gênero sexual do passageiro, representado por male ou female
+- **Age:** descreve a idade do passageiro, sendo uma variável numérica do tipo inteiro
+- **SibSp:** descreve a quantidade irmãos ou cônjuge à bordo do respectivo passageiro, sendo representado por variável numérica do tipo inteiro
+- **Parch:** descreve a quantidade de pais ou filhos à bordo do respectivo passageiro, sendo representado por uma variável numérica do tipo inteiro
+- **Ticket:** descreve o número do ticket do passageiro
+- **Fare:** descreve a tarifa paga pelo passaageiro, sendo representado por uma variável numérica do tipo decimal
 
-A origem do Dataset 
-várias variáveis que descrevem os passageiros a bordo do navio, como idade, sexo, classe socioeconômica, número de irmãos/cônjuges a bordo, número de pais/filhos a bordo, tarifa paga, número do ticket, número da cabine e se sobreviveram ou não. 
+**Dados ausentes:**
+Conforme demonstrado anteriormente, esse Dataset é representado uma limitação de variáveis que permitem obter alguns insights específicos, como: compreender a faixa etária dos sobrevientes, comprender o percentual de sobrevientes por gênero sexual, entre vários outros insights. Entretanto, existem dados ausentes  que permitiram obter outros tipo de análises. Por exemplo, podemos citar a ausência de informações referentes ao posto de trabalho de cada tribulante, qual a cidadania de cada passageiro, número de botes à bordo, capacidade dos botes, etc.
+
+**Atualização:**
+A última atualização do Dataset ocorreu há cerca de dois anos.
 
 ![Titanic Survival Prediction Dataset](/docs/img/titanic.png)
 Link: https://www.kaggle.com/datasets/yasserh/titanic-dataset/data
