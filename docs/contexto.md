@@ -9,7 +9,7 @@ Este Dataset contém informações sobre os passageiros a bordo, permitindo uma 
 
 ## Problema
 
-Previsibilidade de sobrevivência dos passageiros do Titanic com base em uma variedade de variáveis disponíveis no conjunto de dados, como idade, sexo, classe socioeconômica, número de familiares a bordo, entre outros. Essa previsão é relevante não apenas do ponto de vista histórico, mas também pode fornecer insights significativos sobre os fatores que influenciaram as chances de sobrevivência durante o desastre do Titanic.
+Previsibilidade de sobrevivência dos passageiros do Titanic com base em uma gama de variáveis disponíveis no conjunto de dados, como idade, sexo, classe socioeconômica, número de familiares a bordo, entre outros. Essa previsão é relevante não apenas do ponto de vista histórico, mas também pode fornecer insights significativos sobre os fatores que influenciaram as chances de sobrevivência durante o desastre do Titanic.
 
 Ao compreender os padrões de sobrevivência, podemos responder a perguntas importantes, como: Quais grupos demográficos tiveram maiores chances de sobreviver? Qual foi o impacto da classe socioeconômica na probabilidade de sobrevivência? Existem diferenças significativas nas taxas de sobrevivência entre homens e mulheres? E como outras variáveis, como idade e tamanho da família, influenciaram as chances de sobrevivência?
 
