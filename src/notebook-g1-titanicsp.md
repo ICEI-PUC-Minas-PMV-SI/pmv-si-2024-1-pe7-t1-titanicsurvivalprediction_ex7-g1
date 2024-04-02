@@ -526,25 +526,25 @@ plt.show()
 
 
     
-![png](output_9_0.png)
+![](/docs/img/output_9_0.png)
     
 
 
 
     
-![png](output_9_1.png)
+![](/docs/img/output_9_1.png)
     
 
 
 
     
-![png](output_9_2.png)
+![](/docs/img/output_9_2.png)
     
 
 
 
     
-![png](output_9_3.png)
+![](/docs/img/output_9_3.png)
     
 
 
@@ -724,7 +724,7 @@ sns.pairplot(df, x_vars=['Sex', 'Parch', 'SibSp', 'Age', 'Pclass'], y_vars=['Sex
 
 
     
-![png](output_12_2.png)
+![](/docs/img/output_12_2.png)
     
 
 
@@ -745,6 +745,6 @@ sns.heatmap(numeric_df.corr(), annot=True, cmap='Oranges', fmt='.2f')
 
 
     
-![png](output_13_1.png)
+![](/docs/img/output_13_1.png)
     
 
