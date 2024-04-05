@@ -1,4 +1,4 @@
-# TÍTULO DO PROJETO
+# Titanic Survivel
 
 `CURSO: Sistemas de Informação`
 
@@ -6,7 +6,9 @@
 
 `SEMESTRE: 7º`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+Neste projeto, abordamos o desafio do Titanic, cujo objetivo é prever a sobrevivência dos passageiros. Utilizando uma ampla gama de variáveis disponíveis nos dados, como idade, sexo, 
+classe socioeconômica e número de familiares a bordo.Essa análise não apenas busca fornecer uma visão histórica do desastre, mas também visa oferecer insights valiosos sobre os fatores
+que influenciaram as chances de sobrevivência durante o naufrágio do Titanic.
 
 ## Integrantes
 
@@ -17,7 +19,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 ## Orientador
 
-* Nome completo do professor 1
+* Profª. Luciana De Nardin
 
 # Planejamento
 
