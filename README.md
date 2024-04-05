@@ -7,7 +7,7 @@
 `SEMESTRE: 7º`
 
 Neste projeto, abordamos o desafio do Titanic, cujo objetivo é prever a sobrevivência dos passageiros. Utilizando uma ampla gama de variáveis disponíveis nos dados, como idade, sexo, 
-classe socioeconômica e número de familiares a bordo.Essa análise não apenas busca fornecer uma visão histórica do desastre, mas também visa oferecer insights valiosos sobre os fatores
+classe socioeconômica e número de familiares a bordo. Essa análise não apenas busca fornecer uma visão histórica do desastre, mas também visa oferecer insights valiosos sobre os fatores
 que influenciaram as chances de sobrevivência durante o naufrágio do Titanic.
 
 ## Integrantes
