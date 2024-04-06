@@ -20,7 +20,7 @@ A partir da análise descrita e exploratória realizada, descreva todos os achad
 
 ## Ferramentas utilizadas
 
-**Notebooks Kaggle:** Utilizamos o Kaggle pois oferece uma interface de notebook integrada que suporta kernels para Python. Usamos esses notebooks para escrever e executar nosso código de análise de dados de forma colaborativa. A integração com o ambiente Kaggle facilitou o compartilhamento e a colaboração com outros membros da comunidade.
+**Notebooks Kaggle:** Utilizamos o Kaggle, pois oferece uma interface de notebook usando o Jupyter Notebook, que é integrada e suporta kernels para Python. Usamos esses notebooks para escrever e executar nosso código de análise de dados de forma colaborativa. A integração com o ambiente Kaggle facilitou o compartilhamento e a colaboração com outros membros da comunidade.
 
 **Bibliotecas Python:** Na plataforma Kaggle, encontramos suporte para uma ampla gama de bibliotecas populares de Python, como Pandas, NumPy, Matplotlib, Seaborn, Tabulate entre outras. Essas bibliotecas foram utilizadas para realizar manipulação de dados, visualização de gráficos, tabelas e análise estatística.
 
