@@ -21,7 +21,21 @@ fornece insights valiosos sobre a natureza humana e as complexidades envolvidas 
 
 ## Descrição dos achados
 
-A partir da análise descrita e exploratória realizada, descreva todos os achados considerados relevantes para o contexto em que o trabalho se insere. Por exemplo: com relação à centralidade dos dados algo chamou a sua atenção? foi possível identificar correlação entre os atributos?
+A Matriz de Correlação, como o próprio nome induz mostra as correlações entre diferentes variáveis do conjunto de dados do naufrágio do Titanic. Cada célula colorida representa o coeficiente de correlação entre duas variáveis específicas. As cores mais avermelhadas indicam correlação positiva, enquanto as cores mais alaranjadas/amareladas indicam correlação negativa.
+ 
+Algumas observações importantes:
+ 
+1.⁠ ⁠A variável "PassengerId" tem correlação próxima de 1 consigo mesma, o que é esperado, já que é um identificador único.
+ 
+2.⁠ ⁠As variáveis "Survived" e "Pclass" mostram uma correlação negativa moderada, sugerindo que passageiros de classes mais altas tiveram maior probabilidade de sobrevivência.
+ 
+3.⁠ ⁠"Age" mostra correlações negativas fracas com "Survived" e "Pclass", indicando que pessoas mais jovens tinham uma leve vantagem de sobrevivência e tendiam a estar em classes mais altas.
+ 
+4.⁠ ⁠"Sibsp" (número de irmãos/cônjuges a bordo) tem uma correlação positiva fraca com "Parch" (número de pais/filhos a bordo), sugerindo que famílias maiores viajavam juntas.
+ 
+5.⁠ ⁠"Fare" tem uma correlação positiva moderada com "Pclass", o que faz sentido, já que passageiros de classes mais altas pagavam tarifas mais altas.
+ 
+Em resumo, este gráfico de correlações pode fornecer insights iniciais sobre os relacionamentos entre as variáveis do conjunto de dados do Titanic e orientar uma análise mais aprofundada. Por exemplo, seria possível presumir qual seria o percentual de uma pessoa sobrevir a um naufrágio semelhante ao do Titanic se fosse lavado em consideração sua classe social, idade e sexo, caso fossem utilizados critérios semelhantes para categorizar a prioridade de embarque em um bote salva-vidas. 
 
 ## Ferramentas utilizadas
 
