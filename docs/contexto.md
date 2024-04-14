@@ -55,8 +55,6 @@ Existem vários estudos que analisam a influência do comportamento humano em si
 
 Além disso, um estudo realizado pela UC Berkeley analisa o comportamento das pessoas durante o desastre do Titanic e fornece informações que podem ajudar a melhorar as medidas de segurança em situações de emergência.
 
-Esses estudos podem fornecer insights valiosos para entender os padrões de comportamento humano em situações de crise e informar medidas de segurança em viagens marítimas e outros contextos similares.
-
 ## Público-Alvo
 
 Inclui pesquisadores acadêmicos interessados em estudos históricos e comportamentais, profissionais de segurança em viagens marítimas e entusiastas de aprendizado de máquina. Os usuários podem variar em seu nível de conhecimento técnico, desde iniciantes até especialistas em análise de dados.
