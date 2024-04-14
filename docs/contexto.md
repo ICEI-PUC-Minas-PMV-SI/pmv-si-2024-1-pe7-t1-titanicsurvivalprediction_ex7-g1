@@ -22,7 +22,7 @@ Além disso, esta análise pode ter implicações mais amplas, incluindo a ident
 
 ## Questão de pesquisa
 
-Qual a influência dos diferentes atributos dos passageiros, como idade, parentes a bordo sexo e classe socioeconômica, em suas chances de sobrevivência no naufrágio do Titanic?
+Qual é a influência da idade, parentes a bordo, sexo, classe socioeconômica e número de parentes a bordo em suas chances de sobrevivência no naufrágio do Titanic?
 
 > **Links Úteis**:
 > - [Questão de pesquisa](https://www.enago.com.br/academy/how-to-develop-good-research-question-types-examples/)
@@ -81,23 +81,21 @@ Um possivel viajante.
 
 ## Estado da arte
 
-* Analysis of Titanic Disaster using Machine Learning Algorithms: 
+A análise do desastre do Titanic através de algoritmos de machine learning já foi realizada em diversos estudos. O artigo "Analysis of Titanic Disaster using Machine Learning Algorithms" utiliza algoritmos de aprendizado de máquina, como Random Forest, XGBoost e Neural Networks, para prever a sobrevivência dos passageiros do Titanic. O estudo obteve acurácia de 84,1% usando o algoritmo Random Forest.
 
-https://www.researchgate.net/publication/353352089_Analysis_of_Titanic_Disaster_using_Machine_Learning_Algorithms
+Outro estudo, "Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach", utiliza uma abordagem diferente, aplicando redes neurais profundas para prever a sobrevivência dos passageiros do Titanic. O estudo obteve uma acurácia de 83,7% usando redes neurais profundas.
 
-* Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach
+Além disso, o artigo "A Comparative Study on Machine Learning Techniques Using Titanic Dataset" compara a eficácia de diferentes algoritmos de classificação, como Decision Trees, Random Forest, Logistic Regression, e K-Nearest Neighbors, na previsão da sobrevivência dos passageiros do Titanic. O estudo obteve uma acurácia de 84,8% usando o algoritmo Random Forest.
 
-https://www.jetir.org/papers/JETIR2209140.pdf
+Esses estudos demonstram a eficácia de diferentes algoritmos de machine learning na previsão da sobrevivência dos passageiros do Titanic. No entanto, ainda há espaço para melhorias e aplicação de novas técnicas de aprendizado de máquina para obter mais insights sobre os fatores que influenciaram a sobrevivência dos passageiros do Titanic.
 
-* A Comprehensive Study of Classification Algorithms on Titanic Dataset
+Referências:
 
-https://ieeexplore.ieee.org/abstract/document/8229835
+IBRAHIM, Abdullahi Adinoyi. Analysis of Titanic Disaster using Machine Learning Algorithms. Engineering Letters, v. 28, n. 4, p. EL_28_4_22, 2021. Disponível em: <https://www.researchgate.net/publication/353352089_Analysis_of_Titanic_Disaster_using_Machine_Learning_Algorithms>.
 
-> **Links Úteis**:
-> - [Google Scholar](https://scholar.google.com/)
-> - [IEEE Xplore](https://ieeexplore.ieee.org/Xplore/home.jsp)
-> - [Science Direct](https://www.sciencedirect.com/)
-> - [ACM Digital Library](https://dl.acm.org/)
+KAVYA, N. C.; SRINIVASULU, M. Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach. Journal of Emerging Technologies and Innovative Research (JETIR), v. 9, n. 9, p. b320, 2022. Disponível em: <https://www.jetir.org/papers/JETIR2209140.pdf>.
+
+EKINCI, E.; OMURCA, S. İ.; ACUN, N.  [2018]. A Comparative Study on Machine Learning Techniques using Titanic Dataset. In: 7th International Conference on Advanced Technologies (ICAT'18), pp. 1-X, April 28-May 1, Antalya/TURKEY. Disponível em: <https://www.researchgate.net/publication/324909545_A_Comparative_Study_on_Machine_Learning_Techniques_Using_Titanic_Dataset>.
 
 # Descrição do _dataset_ selecionado
 
