@@ -34,8 +34,33 @@ Objetivo Geral: 
 Experimentar modelos de aprendizado de máquina adequados para prever a sobrevivência dos passageiros do Titanic.
 
 Objetivos Específicos:
-Avaliar o impacto da idade e sexo na probabilidade de sobrevivência.
-Analisar a relação entre classe socioeconômica e chances de sobrevivência.
+
+1. Avaliar o impacto da idade e sexo na probabilidade de sobrevivência.
+2. Analisar a relação entre classe socioeconômica e chances de sobrevivência.
+
+Ao avaliar o impacto da idade e sexo na probabilidade de sobrevivência, o projeto busca entender se os fatores demográficos têm influência na sobrevivência dos passageiros. A análise deve fornecer informações sobre as taxas de sobrevivência para diferentes grupos de idade e sexo, permitindo identificar quais grupos tiveram maiores chances de sobrevivência.
+
+A segunda meta é analisar a relação entre classe socioeconômica e chances de sobrevivência. Neste aspecto, o projeto busca entender se os passageiros de classes mais altas tiveram maiores chances de sobrevivência, considerando o acesso aos botes salva-vidas e outras fatores relacionados à classe socioeconômica.
+
+Estes objetivos específicos são importantes para compreender os padrões de sobrevivência no desastre do Titanic e fornecer insights valiosos que podem informar políticas e práticas de segurança em contextos similares.
+
+Citations:
+[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/4811979/6e0a64f4-36ef-4608-9e21-227f50468a90/contexto.md
+[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/4811979/004c2d20-4f3f-40fd-9454-a157f52fe356/notebook-g1-titanicsp.md
+[3] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/4811979/503fea0d-4ea6-4c8f-b417-faee2859dedb/Titanic-Dataset.csv
+[4] https://paulovasconcellos.com.br/o-que-o-naufr%C3%A1gio-do-titanic-nos-ensina-at%C3%A9-hoje-data-science-project-2fea8ff1c9b5?gi=71ee9810ad4c
+[5] https://segredosdomundo.r7.com/curiosidades-sobre-o-titanic/
+[6] https://super.abril.com.br/historia/naufragio-lendario/mobile
+[7] https://g1.globo.com/pop-arte/cinema/noticia/2023/06/24/titanic-o-que-e-real-e-o-que-e-ficcao-no-filme-de-james-cameron.ghtml
+[8] https://www.nucleodoconhecimento.com.br/historia/filme-titanic
+[9] https://hackernoon.com/pt/qual-era-a-probabilidade-de-algu%C3%A9m-sobreviver-no-tit%C3%A2nico
+[10] https://pt.wikipedia.org/wiki/Passageiros_do_RMS_Titanic
+[11] https://claudia.abril.com.br/famosos/titanic-e-separacao-de-classes/mobile
+[12] https://rpubs.com/Er1ckAraujo/Projeto-Titanic
+[13] https://edisciplinas.usp.br/mod/resource/view.php?id=4808666
+[14] https://pt.linkedin.com/pulse/desafio-do-titanic-an%C3%A1lise-de-sobreviv%C3%AAncia-allan-rocha
+[15] https://statplace.com.br/blog/titanic-um-exemplo-de-regressao-logistica/
+[16] https://aventurasnahistoria.uol.com.br/noticias/historia-hoje/millvina-dean-a-saga-da-ultima-sobrevivente-do-titanic.phtml
  
 > **Links Úteis**:
 > - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
