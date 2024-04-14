@@ -49,7 +49,21 @@ Estes objetivos específicos são importantes para compreender os padrões de so
 
 ## Justificativa
 
-A análise da sobrevivência no desastre do Titanic não apenas oferece insights históricos, mas também pode ser útil para entender padrões de comportamento humano em situações de crise. Além disso, a identificação dos principais fatores que influenciam a sobrevivência pode informar medidas de segurança em viagens marítimas e outros contextos similares. Dados reais sobre desastres como o do Titanic são raros e valiosos para estudos acadêmicos e práticos.
+A análise da sobrevivência no desastre do Titanic pode oferecer insights históricos e ajudar a entender padrões de comportamento humano em situações de crise. Além disso, a identificação dos principais fatores que influenciam a sobrevivência pode informar medidas de segurança em viagens marítimas e outros contextos similares. Dados reais sobre desastres como o do Titanic são raros e valiosos para estudos acadêmicos e práticos.
+
+Existem vários estudos que analisam a influência do comportamento humano em situações de crise, como o desastre do Titanic. Por exemplo, um estudo publicado no Journal of Quantitative Criminology analisa o papel da idade e sexo na sobrevivência dos passageiros do Titanic. Outro estudo, publicado no Journal of Emerging Technologies And Innovative Research, analisa a influência da classe socioeconômica na sobrevivência dos passageiros.
+
+Além disso, um estudo realizado pela UC Berkeley analisa o comportamento das pessoas durante o desastre do Titanic e fornece informações que podem ajudar a melhorar as medidas de segurança em situações de emergência.
+
+Esses estudos podem fornecer insights valiosos para entender os padrões de comportamento humano em situações de crise e informar medidas de segurança em viagens marítimas e outros contextos similares.
+
+[1] IBRAHIM, Abdullahi Adinoyi. Titanic: Machine Learning from Disaster. Engineering Letters, v. 28, n. 4, p. EL_28_4_22, 2021. Disponível em: <https://www.researchgate.net/publication/353352089_Analysis_of_Titanic_Disaster_using_Machine_Learning_Algorithms>.
+
+[2] KAVYA, N. C.; SRINIVASULU, M. Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach. Journal of Emerging Technologies and Innovative Research (JETIR), v. 9, n. 9, p. b320, 2022. Disponível em: <https://www.jetir.org/papers/JETIR2209140.pdf>.
+
+[3] FREY, Bruno S.; SAVAGE, David A.; TORGLER, Benno. Surviving the Titanic Disaster: Economic, Natural and Social Determinants. eScholarship.org, 2009. p. 7. Disponível em: <https://escholarship.org/content/qt6h24b1vt/qt6h24b1vt.pdf>.
+
+
 
 > **Links Úteis**:
 > - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
