@@ -37,19 +37,7 @@ df.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -244,19 +232,7 @@ df[df.isnull().any(axis=1)]
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -550,7 +526,7 @@ plt.show()
 
 
     
-![png](output_9_4.png)
+![](/docs/img/output_9_4.png)
     
 
 
@@ -715,10 +691,6 @@ sns.pairplot(df, x_vars=['Sex', 'Parch', 'SibSp', 'Age', 'Pclass'], y_vars=['Sex
 
 
     <seaborn.axisgrid.PairGrid at 0x7f4fa6cb3a60>
-
-
-
-
     <Figure size 3000x1500 with 0 Axes>
 
 
