@@ -22,7 +22,7 @@ Além disso, esta análise pode ter implicações mais amplas, incluindo a ident
 
 ## Questão de pesquisa
 
-Qual é a influência da idade, parentes a bordo, sexo, classe socioeconômica e número de parentes a bordo em suas chances de sobrevivência no naufrágio do Titanic?
+Qual a influência dos diferentes atributos dos passageiros, em suas chances de sobrevivência no naufrágio do Titanic?
 
 > **Links Úteis**:
 > - [Questão de pesquisa](https://www.enago.com.br/academy/how-to-develop-good-research-question-types-examples/)
