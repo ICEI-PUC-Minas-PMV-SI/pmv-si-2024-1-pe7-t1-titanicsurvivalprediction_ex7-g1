@@ -24,10 +24,6 @@ Além disso, esta análise pode ter implicações mais amplas, incluindo a ident
 
 Qual a influência dos diferentes atributos dos passageiros, em suas chances de sobrevivência no naufrágio do Titanic?
 
-> **Links Úteis**:
-> - [Questão de pesquisa](https://www.enago.com.br/academy/how-to-develop-good-research-question-types-examples/)
-> - [Problema de pesquisa](https://blog.even3.com.br/problema-de-pesquisa/)
-
 ## Objetivos preliminares
 
 Objetivo Geral: 
@@ -35,17 +31,18 @@ Experimentar modelos de aprendizado de máquina adequados para prever a sobreviv
 
 Objetivos Específicos:
 
-1. Avaliar o impacto da idade e sexo na probabilidade de sobrevivência.
-2. Analisar a relação entre classe socioeconômica e chances de sobrevivência.
+1. Avaliar o impacto da idade e sexo na probabilidade de sobrevivência:
 
-Ao avaliar o impacto da idade e sexo na probabilidade de sobrevivência, o projeto busca entender se os fatores demográficos têm influência na sobrevivência dos passageiros. A análise deve fornecer informações sobre as taxas de sobrevivência para diferentes grupos de idade e sexo, permitindo identificar quais grupos tiveram maiores chances de sobrevivência.
+    - Realizar uma análise exploratória dos dados para identificar padrões e tendências na sobrevivência dos passageiros em relação à idade e sexo.
+    - Utilizar técnicas de análise de regressão logística ou outras técnicas de aprendizado de máquina para modelar a relação entre idade, sexo e sobrevivência.
+    - Interpretar os resultados do modelo para identificar quais grupos tiveram maiores chances de sobrevivência.
 
-A segunda meta é analisar a relação entre classe socioeconômica e chances de sobrevivência. Neste aspecto, o projeto busca entender se os passageiros de classes mais altas tiveram maiores chances de sobrevivência, considerando o acesso aos botes salva-vidas e outras fatores relacionados à classe socioeconômica.
+2. Analisar a relação entre classe socioeconômica e chances de sobrevivência:
 
-Estes objetivos específicos são importantes para compreender os padrões de sobrevivência no desastre do Titanic e fornecer insights valiosos que podem informar políticas e práticas de segurança em contextos similares.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+    - Realizar uma análise exploratória dos dados para identificar padrões e tendências na sobrevivência dos passageiros em relação à classe socioeconômica.
+    - Utilizar técnicas de análise de regressão logística ou outras técnicas de aprendizado de máquina para modelar a relação entre classe socioeconômica e sobrevivência.
+    - Interpretar os resultados do modelo para identificar quais grupos tiveram maiores chances de sobrevivência.
+    - Avaliar o acesso aos botes salva-vidas e outras variáveis relacionadas à classe socioeconômica para entender a relação entre estes fatores e as chances de sobrevivência.
 
 ## Justificativa
 
