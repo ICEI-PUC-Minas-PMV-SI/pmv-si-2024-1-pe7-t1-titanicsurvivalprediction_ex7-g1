@@ -22,11 +22,7 @@ Além disso, esta análise pode ter implicações mais amplas, incluindo a ident
 
 ## Questão de pesquisa
 
-Qual a influência dos diferentes atributos dos passageiros, como idade, parentes a bordo sexo e classe socioeconômica, em suas chances de sobrevivência no naufrágio do Titanic?
-
-> **Links Úteis**:
-> - [Questão de pesquisa](https://www.enago.com.br/academy/how-to-develop-good-research-question-types-examples/)
-> - [Problema de pesquisa](https://blog.even3.com.br/problema-de-pesquisa/)
+Qual a influência dos diferentes atributos dos passageiros, em suas chances de sobrevivência no naufrágio do Titanic?
 
 ## Objetivos preliminares
 
@@ -34,18 +30,27 @@ Objetivo Geral: 
 Experimentar modelos de aprendizado de máquina adequados para prever a sobrevivência dos passageiros do Titanic.
 
 Objetivos Específicos:
-Avaliar o impacto da idade e sexo na probabilidade de sobrevivência.
-Analisar a relação entre classe socioeconômica e chances de sobrevivência.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+
+1. Avaliar o impacto da idade e sexo na probabilidade de sobrevivência:
+
+    - Realizar uma análise exploratória dos dados para identificar padrões e tendências na sobrevivência dos passageiros em relação à idade e sexo.
+    - Utilizar técnicas de análise de regressão logística ou outras técnicas de aprendizado de máquina para modelar a relação entre idade, sexo e sobrevivência.
+    - Interpretar os resultados do modelo para identificar quais grupos tiveram maiores chances de sobrevivência.
+
+2. Analisar a relação entre classe socioeconômica e chances de sobrevivência:
+
+    - Realizar uma análise exploratória dos dados para identificar padrões e tendências na sobrevivência dos passageiros em relação à classe socioeconômica.
+    - Utilizar técnicas de análise de regressão logística ou outras técnicas de aprendizado de máquina para modelar a relação entre classe socioeconômica e sobrevivência.
+    - Interpretar os resultados do modelo para identificar quais grupos tiveram maiores chances de sobrevivência.
+    - Avaliar o acesso aos botes salva-vidas e outras variáveis relacionadas à classe socioeconômica para entender a relação entre estes fatores e as chances de sobrevivência.
 
 ## Justificativa
 
-A análise da sobrevivência no desastre do Titanic não apenas oferece insights históricos, mas também pode ser útil para entender padrões de comportamento humano em situações de crise. Além disso, a identificação dos principais fatores que influenciam a sobrevivência pode informar medidas de segurança em viagens marítimas e outros contextos similares. Dados reais sobre desastres como o do Titanic são raros e valiosos para estudos acadêmicos e práticos.
+A análise da sobrevivência no desastre do Titanic pode oferecer insights históricos e ajudar a entender padrões de comportamento humano em situações de crise. Além disso, a identificação dos principais fatores que influenciam a sobrevivência pode informar medidas de segurança em viagens marítimas e outros contextos similares. Dados reais sobre desastres como o do Titanic são raros e valiosos para estudos acadêmicos e práticos.
 
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+Existem vários estudos que analisam a influência do comportamento humano em situações de crise, como o desastre do Titanic. Por exemplo, um estudo publicado no Journal of Quantitative Criminology analisa o papel da idade e sexo na sobrevivência dos passageiros do Titanic. Outro estudo, publicado no Journal of Emerging Technologies And Innovative Research, analisa a influência da classe socioeconômica na sobrevivência dos passageiros.
+
+Além disso, um estudo realizado pela UC Berkeley analisa o comportamento das pessoas durante o desastre do Titanic e fornece informações que podem ajudar a melhorar as medidas de segurança em situações de emergência.
 
 ## Público-Alvo
 
@@ -60,23 +65,13 @@ Um possivel viajante.
 
 ## Estado da arte
 
-* Analysis of Titanic Disaster using Machine Learning Algorithms: 
+A análise do desastre do Titanic através de algoritmos de machine learning já foi realizada em diversos estudos. O artigo "Analysis of Titanic Disaster using Machine Learning Algorithms" utiliza algoritmos de aprendizado de máquina, como Random Forest, XGBoost e Neural Networks, para prever a sobrevivência dos passageiros do Titanic. O estudo obteve acurácia de 84,1% usando o algoritmo Random Forest.
 
-https://www.researchgate.net/publication/353352089_Analysis_of_Titanic_Disaster_using_Machine_Learning_Algorithms
+Outro estudo, "Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach", utiliza uma abordagem diferente, aplicando redes neurais profundas para prever a sobrevivência dos passageiros do Titanic. O estudo obteve uma acurácia de 83,7% usando redes neurais profundas.
 
-* Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach
+Além disso, o artigo "A Comparative Study on Machine Learning Techniques Using Titanic Dataset" compara a eficácia de diferentes algoritmos de classificação, como Decision Trees, Random Forest, Logistic Regression, e K-Nearest Neighbors, na previsão da sobrevivência dos passageiros do Titanic. O estudo obteve uma acurácia de 84,8% usando o algoritmo Random Forest.
 
-https://www.jetir.org/papers/JETIR2209140.pdf
-
-* A Comprehensive Study of Classification Algorithms on Titanic Dataset
-
-https://ieeexplore.ieee.org/abstract/document/8229835
-
-> **Links Úteis**:
-> - [Google Scholar](https://scholar.google.com/)
-> - [IEEE Xplore](https://ieeexplore.ieee.org/Xplore/home.jsp)
-> - [Science Direct](https://www.sciencedirect.com/)
-> - [ACM Digital Library](https://dl.acm.org/)
+Esses estudos demonstram a eficácia de diferentes algoritmos de machine learning na previsão da sobrevivência dos passageiros do Titanic. No entanto, ainda há espaço para melhorias e aplicação de novas técnicas de aprendizado de máquina para obter mais insights sobre os fatores que influenciaram a sobrevivência dos passageiros do Titanic.
 
 # Descrição do _dataset_ selecionado
 
@@ -126,7 +121,14 @@ Link: https://www.kaggle.com/datasets/yasserh/titanic-dataset/data
 
 # Referências
 
-Inclua todas as referências (livros, artigos, sites, etc) utilizados no desenvolvimento do trabalho utilizando o padrão ABNT.
+IBRAHIM, Abdullahi Adinoyi. Analysis of Titanic Disaster using Machine Learning Algorithms. Engineering Letters, v. 28, n. 4, p. EL_28_4_22, 2021. Disponível em: <https://www.researchgate.net/publication/353352089_Analysis_of_Titanic_Disaster_using_Machine_Learning_Algorithms>.
+
+KAVYA, N. C.; SRINIVASULU, M. Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach. Journal of Emerging Technologies and Innovative Research (JETIR), v. 9, n. 9, p. b320, 2022. Disponível em: <https://www.jetir.org/papers/JETIR2209140.pdf>.
+
+FREY, Bruno S.; SAVAGE, David A.; TORGLER, Benno. Surviving the Titanic Disaster: Economic, Natural and Social Determinants. eScholarship.org, 2009. p. 7. Disponível em: <https://escholarship.org/content/qt6h24b1vt/qt6h24b1vt.pdf>.
+
+EKINCI, E.; OMURCA, S. İ.; ACUN, N.  [2018]. A Comparative Study on Machine Learning Techniques using Titanic Dataset. In: 7th International Conference on Advanced Technologies (ICAT'18), pp. 1-X, April 28-May 1, Antalya/TURKEY. Disponível em: <https://www.researchgate.net/publication/324909545_A_Comparative_Study_on_Machine_Learning_Techniques_Using_Titanic_Dataset>.
+
 
 > **Links Úteis**:
 > - [Padrão ABNT PUC Minas](https://portal.pucminas.br/biblioteca/index_padrao.php?pagina=5886)
