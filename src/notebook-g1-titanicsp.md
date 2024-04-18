@@ -38,19 +38,7 @@ df.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -245,19 +233,7 @@ df[df.isnull().any(axis=1)]
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -499,7 +475,7 @@ df.hist(figsize=(13,9))
 
 
     
-![png](output_10_1.png)
+![](/docs/img/output_10_1.png)
     
 
 
@@ -523,19 +499,7 @@ quant_sobrevi
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -592,7 +556,7 @@ plt.title("Taxa de Sobreviventes do Titanic", fontsize=20, pad=20)
 
 
     
-![png](output_12_1.png)
+![](/docs/img/output_12_1.png)
     
 
 
@@ -644,19 +608,19 @@ plt.show()
 
 
     
-![png](output_13_0.png)
+![](/docs/img/output_13_0.png)
     
 
 
 
     
-![png](output_13_1.png)
+![](/docs/img/output_13_1.png)
     
 
 
 
     
-![png](output_13_2.png)
+![](/docs/img/output_13_2.png)
     
 
 
@@ -677,7 +641,7 @@ plt.show()
 
 
     
-![png](output_14_0.png)
+![](/docs/img/output_14_0.png)
     
 
 
@@ -694,7 +658,7 @@ plt.show()
 
 
     
-![png](output_15_0.png)
+![](/docs/img/output_15_0.png)
     
 
 
@@ -711,7 +675,7 @@ plt.show()
 
 
     
-![png](output_16_0.png)
+![](/docs/img/output_16_0.png)
     
 
 
@@ -728,7 +692,7 @@ plt.show()
 
 
     
-![png](output_17_0.png)
+![](/docs/img/output_17_0.png)
     
 
 
@@ -902,7 +866,7 @@ sns.pairplot(df, x_vars=['Sex', 'Parch', 'SibSp', 'Age', 'Pclass'], y_vars=['Sex
 
 
     
-![png](output_20_2.png)
+![](/docs/img/output_20_2.png)
     
 
 
@@ -923,7 +887,7 @@ sns.heatmap(numeric_df.corr(), annot=True, cmap='Oranges', fmt='.2f')
 
 
     
-![png](output_21_1.png)
+![](/docs/img/output_21_1.png)
     
 
 
