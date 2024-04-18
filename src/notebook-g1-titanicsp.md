@@ -1,4 +1,5 @@
-<h3>Projeto: Pesquisa e Experimentação em Sistemas de Informação-Grupo 1<h4>notebook_titanicsurvivalprediction<h4><h3>
+Projeto: Pesquisa e Experimentação em Sistemas de Informação-Grupo 1
+notebook_titanicsurvivalprediction
 
 
 ```python
@@ -20,9 +21,6 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
 ```
-
-    /kaggle/input/titanic-dataset/Titanic-Dataset.csv
-    
 
 
 ```python
@@ -894,7 +892,7 @@ sns.pairplot(df, x_vars=['Sex', 'Parch', 'SibSp', 'Age', 'Pclass'], y_vars=['Sex
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x7a29ca0e3520>
+    <seaborn.axisgrid.PairGrid at 0x7a29c4ed9d20>
 
 
 
