@@ -1,12 +1,15 @@
+<h3>Projeto: Pesquisa e Experimentação em Sistemas de Informação-Grupo 1<h4>notebook_titanicsurvivalprediction<h4><h3>
+
+
 ```python
 # Grupo 1 - notebook_titanicsurvivalprediction
 
 import numpy as np # Manipulação de matrizes
 import pandas as pd # Criação e manipulação de dataset
-%matplotlib inline
 from pandas import *
 import matplotlib.pyplot as plt # Plotagem de dados
 import matplotlib.font_manager
+%matplotlib inline
 import seaborn as sns # Plotagem e visualização dos dados
 from tabulate import tabulate
 from scipy.stats import chi2_contingency
@@ -37,7 +40,19 @@ df.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -232,7 +247,19 @@ df[df.isnull().any(axis=1)]
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -454,79 +481,256 @@ print(percentages)
 
 
 ```python
+#histograma das variáveis numéricas
+df.hist(figsize=(13,9))
+```
+
+
+
+
+    array([[<Axes: title={'center': 'PassengerId'}>,
+            <Axes: title={'center': 'Survived'}>,
+            <Axes: title={'center': 'Pclass'}>],
+           [<Axes: title={'center': 'Age'}>,
+            <Axes: title={'center': 'SibSp'}>,
+            <Axes: title={'center': 'Parch'}>],
+           [<Axes: title={'center': 'Fare'}>, <Axes: >, <Axes: >]],
+          dtype=object)
+
+
+
+
+    
+![png](output_10_1.png)
+    
+
+
+
+```python
+#definindo os dados que aparecerão no gráfico
+
+labels = ['Não Sobreviventes', "Sobreviventes"] 
+
+contagem = pd.cut(x=df.Survived, bins=2,labels= labels, include_lowest=True).value_counts() #nº de sobreviventes
+
+taxa_de_sobreviventes = (pd.value_counts(pd.cut(x=df.Survived, bins=2,labels= labels, 
+                                                include_lowest=True),normalize=True) * 100).round(1) #taxa de Sobreviventes
+quant_sobrevi = pd.DataFrame({"Contagem":contagem, 
+                              'Taxa de Sobrevivência(%)':taxa_de_sobreviventes}) #criando um DataFrame para facilitar a visualização dos dados
+                              
+quant_sobrevi
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Contagem</th>
+      <th>Taxa de Sobrevivência(%)</th>
+    </tr>
+    <tr>
+      <th>Survived</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Não Sobreviventes</th>
+      <td>549</td>
+      <td>61.6</td>
+    </tr>
+    <tr>
+      <th>Sobreviventes</th>
+      <td>342</td>
+      <td>38.4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+plt.figure(figsize=(6, 4))
+
+cores= ['#009ACD', '#ADD8E6']
+percentages = list(quant_sobrevi['Taxa de Sobrevivência(%)'])
+explode=(0.1,0)
+
+plt.pie(percentages, explode=explode, 
+       labels=labels,
+       colors = cores,
+       autopct='%1.0f%%',
+       shadow=True, startangle=0,   
+       pctdistance=0.5,labeldistance=1.1)
+plt.title("Taxa de Sobreviventes do Titanic", fontsize=20, pad=20)
+```
+
+
+
+
+    Text(0.5, 1.0, 'Taxa de Sobreviventes do Titanic')
+
+
+
+
+    
+![png](output_12_1.png)
+    
+
+
+
+```python
 # Remover avisos
 # import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
+# warnings.simplefilter(action='ignore', category=FutureWarning)
+
+# Calcular o percentual de Passageiros a Bordo por Sexo
+percentual_por_sexo = df['Sex'].value_counts(normalize=True) * 100
+# Gráfico: Percentual de Passageiros a Bordo por Sexo
+plt.figure(figsize=(6, 4))
+sns.countplot(data=df, x='Sex', palette='Blues_r')
+plt.title('Percentual de Passageiros a Bordo por Sexo', fontsize=11, pad=11)
+plt.xlabel('Sexo', fontsize=11)
+plt.ylabel('Percentual de Passageiros', fontsize=11)
+plt.xticks(ticks=[0, 1], labels=['Masculino', 'Feminino'])  # Definindo os rótulos do eixo x
+# Adicionar texto com os percentuais no gráfico
+for i, percentual in enumerate(percentual_por_sexo):
+    plt.text(i, percentual + 1, f'{percentual:.2f}%', ha='center')
+plt.show()
+
+# Calcular o percentual de Sobreviventes por Sexo
+percentual_por_sexo = df.groupby('Sex')['Survived'].mean() * 100
+# Criar um DataFrame com os dados
+quant_sex = pd.DataFrame({'Sexo': percentual_por_sexo.index, 'Taxa de Sobreviventes por Sexo em %': percentual_por_sexo.values})
+# Plotar o gráfico
+plt.figure(figsize=(6, 4))
+ax = sns.barplot(x='Sexo', y='Taxa de Sobreviventes por Sexo em %', data=quant_sex, palette='Blues_r')
+ax.set_title("Percentual de Sobreviventes por Sexo", fontsize=11, pad=11)
+ax.set_xlabel('Sexo', fontsize=11)
+ax.set_ylabel('Taxa de Sobreviventes em %', fontsize=11)
+ax.set_xticklabels(labels=['Masculino', 'Feminino'])
+plt.tight_layout()
+# Adicionar texto com os percentuais no gráfico
+for i, percentual in enumerate(percentual_por_sexo):
+    plt.text(i, percentual + 1, f'{percentual:.2f}%', ha='center')
+plt.show()
 
 # Gráfico: Distribuição da sobrevivência por sexo
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(6, 4))
 sns.countplot(data=df, x='Survived', hue='Sex')
 plt.title('Distribuição da Sobrevivência por Sexo')
 plt.xlabel('Sobreviveu?')
 plt.ylabel('Contagem')
 plt.show()
+```
 
-# Gráfico: Distribuição da sobrevivência por classe
-plt.figure(figsize=(8, 6))
-sns.countplot(data=df, x='Survived', hue='Pclass')
-plt.title('Distribuição da Sobrevivência por Classe')
-plt.xlabel('Sobreviveu?')
-plt.ylabel('Contagem')
-plt.show()
 
-# Gráfico: Distribuição da sobrevivência por dependentes
-plt.figure(figsize=(8, 6))
-sns.countplot(data=df, x='Survived', hue='SibSp')
-plt.title('Distribuição da Sobrevivência por Dependentes-Irmãos/Cônjuge')
-plt.xlabel('Sobreviveu?')
-plt.ylabel('Contagem')
-plt.show()
+    
+![png](output_13_0.png)
+    
 
-# Gráfico: Distribuição da sobrevivência por dependentes
-plt.figure(figsize=(8, 6))
-sns.countplot(data=df, x='Survived', hue='Parch')
-plt.title('Distribuição da Sobrevivência por Dependentes-Pais/Filhos')
-plt.xlabel('Sobreviveu?')
-plt.ylabel('Contagem')
-plt.show()
+
+
+    
+![png](output_13_1.png)
+    
+
+
+
+    
+![png](output_13_2.png)
+    
+
+
+
+```python
+# Desative os avisos temporariamente
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 # Gráfico: Distribuição da sobrevivência por idade
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(6, 4))
 sns.histplot(data=df, x='Age', hue='Survived', kde=True)
 plt.title('Distribuição da Sobrevivência por Idade')
 plt.xlabel('Idade')
 plt.ylabel('Contagem')
 plt.show()
-
 ```
 
 
     
-![](/docs/img/output_9_0.png)
+![png](output_14_0.png)
     
 
 
 
-    
-![](/docs/img/output_9_1.png)
-    
-
-
-
-    
-![](/docs/img/output_9_2.png)
-    
-
-
-
-    
-![](/docs/img/output_9_3.png)
-    
-
+```python
+# Gráfico: Distribuição da sobrevivência por classe
+plt.figure(figsize=(6, 4))
+sns.countplot(data=df, x='Survived', hue='Pclass')
+plt.title('Distribuição da Sobrevivência por Classe')
+plt.xlabel('Sobreviveu?')
+plt.ylabel('Contagem')
+plt.show()
+```
 
 
     
-![](/docs/img/output_9_4.png)
+![png](output_15_0.png)
+    
+
+
+
+```python
+# Gráfico: Distribuição da sobrevivência por dependentes
+plt.figure(figsize=(6, 4))
+sns.countplot(data=df, x='Survived', hue='SibSp')
+plt.title('Distribuição da Sobrevivência por Dependentes-Irmãos/Cônjuge')
+plt.xlabel('Sobreviveu?')
+plt.ylabel('Contagem')
+plt.show()
+```
+
+
+    
+![png](output_16_0.png)
+    
+
+
+
+```python
+# Gráfico: Distribuição da sobrevivência por dependentes
+plt.figure(figsize=(6, 4))
+sns.countplot(data=df, x='Survived', hue='Parch')
+plt.title('Distribuição da Sobrevivência por Dependentes-Pais/Filhos')
+plt.xlabel('Sobreviveu?')
+plt.ylabel('Contagem')
+plt.show()
+```
+
+
+    
+![png](output_17_0.png)
     
 
 
@@ -679,24 +883,28 @@ print("Taxa de Sobrevivência por Faixa Etária: (Número de Sobreviventes de De
 
 
 ```python
-# Convertendo infinitos para NaN
+###### Convertendo infinitos para NaN
 df.replace([np.inf, -np.inf], np.nan, inplace=True)
 
 # Matriz de dispersão
-plt.figure(figsize=(30, 15))
+plt.figure(figsize=(4, 2))
 sns.pairplot(df, x_vars=['Sex', 'Parch', 'SibSp', 'Age', 'Pclass'], y_vars=['Sex', 'Parch', 'SibSp', 'Age', 'Pclass'])
 ```
 
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x7f4fa6cb3a60>
-    <Figure size 3000x1500 with 0 Axes>
+    <seaborn.axisgrid.PairGrid at 0x7a29ca0e3520>
+
+
+
+
+    <Figure size 400x200 with 0 Axes>
 
 
 
     
-![](/docs/img/output_12_2.png)
+![png](output_20_2.png)
     
 
 
@@ -717,6 +925,22 @@ sns.heatmap(numeric_df.corr(), annot=True, cmap='Oranges', fmt='.2f')
 
 
     
-![](/docs/img/output_13_1.png)
+![png](output_21_1.png)
     
 
+
+Este gráfico é uma matriz de correlação, que mostra as correlações entre diferentes variáveis do conjunto de dados do naufrágio do Titanic. Cada célula colorida representa o coeficiente de correlação entre duas variáveis específicas. As cores mais avermelhadas indicam correlação positiva, enquanto as cores mais alaranjadas/amareladas indicam correlação negativa.
+ 
+Algumas observações importantes:
+ 
+1. A variável "PassengerId" tem correlação próxima de 1 consigo mesma, o que é esperado, já que é um identificador único.
+ 
+2. As variáveis "Survived" e "Pclass" mostram uma correlação negativa moderada, sugerindo que passageiros de classes mais altas tiveram maior probabilidade de sobrevivência.
+ 
+3. "Age" mostra correlações negativas fracas com "Survived" e "Pclass", indicando que pessoas mais jovens tinham uma leve vantagem de sobrevivência e tendiam a estar em classes mais altas.
+ 
+4. "Sibsp" (número de irmãos/cônjuges a bordo) tem uma correlação positiva fraca com "Parch" (número de pais/filhos a bordo), sugerindo que famílias maiores viajavam juntas.
+ 
+5. "Fare" tem uma correlação positiva moderada com "Pclass", o que faz sentido, já que passageiros de classes mais altas pagavam tarifas mais altas.
+ 
+Em resumo, este gráfico de correlações pode fornecer insights iniciais sobre os relacionamentos entre as variáveis do conjunto de dados do Titanic e orientar uma análise mais aprofundada.
