@@ -1,4 +1,5 @@
 # Conhecendo os dados
+[Link do Projeto Notebook-g1](/src/[article-name.md](/src/notebook-g1-titanicsp.md))
 
 A análise exploratória do conjunto de dados "Titanic-Dataset" revelou insights importantes sobre os fatores que influenciaram a sobrevivência dos passageiros durante o trágico naufrágio do RMS Titanic. O gráfico de distribuição da sobrevivência por sexo destacou
 uma grande diferença  entre homens e mulheres, com a maioria das mulheres sendo resgatadas, enquanto a maioria dos homens não sobreviveu. Essa constatação reflete a política de "mulheres e crianças primeiro" adotada nos esforços de salvamento. Além disso, o histograma
