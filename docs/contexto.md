@@ -65,13 +65,35 @@ Um possivel viajante.
 
 ## Estado da arte
 
-A análise do desastre do Titanic através de algoritmos de machine learning já foi realizada em diversos estudos. O artigo "Analysis of Titanic Disaster using Machine Learning Algorithms" utiliza algoritmos de aprendizado de máquina, como Random Forest, XGBoost e Neural Networks, para prever a sobrevivência dos passageiros do Titanic. O estudo obteve acurácia de 84,1% usando o algoritmo Random Forest.
+Na revisão da literatura sobre a aplicação de algoritmos de machine learning para a análise do desastre do Titanic, três estudos fundamentais foram identificados, cada um utilizando abordagens analíticas específicas e configurando algoritmos de maneiras distintas para maximizar a precisão das previsões de sobrevivência.
 
-Outro estudo, "Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach", utiliza uma abordagem diferente, aplicando redes neurais profundas para prever a sobrevivência dos passageiros do Titanic. O estudo obteve uma acurácia de 83,7% usando redes neurais profundas.
+1 - Contexto:
+ 1.1: Analysis of Titanic Disaster using Machine Learning Algorithms
+    Este estudo explora algoritmos como Random Forest, XGBoost e Redes Neurais para prever a sobrevivência dos passageiros do Titanic. O foco está em determinar quais configurações de algoritmo maximizam a precisão das previsões.
 
-Além disso, o artigo "A Comparative Study on Machine Learning Techniques Using Titanic Dataset" compara a eficácia de diferentes algoritmos de classificação, como Decision Trees, Random Forest, Logistic Regression, e K-Nearest Neighbors, na previsão da sobrevivência dos passageiros do Titanic. O estudo obteve uma acurácia de 84,8% usando o algoritmo Random Forest.
+1.2: Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach
+    Abordagem concentrada na aplicação de redes neurais profundas para prever a sobrevivência dos passageiros. O estudo visa ajustar a arquitetura das redes para capturar a complexidade dos padrões de sobrevivência.
 
-Esses estudos demonstram a eficácia de diferentes algoritmos de machine learning na previsão da sobrevivência dos passageiros do Titanic. No entanto, ainda há espaço para melhorias e aplicação de novas técnicas de aprendizado de máquina para obter mais insights sobre os fatores que influenciaram a sobrevivência dos passageiros do Titanic.
+1.3: A Comparative Study on Machine Learning Techniques Using Titanic Dataset
+    Compara várias técnicas de classificação, incluindo Decision Trees, Logistic Regression, K-Nearest Neighbors e Random Forest. O objetivo é avaliar a eficácia de diferentes algoritmos no mesmo conjunto de dados para identificar o mais eficiente.
+
+2 - Detalhes do Dataset:
+    Todos os estudos utilizam o mesmo dataset, que consiste em informações sobre os passageiros do Titanic, como idade, sexo, classe de passagem e sobrevivência. O dataset é amplamente conhecido e utilizado na comunidade de machine learning por seu caráter educativo e pelos desafios que apresenta na previsão de sobrevivência com base em características dos passageiros.
+
+3- Medidas e Resultados
+1.1 Analysis of Titanic Disaster using Machine Learning Algorithms:
+Medidas: Acurácia de 84,1% alcançada utilizando o algoritmo Random Forest.
+Detalhes: O sucesso é atribuído ao ajuste fino de hiperparâmetros como o número de árvores e a profundidade delas.
+
+1.2 Survival prediction of Titanic disaster using machine learning: Re-visit with Neural Network Approach:
+Medidas: Atingiu uma acurácia de 83,7% com redes neurais profundas.
+Detalhes: Configuração da rede incluiu ajustes nas camadas ocultas e nas funções de ativação para aprimorar a capacidade do modelo em interpretar padrões complexos.
+
+1.3 A Comparative Study on Machine Learning Techniques Using Titanic Dataset:
+Medidas: Maior acurácia registrada foi de 84,8% com o uso de Random Forest.
+Detalhes: A escolha correta de variáveis e o pré-processamento adequado dos dados foram cruciais para alcançar os melhores resultados
+
+Esses estudos demonstram que enquanto o Random Forest se mostra consistentemente eficaz, a configuração apropriada dos algoritmos, como a escolha do número de estimadores no Random Forest ou as camadas em redes neurais, é crucial para obter um alto nível de precisão. Além disso, a diversidade nos métodos e nos ajustes específicos de cada algoritmo reforça a necessidade de experimentação detalhada e ajuste fino dos modelos para cada conjunto de dados específico, pois podem impactar significativamente os resultados em projetos de machine learning.
 
 # Descrição do _dataset_ selecionado
 
