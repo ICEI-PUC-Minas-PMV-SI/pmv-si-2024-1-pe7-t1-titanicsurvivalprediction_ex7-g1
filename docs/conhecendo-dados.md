@@ -16,19 +16,68 @@ dos dados mostrou concentrações em faixas etárias específicas, além de valo
 **Detalhamento** 
 
 * Distribuição da Sobrevivência por Sexo:
-![image](https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/assets/81273082/18713b55-68ad-4452-87d0-5f417aa6bea6)
+  
+![](/docs/img/tabelaSexo.png)
+
+![](/docs/img/output_13_0.png)
 
 * Distribuição da Sobrevivência por Idade:
-![image](https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/assets/81273082/e529c20e-5484-4399-90d6-52169734e6c6)
 
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>714.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>29.699118</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>14.526497</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.420000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>20.125000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>28.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>38.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>80.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+![](/docs/img/tabelaIdade.png)
+![](/docs/img/output_16_0.png)
 
 * Distribuição da Sobrevivência por Classe Social:
-![image](https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/assets/81273082/8bc57c48-e267-4844-b663-90d9d0f20ee9)
-![image](https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/assets/81273082/6ef0fa38-570e-46ef-864e-493cd3e5f3d2)
+![](/docs/img/tabelaClasse.png)
+![](/docs/img/output_19_0.png)
 
-* Distribuição da Sobrevivência por Presença de Dependentes:
-![image](https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1/assets/81273082/e18ee934-e1a8-49de-9a17-8184a8a9c1f3)
-
+* Distribuição da Sobrevivência por Sobreviventes por Dependentes-Irmãos/Cônjuge:
+![](/docs/img/tabelaDepIrmaosC.png)
+![](/docs/img/output_21_0.png)
 
 Essas análises destacaram a importância dos fatores como gênero, idade, classe social e presença de dependentes na determinação de quem sobreviveria ao desastre do Titanic. Elas revelaram as prioridades e desafios enfrentados em situações de emergência, além das desigualdades 
 sociais e econômicas prevalecentes no início do século XX. Embora as medidas de tendência central forneçam uma visão geral, as medidas de dispersão e as visualizações gráficas foram  fundamentais para revelar a complexidade das relações entre as variáveis e seu impacto 
