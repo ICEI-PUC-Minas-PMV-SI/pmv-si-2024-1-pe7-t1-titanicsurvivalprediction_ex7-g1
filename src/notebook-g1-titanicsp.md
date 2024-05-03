@@ -18,13 +18,13 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
         print(os.path.join(dirname, filename))
 ```
 
-    /kaggle/input/titanic-dataset/Titanic-Dataset.csv
+    /kaggle/input/dataset-g1/Titanic-Dataset.csv
     
 
 
 ```python
 # Criando dataset
-df = pd.read_csv("/kaggle/input/titanic-dataset/Titanic-Dataset.csv")
+df = pd.read_csv("/kaggle/input/dataset-g1/Titanic-Dataset.csv")
 ```
 
 
@@ -37,7 +37,19 @@ df.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -232,7 +244,19 @@ df[df.isnull().any(axis=1)]
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -474,7 +498,7 @@ df.hist(figsize=(13,9))
 
 
     
-![](/docs/img/output_9_1.png)
+![png](output_9_1.png)
     
 
 
@@ -498,7 +522,19 @@ quant_sobrevi
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -555,7 +591,7 @@ plt.title("Taxa de Sobreviventes do Titanic", fontsize=11, pad=11)
 
 
     
-![](/docs/img/output_11_1.png)
+![png](output_11_1.png)
     
 
 
@@ -633,7 +669,7 @@ plt.show()
 
 
     
-![](/docs/img/output_13_0.png)
+![png](output_13_0.png)
     
 
 
@@ -647,7 +683,19 @@ pd.DataFrame(df.Age.describe())
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -696,12 +744,8 @@ pd.DataFrame(df.Age.describe())
 
 
 ```python
-
 def generate_age_survival_table(df):
-    # Vamos primeiro lidar com os dados ausentes na coluna 'Age'
-    # Preencher os valores ausentes na coluna 'Age' com a mediana da idade
-    df['Age'] = df['Age'].fillna(df['Age'].median())
-
+    
     # Criar faixas de idade
     age_bins = [0, 10, 20, 30, 40, 50, 60, 70, 80]
 
@@ -739,31 +783,28 @@ generate_age_survival_table(df)
     ╒════════════════╤═════════════════════════════════════╤═════════════════════════════════════╤═══════════════════════════════════════════════╕
     │ Faixa Etária   │   % de passageiros por Faixa Etária │   Nº Sobreviventes por Faixa Etária │   Taxa de Sobreviventes por Faixa Etária em % │
     ╞════════════════╪═════════════════════════════════════╪═════════════════════════════════════╪═══════════════════════════════════════════════╡
-    │ 0-10           │                            7.18294  │                                  33 │                                      0.383721 │
+    │ 0-10           │                             8.96359 │                                  33 │                                      0.383721 │
     ├────────────────┼─────────────────────────────────────┼─────────────────────────────────────┼───────────────────────────────────────────────┤
-    │ 11-20          │                           12.9068   │                                 136 │                                      0.334152 │
+    │ 11-20          │                            16.1064  │                                  84 │                                      0.365217 │
     ├────────────────┼─────────────────────────────────────┼─────────────────────────────────────┼───────────────────────────────────────────────┤
-    │ 21-30          │                           45.679    │                                  38 │                                      0.59375  │
+    │ 21-30          │                            32.2129  │                                  38 │                                      0.59375  │
     ├────────────────┼─────────────────────────────────────┼─────────────────────────────────────┼───────────────────────────────────────────────┤
-    │ 31-40          │                           17.3962   │                                  44 │                                      0.382609 │
+    │ 31-40          │                            21.7087  │                                  44 │                                      0.382609 │
     ├────────────────┼─────────────────────────────────────┼─────────────────────────────────────┼───────────────────────────────────────────────┤
-    │ 41-50          │                            9.65208  │                                  69 │                                      0.445161 │
+    │ 41-50          │                            12.0448  │                                  69 │                                      0.445161 │
     ├────────────────┼─────────────────────────────────────┼─────────────────────────────────────┼───────────────────────────────────────────────┤
-    │ 51-60          │                            4.7138   │                                  17 │                                      0.404762 │
+    │ 51-60          │                             5.88235 │                                  17 │                                      0.404762 │
     ├────────────────┼─────────────────────────────────────┼─────────────────────────────────────┼───────────────────────────────────────────────┤
-    │ 61-70          │                            1.90797  │                                   4 │                                      0.235294 │
+    │ 61-70          │                             2.38095 │                                   4 │                                      0.235294 │
     ├────────────────┼─────────────────────────────────────┼─────────────────────────────────────┼───────────────────────────────────────────────┤
-    │ 71-80          │                            0.561167 │                                   1 │                                      0.2      │
+    │ 71-80          │                             0.70028 │                                   1 │                                      0.2      │
     ╘════════════════╧═════════════════════════════════════╧═════════════════════════════════════╧═══════════════════════════════════════════════╛
     
 
 
 ```python
 def plot_age_survival(df, color_palette='Greys'):
-    # Vamos primeiro lidar com os dados ausentes na coluna 'Age'
-    # Preencher os valores ausentes na coluna 'Age' com a mediana da idade
-    df['Age'] = df['Age'].fillna(df['Age'].median())
-
+    
     # Criar faixas de idade
     age_bins = [0, 10, 20, 30, 40, 50, 60, 70, 80]
 
@@ -819,7 +860,7 @@ plot_age_survival(df, color_palette='Blues_r')
 
 
     
-![](/docs/img/output_16_0.png)
+![png](output_16_0.png)
     
 
 
@@ -840,7 +881,7 @@ plt.show()
 
 
     
-![](/docs/img/output_17_0.png)
+![png](output_17_0.png)
     
 
 
@@ -930,55 +971,54 @@ plt.show()
 
 
     
-![](/docs/img/output_19_0.png)
+![png](output_19_0.png)
     
 
 
 
 ```python
+import pandas as pd
+from tabulate import tabulate
+
 def generate_sibsp_table(df, column_width=10):
     # Calcular o percentual de Passageiros a Bordo por Dependentes-Irmãos/Cônjuge (SibSp)
     percentual_por_sibsp = df['SibSp'].value_counts(normalize=True) * 100
 
     # Calcular o número de Sobreviventes por Dependentes-Irmãos/Cônjuge (SibSp) e a taxa de sobreviventes por essa categoria
     sobreviventes_por_sibsp = df.groupby('SibSp')['Survived'].agg(['sum', 'mean'])
-    sobreviventes_por_sibsp.columns = ['Nº Sobreviventes por SibSp', 'Taxa de Sobrevivência por SibSp (%)']
+    sobreviventes_por_sibsp.columns = ['Sobreviventes', 'Taxa (%)']
 
     # Criar DataFrame com as informações de Dependentes-Irmãos/Cônjuge (SibSp)
     quant_sibsp = pd.DataFrame({
-        'Dependentes-Irmãos/Cônjuge': percentual_por_sibsp.index,
-        '% de passageiros por Dependentes-Irmãos/Cônjuge': percentual_por_sibsp.values,
-        'Nº Sobreviventes por Dependentes-Irmãos/Cônjuge': sobreviventes_por_sibsp['Nº Sobreviventes por SibSp'],
-        'Taxa de Sobreviventes por Dependentes-Irmãos/Cônjuge em %': sobreviventes_por_sibsp['Taxa de Sobrevivência por SibSp (%)']
+        'Dep-Irmãos/Côn': percentual_por_sibsp.index,
+        '% de passageiros': percentual_por_sibsp.values,
+        'Sobreviventes': sobreviventes_por_sibsp['Sobreviventes'],
+        'Taxa de Sobrevivência (%)': sobreviventes_por_sibsp['Taxa (%)']
     })
 
     # Ordenar o DataFrame pelos valores de SibSp
-    quant_sibsp = quant_sibsp.sort_values(by='Dependentes-Irmãos/Cônjuge')
+    quant_sibsp = quant_sibsp.sort_values(by='Dep-Irmãos/Côn')
+
+    # Estilo da tabela
+    style = quant_sibsp.style.set_table_styles([{'selector': 'th', 'props': [('max-width', f'{column_width}px')]}])
 
     # Exibir a tabela usando tabulate
-    print(tabulate(quant_sibsp, headers='keys', tablefmt='fancy_grid', showindex=False, colalign=("center",)*len(quant_sibsp.columns)))
+    print(tabulate(quant_sibsp, headers='keys', tablefmt='pipe', showindex=True, numalign="center"))
 
 # Exemplo de uso
-generate_sibsp_table(df, column_width=12)
+generate_sibsp_table(df, column_width=10)
+
 ```
 
-    ╒══════════════════════════════╤═══════════════════════════════════════════════════╤═══════════════════════════════════════════════════╤═════════════════════════════════════════════════════════════╕
-    │  Dependentes-Irmãos/Cônjuge  │  % de passageiros por Dependentes-Irmãos/Cônjuge  │  Nº Sobreviventes por Dependentes-Irmãos/Cônjuge  │  Taxa de Sobreviventes por Dependentes-Irmãos/Cônjuge em %  │
-    ╞══════════════════════════════╪═══════════════════════════════════════════════════╪═══════════════════════════════════════════════════╪═════════════════════════════════════════════════════════════╡
-    │              0               │                      68.2379                      │                        210                        │                          0.345395                           │
-    ├──────────────────────────────┼───────────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
-    │              1               │                      23.4568                      │                        112                        │                          0.535885                           │
-    ├──────────────────────────────┼───────────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
-    │              2               │                      3.14254                      │                        13                         │                          0.464286                           │
-    ├──────────────────────────────┼───────────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
-    │              3               │                      1.79574                      │                         3                         │                          0.166667                           │
-    ├──────────────────────────────┼───────────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
-    │              4               │                      2.0202                       │                         4                         │                            0.25                             │
-    ├──────────────────────────────┼───────────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
-    │              5               │                     0.561167                      │                         0                         │                              0                              │
-    ├──────────────────────────────┼───────────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────────────────────────────────────────────────────┤
-    │              8               │                     0.785634                      │                         0                         │                              0                              │
-    ╘══════════════════════════════╧═══════════════════════════════════════════════════╧═══════════════════════════════════════════════════╧═════════════════════════════════════════════════════════════╛
+    |  SibSp  |  Dep-Irmãos/Côn  |  % de passageiros  |  Sobreviventes  |  Taxa de Sobrevivência (%)  |
+    |:-------:|:----------------:|:------------------:|:---------------:|:---------------------------:|
+    |    0    |        0         |      68.2379       |       210       |          0.345395           |
+    |    1    |        1         |      23.4568       |       112       |          0.535885           |
+    |    2    |        2         |      3.14254       |       13        |          0.464286           |
+    |    4    |        3         |      1.79574       |        3        |          0.166667           |
+    |    3    |        4         |       2.0202       |        4        |            0.25             |
+    |    8    |        5         |      0.561167      |        0        |              0              |
+    |    5    |        8         |      0.785634      |        0        |              0              |
     
 
 
@@ -1027,7 +1067,7 @@ plt.show()
 
 
     
-![](/docs/img/output_21_0.png)
+![png](output_21_0.png)
     
 
 
@@ -1124,7 +1164,7 @@ plt.show()
 
 
     
-![](/docs/img/output_23_0.png)
+![png](output_23_0.png)
     
 
 
@@ -1142,25 +1182,25 @@ print(tabulate(statistics, headers='keys', tablefmt='fancy_grid', colalign=("rig
     ╒════════╤═══════════════╤════════════╤══════════╤═════════════════════════╤═══════╤═════════╤══════════╤══════════╤══════════╤═════════╤═════════╤════════════╤════════════════╕
     │        │   PassengerId │   Survived │   Pclass │                    Name │   Sex │     Age │    SibSp │    Parch │   Ticket │    Fare │   Cabin │   Embarked │ Faixa Etária   │
     ╞════════╪═══════════════╪════════════╪══════════╪═════════════════════════╪═══════╪═════════╪══════════╪══════════╪══════════╪═════════╪═════════╪════════════╪════════════════╡
-    │  count │           891 │        891 │      891 │                     891 │   891 │     891 │      891 │      891 │      891 │     891 │     204 │        889 │ 891            │
+    │  count │           891 │        891 │      891 │                     891 │   891 │     714 │      891 │      891 │      891 │     891 │     204 │        889 │ 714            │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
     │ unique │           nan │        nan │      nan │                     891 │     2 │     nan │      nan │      nan │      681 │     nan │     147 │          3 │ 8              │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
     │    top │           nan │        nan │      nan │ Braund, Mr. Owen Harris │  male │     nan │      nan │      nan │   347082 │     nan │ B96 B98 │          S │ 21-30          │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
-    │   freq │           nan │        nan │      nan │                       1 │   577 │     nan │      nan │      nan │        7 │     nan │       4 │        644 │ 407            │
+    │   freq │           nan │        nan │      nan │                       1 │   577 │     nan │      nan │      nan │        7 │     nan │       4 │        644 │ 230            │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
-    │   mean │           446 │   0.383838 │  2.30864 │                     nan │   nan │ 29.3616 │ 0.523008 │ 0.381594 │      nan │ 32.2042 │     nan │        nan │ nan            │
+    │   mean │           446 │   0.383838 │  2.30864 │                     nan │   nan │ 29.6991 │ 0.523008 │ 0.381594 │      nan │ 32.2042 │     nan │        nan │ nan            │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
-    │    std │       257.354 │   0.486592 │ 0.836071 │                     nan │   nan │ 13.0197 │  1.10274 │ 0.806057 │      nan │ 49.6934 │     nan │        nan │ nan            │
+    │    std │       257.354 │   0.486592 │ 0.836071 │                     nan │   nan │ 14.5265 │  1.10274 │ 0.806057 │      nan │ 49.6934 │     nan │        nan │ nan            │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
     │    min │             1 │          0 │        1 │                     nan │   nan │    0.42 │        0 │        0 │      nan │       0 │     nan │        nan │ nan            │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
-    │    25% │         223.5 │          0 │        2 │                     nan │   nan │      22 │        0 │        0 │      nan │  7.9104 │     nan │        nan │ nan            │
+    │    25% │         223.5 │          0 │        2 │                     nan │   nan │  20.125 │        0 │        0 │      nan │  7.9104 │     nan │        nan │ nan            │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
     │    50% │           446 │          0 │        3 │                     nan │   nan │      28 │        0 │        0 │      nan │ 14.4542 │     nan │        nan │ nan            │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
-    │    75% │         668.5 │          1 │        3 │                     nan │   nan │      35 │        1 │        0 │      nan │      31 │     nan │        nan │ nan            │
+    │    75% │         668.5 │          1 │        3 │                     nan │   nan │      38 │        1 │        0 │      nan │      31 │     nan │        nan │ nan            │
     ├────────┼───────────────┼────────────┼──────────┼─────────────────────────┼───────┼─────────┼──────────┼──────────┼──────────┼─────────┼─────────┼────────────┼────────────────┤
     │    max │           891 │          1 │        3 │                     nan │   nan │      80 │        8 │        6 │      nan │ 512.329 │     nan │        nan │ nan            │
     ╘════════╧═══════════════╧════════════╧══════════╧═════════════════════════╧═══════╧═════════╧══════════╧══════════╧══════════╧═════════╧═════════╧════════════╧════════════════╛
@@ -1223,7 +1263,7 @@ print("Taxa de Sobrevivência por Faixa Etária: (Número de Sobreviventes de De
     ╞════╪═══════════╪════════════╡
     │  0 │ (0, 18]   │   0.503597 │
     ├────┼───────────┼────────────┤
-    │  1 │ (18, 30]  │   0.331096 │
+    │  1 │ (18, 30]  │   0.355556 │
     ├────┼───────────┼────────────┤
     │  2 │ (30, 50]  │   0.423237 │
     ├────┼───────────┼────────────┤
@@ -1288,7 +1328,7 @@ sns.pairplot(df, x_vars=['Sex', 'Parch', 'SibSp', 'Age', 'Pclass'], y_vars=['Sex
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x79cb2c95f940>
+    <seaborn.axisgrid.PairGrid at 0x7ce6a5d96fb0>
 
 
 
@@ -1298,7 +1338,7 @@ sns.pairplot(df, x_vars=['Sex', 'Parch', 'SibSp', 'Age', 'Pclass'], y_vars=['Sex
 
 
     
-![](/docs/img/output_26_2.png)
+![png](output_26_2.png)
     
 
 
@@ -1319,7 +1359,7 @@ sns.heatmap(numeric_df.corr(), annot=True, cmap='Oranges', fmt='.2f')
 
 
     
-![](/docs/img/output_27_1.png)
+![png](output_27_1.png)
     
 
 
@@ -1338,3 +1378,298 @@ Algumas observações importantes:
 5. "Fare" tem uma correlação positiva moderada com "Pclass", o que faz sentido, já que passageiros de classes mais altas pagavam tarifas mais altas.
  
 Em resumo, este gráfico de correlações pode fornecer insights iniciais sobre os relacionamentos entre as variáveis do conjunto de dados do Titanic e orientar uma análise mais aprofundada.
+
+**Pré-processamento e Tratamento dos Dados**
+
+**Sobreviventes por idade**
+
+
+```python
+# Sobreviventes por idade
+pd.DataFrame(df.Age.describe())
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>714.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>29.699118</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>14.526497</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.420000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>20.125000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>28.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>38.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>80.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Avaliando a existência de dados nulos
+df.isnull().sum()
+```
+
+
+
+
+    PassengerId       0
+    Survived          0
+    Pclass            0
+    Name              0
+    Sex               0
+    Age             177
+    SibSp             0
+    Parch             0
+    Ticket            0
+    Fare              0
+    Cabin           687
+    Embarked          2
+    Faixa Etária    177
+    dtype: int64
+
+
+
+
+```python
+#Verificando os dados faltantes
+df.Age.isna().sum() 
+
+```
+
+
+
+
+    177
+
+
+
+Temos 177 dados faltantes na coluna idade Será que isso faz a diferença no calculo das médias? Verificando...
+
+
+```python
+#Eliminando e verificando os dados faltantes
+#df = df.dropna() 
+
+#Verificando após eliminação
+#df.Age.isna().sum() 
+```
+
+
+```python
+# Verificando novamente Sobreviventes por idade
+pd.DataFrame(df.Age.describe())
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>714.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>29.699118</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>14.526497</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.420000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>20.125000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>28.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>38.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>80.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+A média sofreu uma alteração considerável, de 29 anos para 35 anos ao remover os dados incompletos.
+Avaliando: 177 anos faltantes prejudica a análise, pois elimina outros dados importantes também.
+Solução: Preencher os dados de Idade com média ou moda.
+
+
+```python
+# Vamos primeiro lidar com os dados ausentes na coluna 'Age'
+# Preencher os valores ausentes na coluna 'Age' com a mediana da idade
+# df['Age'] = df['Age'].fillna(df['Age'].median())
+
+pd.DataFrame(df.Age.describe())
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>714.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>29.699118</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>14.526497</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.420000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>20.125000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>28.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>38.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>80.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Exclusão de dados por não terem importância em nossa pesquisa
+#df.drop(columns=['PassengerId', 'Name', 'Ticket', 'Cabin', 'Embarked', 'Fare'], inplace=True)
+#df.head()
+```
+
+**Tratando os valores faltantes**
+
+
+```python
+# Exemplo de padronização de dados
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+df.[['idade', 'outra_coluna']] = scaler.fit_transform(df.[['idade', 'outra_coluna']])
+```
+
+
+      Cell In[259], line 5
+        df.[['idade', 'outra_coluna']] = scaler.fit_transform(df.[['idade', 'outra_coluna']])
+           ^
+    SyntaxError: invalid syntax
+    
+
