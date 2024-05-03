@@ -17,9 +17,9 @@ dos dados mostrou concentrações em faixas etárias específicas, além de valo
 
 * Distribuição da Sobrevivência por Sexo:
   
-![](/docs/img/tabelaSexo.png)
+![Tabela Percentual de Passageiros a Bordo por Sexo](/docs/img/tabelaSexo.png)
 
-![](/docs/img/output_13_0.png)
+![Gráfico Percentual de Passageiros a Bordo por Sexo](/docs/img/output_13_0.png)
 
 * Distribuição da Sobrevivência por Idade:
 
@@ -69,15 +69,28 @@ dos dados mostrou concentrações em faixas etárias específicas, além de valo
 </div>
 
 ![](/docs/img/tabelaIdade.png)
+
 ![](/docs/img/output_16_0.png)
 
 * Distribuição da Sobrevivência por Classe Social:
+  
 ![](/docs/img/tabelaClasse.png)
+
 ![](/docs/img/output_19_0.png)
 
 * Distribuição da Sobrevivência por Sobreviventes por Dependentes-Irmãos/Cônjuge:
+  
 ![](/docs/img/tabelaDepIrmaosC.png)
+
 ![](/docs/img/output_21_0.png)
+
+* Distribuição da Sobrevivência por Sobreviventes por Dependentes-Pais/Filhos
+  
+![](/docs/img/tabelaDepPaisFilhos.png)
+
+![](/docs/img/output_23_0.png)
+
+
 
 Essas análises destacaram a importância dos fatores como gênero, idade, classe social e presença de dependentes na determinação de quem sobreviveria ao desastre do Titanic. Elas revelaram as prioridades e desafios enfrentados em situações de emergência, além das desigualdades 
 sociais e econômicas prevalecentes no início do século XX. Embora as medidas de tendência central forneçam uma visão geral, as medidas de dispersão e as visualizações gráficas foram  fundamentais para revelar a complexidade das relações entre as variáveis e seu impacto 
