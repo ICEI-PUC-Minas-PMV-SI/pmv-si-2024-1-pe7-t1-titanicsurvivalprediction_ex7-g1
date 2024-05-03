@@ -15,80 +15,88 @@ dos dados mostrou concentrações em faixas etárias específicas, além de valo
 
 **Detalhamento** 
 
-* Distribuição da Sobrevivência por Sexo:
-  
-![Tabela Percentual de Passageiros a Bordo por Sexo](/docs/img/tabelaSexo.png)
+> ### Distribuição da Sobrevivência por Sexo:
+> ---
+> ![Tabela Percentual de Passageiros a Bordo por Sexo](/docs/img/tabelaSexo.png)
+>
+>![Gráfico Percentual de Passageiros a Bordo por Sexo](/docs/img/output_13_0.png)
 
-![Gráfico Percentual de Passageiros a Bordo por Sexo](/docs/img/output_13_0.png)
 
-* Distribuição da Sobrevivência por Idade:
 
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Age</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>714.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>29.699118</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>14.526497</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>0.420000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>20.125000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>28.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>38.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>80.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+> ### Distribuição da Sobrevivência por Idade:
+> ---
+> <div>
+> <table border="1" class="dataframe">
+>  <thead>
+>    <tr style="text-align: right;">
+>      <th></th>
+>      <th>Age</th>
+>    </tr>
+>  </thead>
+>  <tbody>
+>    <tr>
+>      <th>count</th>
+>      <td>714.000000</td>
+>    </tr>
+>    <tr>
+>      <th>mean</th>
+>      <td>29.699118</td>
+>    </tr>
+>    <tr>
+>      <th>std</th>
+>      <td>14.526497</td>
+>    </tr>
+>    <tr>
+>      <th>min</th>
+>      <td>0.420000</td>
+>    </tr>
+>    <tr>
+>      <th>25%</th>
+>      <td>20.125000</td>
+>    </tr>
+>    <tr>
+>      <th>50%</th>
+>      <td>28.000000</td>
+>    </tr>
+>    <tr>
+>      <th>75%</th>
+>      <td>38.000000</td>
+>    </tr>
+>    <tr>
+>      <th>max</th>
+>      <td>80.000000</td>
+>    </tr>
+>  </tbody>
+> </table>
+> </div>
+>
+> ![](/docs/img/tabelaIdade.png)
+>
+> ![](/docs/img/output_16_0.png)
 
-![](/docs/img/tabelaIdade.png)
 
-![](/docs/img/output_16_0.png)
 
-* Distribuição da Sobrevivência por Classe Social:
-  
-![](/docs/img/tabelaClasse.png)
+> ### Distribuição da Sobrevivência por Classe Social:
+> ---
+> ![](/docs/img/tabelaClasse.png)
+>
+> ![](/docs/img/output_19_0.png)
 
-![](/docs/img/output_19_0.png)
 
-* Distribuição da Sobrevivência por Sobreviventes por Dependentes-Irmãos/Cônjuge:
-  
-![](/docs/img/tabelaDepIrmaosC.png)
 
-![](/docs/img/output_21_0.png)
+> ### Distribuição da Sobrevivência por Sobreviventes por Dependentes-Irmãos/Cônjuge:
+> ---
+> ![](/docs/img/tabelaDepIrmaosC.png)
+>
+> ![](/docs/img/output_21_0.png)
 
-* Distribuição da Sobrevivência por Sobreviventes por Dependentes-Pais/Filhos
-  
-![](/docs/img/tabelaDepPaisFilhos.png)
 
-![](/docs/img/output_23_0.png)
+
+> ### Distribuição da Sobrevivência por Sobreviventes por Dependentes-Pais/Filhos
+> ---
+> ![](/docs/img/tabelaDepPaisFilhos.png)
+>
+> ![](/docs/img/output_23_0.png)
 
 
 
