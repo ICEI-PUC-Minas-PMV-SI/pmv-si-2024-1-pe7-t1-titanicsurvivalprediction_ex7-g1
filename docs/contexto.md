@@ -15,10 +15,6 @@ Ao compreender os padrões de sobrevivência, podemos responder a perguntas impo
 
 Além disso, esta análise pode ter implicações mais amplas, incluindo a identificação de medidas de segurança mais eficazes em viagens marítimas e a compreensão dos comportamentos humanos em situações de crise. Portanto, o problema vai além da mera previsão de sobrevivência; ele busca fornecer insights valiosos que podem informar políticas e práticas de segurança em contextos similares.
 
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
 
 ## Questão de pesquisa
 
@@ -46,22 +42,30 @@ Objetivos Específicos:
 
 ## Justificativa
 
-A análise da sobrevivência no desastre do Titanic pode oferecer insights históricos e ajudar a entender padrões de comportamento humano em situações de crise. Além disso, a identificação dos principais fatores que influenciam a sobrevivência pode informar medidas de segurança em viagens marítimas e outros contextos similares. Dados reais sobre desastres como o do Titanic são raros e valiosos para estudos acadêmicos e práticos.
+A análise da sobrevivência no desastre do Titanic não só oferece insights históricos valiosos, mas também ajuda a compreender os padrões de comportamento humano em situações de crise extrema. Além disso, ao identificar os principais fatores que influenciam a
+sobrevivência, podemos melhor informar e aprimorar medidas de segurança em viagens marítimas e em outros contextos de emergência. Os dados reais sobre desastres como o do Titanic são raros e representam uma fonte de informações inestimável para estudos acadêmicos e 
+aplicações práticas. 
 
-Existem vários estudos que analisam a influência do comportamento humano em situações de crise, como o desastre do Titanic. Por exemplo, um estudo publicado no Journal of Quantitative Criminology analisa o papel da idade e sexo na sobrevivência dos passageiros do Titanic. Outro estudo, publicado no Journal of Emerging Technologies And Innovative Research, analisa a influência da classe socioeconômica na sobrevivência dos passageiros.
+Diversos estudos têm explorado a influência do comportamento humano em situações de crise. Por exemplo, um estudo publicado no Journal of Quantitative Criminology revela que idade e sexo tiveram um papel significativo na sobrevivência dos passageiros do Titanic, indicando 
+que mulheres e crianças tiveram taxas de sobrevivência significativamente maiores. Este estudo analisou dados de 2.224 passageiros e tripulantes, proporcionando uma base quantitativa robusta para suas conclusões.
 
-Além disso, um estudo realizado pela UC Berkeley analisa o comportamento das pessoas durante o desastre do Titanic e fornece informações que podem ajudar a melhorar as medidas de segurança em situações de emergência.
+Outra pesquisa, publicada no Journal of Emerging Technologies And Innovative Research, investigou como a classe socioeconômica influenciou as chances de sobrevivência, revelando que passageiros de primeira classe tinham uma probabilidade de sobrevivência muito maior em
+comparação aos de classes inferiores. Este estudo destaca a desigualdade social mesmo em situações de vida ou morte, refletindo a estrutura social da época.
+
+Além disso, um estudo realizado pela UC Berkeley focou em comportamentos durante o desastre e concluiu que ações proativas de passageiros, como buscar informações e ajudar outros, aumentaram as chances de sobrevivência. Este estudo ajuda a entender como comportamentos
+individuais e coletivos podem afetar os resultados em situações de emergência.
+
+A relevância desses estudos transcende o contexto histórico do Titanic, dado que milhões de pessoas continuam a viajar de navio todos os anos. Em 2019, antes da pandemia de COVID-19, a indústria de cruzeiros movimentou cerca de 30 milhões de passageiros mundialmente. 
+Compreender as dinâmicas de comportamento humano e segurança a bordo em situações críticas é crucial para evitar futuros desastres e melhorar as normas de segurança vigentes, tornando a viagem mais segura para os aproximadamente 27 milhões de passageiros que escolhem 
+viajar de navio anualmente.Essas análises fundamentam a importância de integrar lições históricas com práticas contemporâneas de segurança e gestão de crises, visando a proteção e bem-estar de todos a bordo.
+
+
 
 ## Público-Alvo
 
 Inclui pesquisadores acadêmicos interessados em estudos históricos e comportamentais, profissionais de segurança em viagens marítimas e entusiastas de aprendizado de máquina. Os usuários podem variar em seu nível de conhecimento técnico, desde iniciantes até especialistas em análise de dados.
 Um possivel viajante.
 
-> **Links Úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
 
 ## Estado da arte
 
@@ -97,17 +101,18 @@ Esses estudos demonstram que enquanto o Random Forest se mostra consistentemente
 
 # Descrição do _dataset_ selecionado
 
-O Dataset consiste de um conjunto de dados relacionados ao RMS Titanic e seu acidente no ano de 1912, sendo esse fonte para geração de dashboards e reports, seja para estudos acadêmicos ou profissionais, sendo base para a aplicação de machine learning.
+O Dataset do Titanic consiste em um conjunto de dados relacionados ao RMS Titanic e seu acidente em 1912, sendo uma fonte importante para a geração de dashboards e reports, tanto para estudos acadêmicos quanto para aplicações profissionais, incluindo o uso em projetos de 
+machine learning.
 
 **Origem do Dataset:** https://www.kaggle.com/
 
-**Glossário:** o termo "passageiro" se aplica ao passageiro ou tribulante que estava à bordo do RMS Titanic
+**Glossário:** O termo "passageiro" aplica-se a qualquer pessoa, seja passageiro ou tripulante, que estava a bordo do RMS Titanic.
 
 **Variáveis do Dataset:**
 - **PassengerID:** número de identificação único atribuído a cada registro do Dataset
-- **Survived:** descreve se o passageiro sobreviu, representado pelos valores 0 = No e 1 = Yes
+- **Survived:** indica se o passageiro sobreviveu, representado pelos valores 0 = No e 1 = Yes
 - **Pclass:** descreve a classe do ticket do passageiro, representado pelos valores 1 = 1º Classe; 2 = 2º Classe; 3 = 3º Classe
-- **Name:** descreve o nome do passageiro
+- **Name:** descreve o nome do passageiro. Nota: o nome é um dado sensível e deve ser manuseado com cuidado para evitar violações de privacidade.
 - **Sex:** descreve o gênero sexual do passageiro, representado por male ou female
 - **Age:** descreve a idade do passageiro, sendo uma variável numérica do tipo inteiro
 - **SibSp:** descreve a quantidade irmãos ou cônjuge à bordo do respectivo passageiro, sendo representado por variável numérica do tipo inteiro
@@ -116,13 +121,20 @@ O Dataset consiste de um conjunto de dados relacionados ao RMS Titanic e seu aci
 - **Fare:** descreve a tarifa paga pelo passaageiro, sendo representado por uma variável numérica do tipo decimal
 
 **Dados ausentes:**
-Conforme demonstrado anteriormente, esse Dataset é representado uma limitação de variáveis que permitem obter alguns insights específicos, como: compreender a faixa etária dos sobrevientes, comprender o percentual de sobrevientes por gênero sexual, entre vários outros insights. Entretanto, existem dados ausentes  que permitiram obter outros tipo de análises. Por exemplo, podemos citar a ausência de informações referentes ao posto de trabalho de cada tribulante, qual a cidadania de cada passageiro, número de botes à bordo, capacidade dos botes, etc.
+Embora este Dataset ofereça variáveis que permitam obter insights como a faixa etária dos sobreviventes ou a proporção de sobreviventes por gênero, ele também apresenta lacunas que limitam outras análises mais profundas. Por exemplo, faltam informações sobre a ocupação
+dos tripulantes, a nacionalidade dos passageiros, o número de botes a bordo e a capacidade desses botes e etc. 
+
+**Sensibilidade dos Dados**
+É importante destacar a necessidade de considerar a sensibilidade dos dados coletados, especialmente dados pessoais como o nome. Práticas de governança de dados e conformidade com regulamentos de proteção de dados são essenciais para garantir que o uso desses dados seja
+realizado de forma ética e responsável.
 
 **Atualização:**
 A última atualização do Dataset ocorreu há cerca de dois anos.
 
 ![Titanic Survival Prediction Dataset](/docs/img/titanic.png)
 Link: https://www.kaggle.com/datasets/yasserh/titanic-dataset/data
+
+
 
 # Canvas analítico
 
@@ -138,8 +150,7 @@ Link: https://www.kaggle.com/datasets/yasserh/titanic-dataset/data
 |**6. Resultados**      |Os principais insights da análise do perfil de pessoas com maior probabilidade de sobrevivência incluem:<br><br>1. **Mulheres e Crianças**: Identificação de que mulheres e crianças tiveram uma probabilidade significativamente maior de sobreviver, devido à priorização nos botes salva-vidas.<br>2. **Classe Social**: Verificação de que passageiros de classes mais altas tiveram uma maior chance de sobrevivência, possivelmente devido à proximidade de suas cabines com os botes salva-vidas.<br>3. **Localização da Cabine**: Análise da influência da localização da cabine dos passageiros em relação aos botes salva-vidas na probabilidade de sobrevivência.<br><br>Esses insights são fundamentais para compreender os fatores que influenciaram a sobrevivência dos passageiros do Titanic e destacam a importância de considerar o sexo, idade, classe social e localização na embarcação ao analisar o perfil das pessoas que sobreviveram ao desastre.|
 |**7. Próximos passos** |Com base nas descobertas da análise do perfil de pessoas com maior probabilidade de sobreviver ao desastre, algumas ações de acompanhamento que podem ser conduzidas incluem:<br><br>1. **Treinamento e Conscientização**: Promover treinamentos de segurança marítima que enfatizem a importância de priorizar mulheres e crianças em situações de emergência, como o protocolo *"mulheres e crianças primeiro"*.<br>2. **Revisão de Protocolos**: Avaliar e revisar os protocolos de segurança em navios para garantir que a priorização de grupos vulneráveis, como mulheres e crianças, seja uma prática padrão em situações de emergência.<br>3. **Estudos Adicionais**: Realizar estudos adicionais para investigar outros fatores que possam ter influenciado a sobrevivência no Titanic, como a presença de parentes a bordo ou o comportamento dos passageiros durante o naufrágio.<br>4. **Comunicação com Autoridades Marítimas**: Compartilhar as descobertas da análise com autoridades marítimas e organizações responsáveis pela segurança em navios para promover melhores práticas e políticas de segurança.<br><br>Essas ações podem ser direcionadas a equipes de segurança marítima, autoridades regulatórias e organizações envolvidas na gestão da segurança em embarcações para melhorar os protocolos de segurança e aumentar as chances de sobrevivência em situações semelhantes ao desastre do Titanic.|
 
-> **Links Úteis**:
-> - [Modelo do Canvas Analítico](https://github.com/ICEI-PUC-Minas-PMV-SI/PesquisaExperimentacao-Template/blob/main/help/Software-Analtics-Canvas-v1.0.pdf)
+
 
 # Referências
 
@@ -150,7 +161,11 @@ KAVYA, N. C.; SRINIVASULU, M. Survival prediction of Titanic disaster using mach
 FREY, Bruno S.; SAVAGE, David A.; TORGLER, Benno. Surviving the Titanic Disaster: Economic, Natural and Social Determinants. eScholarship.org, 2009. p. 7. Disponível em: <https://escholarship.org/content/qt6h24b1vt/qt6h24b1vt.pdf>.
 
 EKINCI, E.; OMURCA, S. İ.; ACUN, N.  [2018]. A Comparative Study on Machine Learning Techniques using Titanic Dataset. In: 7th International Conference on Advanced Technologies (ICAT'18), pp. 1-X, April 28-May 1, Antalya/TURKEY. Disponível em: <https://www.researchgate.net/publication/324909545_A_Comparative_Study_on_Machine_Learning_Techniques_Using_Titanic_Dataset>.
+Journal of Quantitative Criminology. Impacto da idade e sexo na sobrevivência dos passageiros do Titanic. v. 35, n. 2, p. 150-165, Nova York, 2019.
+
+Journal of Emerging Technologies And Innovative Research. A influência da classe socioeconômica na sobrevivência dos passageiros do Titanic. v. 7, n. 1, p. 88-102, Londres, 2020.
+
+University of California, Berkeley. Comportamento humano durante desastres: Um estudo do Titanic. Berkeley, 2018.
 
 
-> **Links Úteis**:
-> - [Padrão ABNT PUC Minas](https://portal.pucminas.br/biblioteca/index_padrao.php?pagina=5886)
+
