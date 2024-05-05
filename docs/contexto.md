@@ -160,7 +160,9 @@ KAVYA, N. C.; SRINIVASULU, M. Survival prediction of Titanic disaster using mach
 
 FREY, Bruno S.; SAVAGE, David A.; TORGLER, Benno. Surviving the Titanic Disaster: Economic, Natural and Social Determinants. eScholarship.org, 2009. p. 7. Disponível em: <https://escholarship.org/content/qt6h24b1vt/qt6h24b1vt.pdf>.
 
-EKINCI, E.; OMURCA, S. İ.; ACUN, N.  [2018]. A Comparative Study on Machine Learning Techniques using Titanic Dataset. In: 7th International Conference on Advanced Technologies (ICAT'18), pp. 1-X, April 28-May 1, Antalya/TURKEY. Disponível em: <https://www.researchgate.net/publication/324909545_A_Comparative_Study_on_Machine_Learning_Techniques_Using_Titanic_Dataset>.
+EKINCI, E.; OMURCA, S. İ.; ACUN, N.  [2018]. A Comparative Study on Machine Learning Techniques using Titanic Dataset. In: 7th International Conference on Advanced Technologies (ICAT'18), pp. 1-X, April 28-May 1, Antalya/TURKEY. Disponível em: 
+<https://www.researchgate.net/publication/324909545_A_Comparative_Study_on_Machine_Learning_Techniques_Using_Titanic_Dataset>.
+
 Journal of Quantitative Criminology. Impacto da idade e sexo na sobrevivência dos passageiros do Titanic. v. 35, n. 2, p. 150-165, Nova York, 2019.
 
 Journal of Emerging Technologies And Innovative Research. A influência da classe socioeconômica na sobrevivência dos passageiros do Titanic. v. 7, n. 1, p. 88-102, Londres, 2020.
