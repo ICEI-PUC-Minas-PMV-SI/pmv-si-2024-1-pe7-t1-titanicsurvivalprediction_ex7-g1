@@ -112,8 +112,7 @@ upper_bound = Q3 + 1.5 * IQR
 data = data[(data['Fare'] >= lower_bound) & (data['Fare'] <= upper_bound)]
 ```
 
-* Transformar variáveis categóricas usando One-Hot Encoding
-* e padronizar/normalizar variáveis numéricas
+* Transformar variáveis categóricas usando One-Hot Encoding e padronizar/normalizar variáveis numéricas
 ```python 
 numeric_features = ['Age', 'Fare']
 categorical_features = ['Sex', 'Embarked']
