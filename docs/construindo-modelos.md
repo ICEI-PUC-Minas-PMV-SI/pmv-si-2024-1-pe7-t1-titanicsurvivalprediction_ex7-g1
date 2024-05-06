@@ -23,7 +23,7 @@ Essas informações adicionais podem ser necessárias para uma análise mais pro
 # Tipos de Dados no Dataset do Titanic
 
 Variável  | Tipo de Dados  | Faixa de Valores  | Tipo de Dado
---------- | ------
+--------- | -------------- | ----------------- | ------------- 
 PassengerId | 	Numérico (Inteiro)  | 1 a 891  | 	Quantitativo
 Survived | Categórico (Binário)  | 0 (Não sobreviveu), 1 (Sobreviveu)  | Qualitativo
 Pclass | Categórico (Ordinal)  | 1 (Primeira classe), 2 (Segunda classe), 3 (Terceira classe)  | Qualitativo
