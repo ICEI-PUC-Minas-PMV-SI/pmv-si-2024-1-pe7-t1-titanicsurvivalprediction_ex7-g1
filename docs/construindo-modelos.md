@@ -61,9 +61,166 @@ Nesta etapa, deverão ser descritas todas as técnicas utilizadas para pré-proc
 
 Algumas das etapas podem estar relacionadas à:
 
-* Limpeza de Dados: trate valores ausentes: decida como lidar com dados faltantes, seja removendo linhas, preenchendo com médias, medianas ou usando métodos mais avançados; remova _outliers_: identifique e trate valores que se desviam significativamente da maioria dos dados.
+# Limpeza de Dados
 
-* Transformação de Dados: normalize/padronize: torne os dados comparáveis, normalizando ou padronizando os valores para uma escala específica; codifique variáveis categóricas: converta variáveis categóricas em uma forma numérica, usando técnicas como _one-hot encoding_.
+Neste projeto, a limpeza de dados incluiu as seguintes etapas:
+
+`import pandas as pd
+import numpy as np
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
+
+* Carregar o dataset
+data = pd.read_csv("titanic.csv")
+
+* Visualizar as primeiras linhas do dataset
+print(data.head())
+
+* Tratar valores ausentes
+* Criar um imputer para preencher valores ausentes em 'Age' e 'Embarked'
+imputer = SimpleImputer(strategy='median')  # Preencher com a mediana para 'Age'
+data['Age'] = imputer.fit_transform(data[['Age']])
+
+* Preencher valores ausentes em 'Embarked' com o valor mais frequente
+data['Embarked'].fillna(data['Embarked'].mode()[0], inplace=True)
+
+* Remover a variável 'Cabin' devido ao alto número de valores ausentes
+data.drop('Cabin', axis=1, inplace=True)
+
+* Remover outliers em 'Fare' usando o método IQR
+Q1 = data['Fare'].quantile(0.25)
+Q3 = data['Fare'].quantile(0.75)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+data = data[(data['Fare'] >= lower_bound) & (data['Fare'] <= upper_bound)]
+
+* Transformar variáveis categóricas usando One-Hot Encoding
+* e padronizar/normalizar variáveis numéricas
+numeric_features = ['Age', 'Fare']
+categorical_features = ['Sex', 'Embarked']
+
+numeric_transformer = Pipeline(steps=[
+    ('scaler', StandardScaler())])
+
+categorical_transformer = Pipeline(steps=[
+    ('onehot', OneHotEncoder())])
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat', categorical_transformer, categorical_features)])
+
+* Aplicar as transformações no dataset
+cleaned_data = preprocessor.fit_transform(data)
+
+* Separar variáveis independentes da variável alvo
+X = cleaned_data
+y = data['Survived']
+
+* Dividir o dataset em conjunto de treinamento e teste
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+
+* Carregando os dados
+data = pd.read_csv('titanic.csv')
+
+* Visualizando os primeiros registros
+print(data.head())
+
+* 1. Tratamento de Valores Ausentes
+* Imputação para a idade
+age_imputer = SimpleImputer(strategy='median')
+data['Age'] = age_imputer.fit_transform(data[['Age']])
+
+* Imputação para a cabine (criando uma nova variável indicando se a cabine era conhecida)
+data['Cabin_Known'] = np.where(data['Cabin'].isnull(), 0, 1)
+
+* Imputação para Embarked com a moda
+embarked_imputer = SimpleImputer(strategy='most_frequent')
+data['Embarked'] = embarked_imputer.fit_transform(data[['Embarked']])
+
+* 2. Remoção de Outliers
+* Considerando a tarifa (fare)
+Q1 = data['Fare'].quantile(0.25)
+Q3 = data['Fare'].quantile(0.75)
+IQR = Q3 - Q1
+upper_limit = Q3 + 1.5 * IQR
+data['Fare'] = np.where(data['Fare'] > upper_limit, upper_limit, data['Fare'])
+
+* 3. Transformação de Dados
+* Normalização/Padronização
+scaler = StandardScaler()
+data[['Age', 'Fare']] = scaler.fit_transform(data[['Age', 'Fare']])
+
+* Codificação de Variáveis Categóricas
+ct = ColumnTransformer([
+    ("onehot", OneHotEncoder(), ['Embarked', 'Sex', 'Pclass'])
+], remainder='passthrough')
+
+data_transformed = ct.fit_transform(data)
+new_columns = ct.get_feature_names_out()
+data_final = pd.DataFrame(data_transformed, columns=new_columns)
+
+* Mostrar as primeiras linhas do dataframe transformado
+print(data_final.head())
+
+* Exportar dados limpos para novo CSV
+data_final.to_csv('titanic_clean.csv', index=False)`
+
+
+# Transformação de Dados: 
+padronizando as variáveis numéricas e convertendo as variáveis categóricas em um formato numérico através do one-hot encoding.
+* Instalando e importando as bibliotecas necessárias
+
+`import pandas as pd
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+
+* Carregando o dataset limpo
+data = pd.read_csv('titanic_clean.csv')
+
+* Lista de colunas numéricas para padronizar
+numeric_features = ['Age', 'Fare', 'SibSp', 'Parch']
+
+* Criando o transformador para as variáveis numéricas
+numeric_transformer = StandardScaler()
+
+* Lista de colunas categóricas para codificação
+categorical_features = ['Sex', 'Embarked', 'Pclass', 'Cabin_Known']
+
+* Criando o transformador para as variáveis categóricas
+categorical_transformer = OneHotEncoder(drop='first')  # 'drop' evita a multicolinearidade
+
+* Criando o transformador de colunas para aplicar as transformações apropriadas
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat', categorical_transformer, categorical_features)
+    ])
+
+* Aplicando o pré-processador ao dataset
+X_transformed = preprocessor.fit_transform(data)
+
+* Para uso posterior em modelos, transformar a saída em um DataFrame novamente pode ser útil
+column_names = preprocessor.transformers_[0][2] + list(preprocessor.named_transformers_['cat'].get_feature_names(categorical_features))
+X_transformed_df = pd.DataFrame(X_transformed, columns=column_names)
+
+* Mostrando as primeiras linhas do DataFrame transformado
+print(X_transformed_df.head())`
+
+
+
 
 * _Feature Engineering_: crie novos atributos que possam ser mais informativos para o modelo; selecione características relevantes e descarte as menos importantes.
 
