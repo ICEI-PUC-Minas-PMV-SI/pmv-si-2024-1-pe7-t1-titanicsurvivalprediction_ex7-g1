@@ -45,7 +45,7 @@ Embarked  | Categórico (Nominal)  | 'S' (Southampton), 'C' (Cherbourg), 'Q' (Qu
 * Imputação de valores ausentes em 'Age' usando a mediana.
 * Criação de uma variável binária para 'Cabin' para indicar se a informação está disponível.
 * Imputação do modo para valores ausentes em 'Embarked'.
-* Limitação de outliers em 'Fare' com base no cálculo do IQR.
+* Limitação de outliers em 'Fare' com base no cálculo do IQR (????)
 
 **Transformação:**
 
