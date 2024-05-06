@@ -65,30 +65,30 @@ Algumas das etapas podem estar relacionadas à:
 
 Neste projeto, a limpeza de dados incluiu as seguintes etapas:
 
-`import pandas as pd
+` import pandas as pd
 import numpy as np
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split `
 
 * Carregar o dataset
-data = pd.read_csv("titanic.csv")
+` data = pd.read_csv("titanic.csv") `
 
 * Visualizar as primeiras linhas do dataset
-print(data.head())
+` print(data.head()) `
 
 * Tratar valores ausentes
 * Criar um imputer para preencher valores ausentes em 'Age' e 'Embarked'
-imputer = SimpleImputer(strategy='median')  # Preencher com a mediana para 'Age'
-data['Age'] = imputer.fit_transform(data[['Age']])
+` imputer = SimpleImputer(strategy='median')  # Preencher com a mediana para 'Age'
+data['Age'] = imputer.fit_transform(data[['Age']]) `
 
 * Preencher valores ausentes em 'Embarked' com o valor mais frequente
-data['Embarked'].fillna(data['Embarked'].mode()[0], inplace=True)
+` data['Embarked'].fillna(data['Embarked'].mode()[0], inplace=True) `
 
 * Remover a variável 'Cabin' devido ao alto número de valores ausentes
-data.drop('Cabin', axis=1, inplace=True)
+` data.drop('Cabin', axis=1, inplace=True) `
 
 * Remover outliers em 'Fare' usando o método IQR
 Q1 = data['Fare'].quantile(0.25)
