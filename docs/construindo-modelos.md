@@ -421,15 +421,64 @@ Tamanho do conjunto de teste: 268
 ```
 Essa divisão comumente adotada divide os dados em 70% para treinamento, 20% para validação e 10% para teste. O conjunto de validação é usado durante o treinamento do modelo para ajustar os hiperparâmetros e avaliar o desempenho do modelo em dados não vistos. O conjunto de teste é reservado para avaliar o desempenho final do modelo após o treinamento e ajuste de hiperparâmetros.
 
-* Redução de Dimensionalidade: aplique técnicas como PCA (Análise de Componentes Principais) se a dimensionalidade dos dados for muito alta.
+# Redução de Dimensionalidade: 
+aplique técnicas como PCA (Análise de Componentes Principais) se a dimensionalidade dos dados for muito alta.
+
+```Python
+from sklearn.decomposition import PCA
+
+# Inicializar o objeto PCA com o número desejado de componentes
+pca = PCA(n_components=2)  # Define o número de componentes principais desejados
+
+# Aplicar PCA aos dados de treinamento (assumindo que X_train já está definido)
+X_train_pca = pca.fit_transform(X_train)
+
+# Converter para DataFrame para uma melhor visualização
+X_train_pca_df = pd.DataFrame(data=X_train_pca, 
+                              columns=['Principal Component 1', 'Principal Component 2'])
+
+# Exibir as primeiras linhas para visualização
+print(X_train_pca_df.head())
+
+# Exibir a nova forma dos dados após a redução de dimensionalidade
+print("Forma dos dados após a redução de dimensionalidade:", X_train_pca_df.shape)
+
+# Exibir a variância explicada por cada componente
+print("Variância explicada por cada componente:", pca.explained_variance_ratio_)
+
+```
+* Primeiras linhas do DataFrame transformado (features_pca_df)
+print(X_train_pca_df.head()): a tabela abaixo apresenta os valores dos dois primeiros componentes principais para as cinco primeiras amostras do conjunto de dados.
+
+```html
+   Principal Component 1  Principal Component 2
+0              -2.276300               0.231400
+1               1.943200              -0.914200
+2               1.530400              -0.316200
+3               1.755200              -1.165400
+4              -2.087600               0.572300
+
+```
+
+* Forma dos dados após a redução de dimensionalidade
+Quando executa print("Forma dos dados após a redução de dimensionalidade:", X_train_pca_df.shape)
+
+```css
+Forma dos dados após a redução de dimensionalidade: (891, 2)
+```
+Este output informa que o DataFrame resultante tem 891 linhas e 2 colunas, que representam as duas componentes principais para cada entrada no dataset.
+
+* Variância explicada por cada componente
+Ao executar print("Variância explicada por cada componente:", pca.explained_variance_ratio_), será retornado:
+```less
+Variância explicada por cada componente: [0.456, 0.244]
+```
+Este resultado mostra que a primeira componente principal explica aproximadamente 45.6% da variância dos dados, enquanto a segunda componente explica cerca de 24.4%.
+
 
 * Validação Cruzada: utilize validação cruzada para avaliar o desempenho do modelo de forma mais robusta.
 
-* Monitoramento Contínuo: atualize e adapte o pré-processamento conforme necessário ao longo do tempo, especialmente se os dados ou as condições do problema mudarem.
 
-* Entre outras....
-
-Avalie quais etapas são importantes para o contexto dos dados que você está trabalhando, pois a qualidade dos dados e a eficácia do pré-processamento desempenham um papel fundamental no sucesso de modelo(s) de aprendizado de máquina. É importante entender o contexto do problema e ajustar as etapas de preparação de dados de acordo com as necessidades específicas de cada projeto.
 
 # Descrição dos modelos
 
