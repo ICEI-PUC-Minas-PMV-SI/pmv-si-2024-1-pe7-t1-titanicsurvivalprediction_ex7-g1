@@ -463,21 +463,60 @@ print(X_train_pca_df.head()): a tabela abaixo apresenta os valores dos dois prim
 * Forma dos dados após a redução de dimensionalidade
 Quando executa print("Forma dos dados após a redução de dimensionalidade:", X_train_pca_df.shape)
 
-```css
+```html
 Forma dos dados após a redução de dimensionalidade: (891, 2)
 ```
 Este output informa que o DataFrame resultante tem 891 linhas e 2 colunas, que representam as duas componentes principais para cada entrada no dataset.
 
 * Variância explicada por cada componente
 Ao executar print("Variância explicada por cada componente:", pca.explained_variance_ratio_), será retornado:
-```less
+```html
 Variância explicada por cada componente: [0.456, 0.244]
 ```
-Este resultado mostra que a primeira componente principal explica aproximadamente 45.6% da variância dos dados, enquanto a segunda componente explica cerca de 24.4%.
+Este resultado mostra que o primeiro componente principal explica aproximadamente 45.6% da variância dos dados, enquanto o segundo componente explica cerca de 24.4%.
 
 
-* Validação Cruzada: utilize validação cruzada para avaliar o desempenho do modelo de forma mais robusta.
+# Validação Cruzada:
+```Python
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 
+# Carregar os dados
+data = pd.read_csv('titanic_clean.csv')
+
+# Definir features e target
+X = data.drop('Survived', axis=1)
+y = data['Survived']
+
+# Criar um pipeline com pré-processamento e modelo
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),  # Padronização dos dados
+    ('clf', RandomForestClassifier())  # Modelo RandomForest
+])
+
+# Realizar a validação cruzada
+scores = cross_val_score(pipeline, X, y, cv=5)  # 5 folds
+
+# Imprimir os resultados
+print("Acurácia Média: {:.2f}".format(scores.mean()))
+print("Desvio Padrão dos Scores: {:.2f}".format(scores.std()))
+```
+
+1. Importamos cross_val_score do sklearn para realizar a validação cruzada.
+2. Criamos um pipeline que inclui uma etapa de pré-processamento (padronização dos dados usando StandardScaler) e um modelo de RandomForest.
+3. Usamos cross_val_score para calcular a acurácia do modelo em cada fold da validação cruzada. O argumento cv=5 especifica o número de folds a serem usados.
+4. Finalmente, imprimimos a média das acurácias dos folds e o desvio padrão dos scores para avaliar o desempenho médio e a consistência do modelo em diferentes conjuntos de dados de treinamento e teste.
+
+```html
+Acurácia Média: 0.82
+Desvio Padrão dos Scores: 0.03
+```
+
+**Acurácia Média:** Este valor é a média dos scores de acurácia obtidos em cada uma das 5 iterações da validação cruzada. O formato {:.2f} usado no format garante que o número seja mostrado com duas casas decimais. Assumindo um valor de 0.82, isso indicaria que, em média, o modelo foi capaz de prever corretamente a sobrevivência 82% das vezes.
+
+**Desvio Padrão dos Scores:** Este número mostra o desvio padrão dos scores de acurácia obtidos, o que dá uma ideia da variação nos resultados do modelo entre os diferentes folds da validação cruzada. Um valor de 0.03, sugere que as variações entre os resultados de cada fold são relativamente pequenas, indicando que o modelo é estável.
 
 
 # Descrição dos modelos
