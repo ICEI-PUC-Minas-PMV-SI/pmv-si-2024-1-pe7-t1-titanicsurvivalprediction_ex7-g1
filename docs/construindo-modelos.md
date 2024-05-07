@@ -164,7 +164,7 @@ data = pd.read_csv('titanic.csv')
 print(data.head())
 ```
 
-* 1. Tratamento de Valores Ausentes
+* Tratamento de Valores Ausentes
 * Imputação para a idade
 ```python 
 age_imputer = SimpleImputer(strategy='median')
@@ -182,7 +182,7 @@ embarked_imputer = SimpleImputer(strategy='most_frequent')
 data['Embarked'] = embarked_imputer.fit_transform(data[['Embarked']])
 ````
 
-* 2. Remoção de Outliers
+* Remoção de Outliers
 * Considerando a tarifa (fare)
 ```python 
 Q1 = data['Fare'].quantile(0.25)
@@ -192,7 +192,7 @@ upper_limit = Q3 + 1.5 * IQR
 data['Fare'] = np.where(data['Fare'] > upper_limit, upper_limit, data['Fare'])
 ```
 
-* 3. Transformação de Dados
+* Transformação de Dados
 * Normalização/Padronização
 ```python 
 scaler = StandardScaler()
@@ -278,12 +278,117 @@ X_transformed_df = pd.DataFrame(X_transformed, columns=column_names)
 print(X_transformed_df.head())
 ```
 
+# Feature Engineering: 
+A engenharia de recursos envolve a criação de novos atributos que podem nos ajudar nos modelos e a entender melhor os padrões nos dados. Para criação de novos atributos fizemos os seguintes passos:
+* Tamanho da Família:
+Combinar SibSp (número de irmãos ou cônjuge a bordo) e Parch (número de pais ou filhos a bordo) para formar um novo atributo chamado Family_Size.
+```python
+data['Family_Size'] = data['SibSp'] + data['Parch'] + 1  # Incluindo o próprio passageiro
+```
+* Título Extraído do Nome:
+Extrair o título (Sr., Sra., Miss, etc.) dos nomes dos passageiros como um indicador de status social, gênero e estado civil.
+```python
+data['Title'] = data['Name'].apply(lambda x: x.split(',')[1].split('.')[0].strip())
+```
+* Faixa Etária:
+Convertendo a idade em categorias pode ser mais útil do que usar a idade como um número contínuo, pois categorias podem capturar melhor variações não lineares relacionadas a faixas etárias.
+```Python
+bins = [0, 12, 20, 40, 60, 80, 100]
+labels = ['Child', 'Teen', 'Adult', 'Middle_Aged', 'Senior', 'Elderly']
+data['Age_Group'] = pd.cut(data['Age'], bins=bins, labels=labels, right=False)
+````
 
+# Seleção de Recursos (Feature Selection)
+A seleção de recursos envolve identificar quais atributos contribuem mais para a previsão do modelo. Existem várias técnicas para fazer isso, incluindo métodos estatísticos, modelos baseados em árvores e métodos automáticos como Recursive Feature Elimination (RFE). Neste caso optamos, por usar uma abordagem simples baseada em intuição e análise exploratória.
 
+* Critérios de Seleção:
+1. Relevância Direta: Variáveis como Sex e Pclass mostraram-se altamente relevantes.
+2. Redundância: Descartar variáveis que não adicionam informações novas ou que são redundantes com as variáveis criadas.
+3. Dados Incompletos: Variáveis com muitos dados ausentes e que são difíceis de imputar de forma confiável podem ser descartadas se não forem críticas.
 
-* _Feature Engineering_: crie novos atributos que possam ser mais informativos para o modelo; selecione características relevantes e descarte as menos importantes.
+* Variáveis a Serem Descartadas:
+1. Ticket: Número do ticket é geralmente único para cada passageiro e, portanto, não fornece uma boa base para generalização.
+2. Cabin: Apesar da nova variável Cabin_Known, o identificador específico da cabine é menos útil devido à grande quantidade de dados faltantes.
+3. Name: Já extraímos os títulos dos nomes, tornando o nome completo menos necessário.
+4. PassengerId: É apenas um identificador e não tem valor preditivo.
 
-* Tratamento de dados desbalanceados: se as classes de interesse forem desbalanceadas, considere técnicas como _oversampling_, _undersampling_ ou o uso de algoritmos que lidam naturalmente com desbalanceamento.
+```Python
+data.drop(['Ticket', 'Cabin', 'Name', 'PassengerId'], axis=1, inplace=True)
+````
+```Python
+import pandas as pd
+
+# Carregando os dados aqui
+data = pd.read_csv('titanic_clean.csv')
+
+# Engenharia de recursos
+data['Family_Size'] = data['SibSp'] + data['Parch'] + 1
+data['Title'] = data['Name'].apply(lambda x: x.split(',')[1].split('.')[0].strip())
+bins = [0, 12, 20, 40, 60, 80, 100]
+labels = ['Child', 'Teen', 'Adult', 'Middle_Aged', 'Senior', 'Elderly']
+data['Age_Group'] = pd.cut(data['Age'], bins=bins, labels=labels, right=False)
+
+# Seleção de recursos
+data.drop(['Ticket', 'Cabin', 'Name', 'PassengerId'], axis=1, inplace=True)
+
+# Salvando o dataframe transformado
+data.to_csv('titanic_transformed.csv', index=False)
+```
+
+Com a introdução de novas variáveis e a criteriosa seleção de características relevantes, o dataset foi aprimorado significativamente para a modelagem preditiva. Essas modificações são essenciais para elevar a precisão dos modelos de machine learning, pois elas concentram a análise nas características mais informativas enquanto simplificam a estrutura do modelo. Esta abordagem não só melhora a eficácia dos modelos, mas também potencializa a interpretação dos resultados, contribuindo para insights mais claros e decisões baseadas em dados mais robustas.
+
+# Tratamento de dados desbalanceados: 
+Lidar com dados desbalanceados é de suma importância em projetos de machine learning, sobretudo em tarefas de classificação. O desequilíbrio entre as classes pode resultar em modelos que favorecem a classe majoritária, comprometendo a eficácia do modelo na identificação da classe minoritária. Diante dessa realidade, foi utilizado técnicas de reamostragem e abordagens algorítmicas projetadas para equilibrar o dataset.
+
+* Avaliar o Desequilíbrio: Contando o número de instâncias de cada classe (sobreviventes e não sobreviventes).
+```Python
+import matplotlib.pyplot as plt
+
+# Visualizar contagem de classes antes do tratamento
+plt.figure(figsize=(8, 6))
+class_count.plot(kind='bar', color=['blue', 'red'])
+plt.title('Contagem de Classes (Antes do Tratamento)')
+plt.xlabel('Sobrevivente')
+plt.ylabel('Número de Passageiros')
+plt.xticks([0, 1], ['Não Sobreviveu', 'Sobreviveu'], rotation=0)
+plt.show()
+```
+* Reamostragem utilizando Oversampling com SMOTE:
+```Python
+from imblearn.over_sampling import SMOTE
+
+# Aplicar SMOTE
+smote = SMOTE(random_state=42)
+X_resampled, y_resampled = smote.fit_resample(X, y)
+
+# Visualizar nova contagem de classes após o tratamento
+plt.figure(figsize=(8, 6))
+pd.Series(y_resampled).value_counts().plot(kind='bar', color=['blue', 'red'])
+plt.title('Nova Contagem de Classes (Após SMOTE)')
+plt.xlabel('Sobrevivente')
+plt.ylabel('Número de Passageiros')
+plt.xticks([0, 1], ['Não Sobreviveu', 'Sobreviveu'], rotation=0)
+plt.show()
+````
+
+* Reamostragem utilizando Undersampling:
+```Python
+from imblearn.under_sampling import RandomUnderSampler
+
+# Aplicar undersampling
+under_sampler = RandomUnderSampler(random_state=42)
+X_resampled, y_resampled = under_sampler.fit_resample(X, y)
+
+# Visualizar nova contagem de classes após o tratamento
+plt.figure(figsize=(8, 6))
+pd.Series(y_resampled).value_counts().plot(kind='bar', color=['blue', 'red'])
+plt.title('Nova Contagem de Classes (Após Undersampling)')
+plt.xlabel('Sobrevivente')
+plt.ylabel('Número de Passageiros')
+plt.xticks([0, 1], ['Não Sobreviveu', 'Sobreviveu'], rotation=0)
+plt.show()
+```
+
 
 * Separação de dados: divida os dados em conjuntos de treinamento, validação e teste para avaliar o desempenho do modelo de maneira adequada.
   
