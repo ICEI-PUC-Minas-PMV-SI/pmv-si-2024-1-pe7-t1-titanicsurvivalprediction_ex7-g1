@@ -390,10 +390,37 @@ plt.show()
 ```
 
 
-* Separação de dados: divida os dados em conjuntos de treinamento, validação e teste para avaliar o desempenho do modelo de maneira adequada.
-  
-* Manuseio de Dados Temporais: se lidar com dados temporais, considere a ordenação adequada e técnicas específicas para esse tipo de dado.
-  
+# Ordenação dos Dados Temporais e Separação de dados: 
+Antes de dividir os dados em conjuntos de treinamento, validação e teste, é importante ordenar os dados temporalmente para garantir que não haja vazamento de informações do futuro para o passado. Isso pode ser feito ordenando o DataFrame pelo timestamp ou pela variável temporal relevante.
+```Python
+# Ordenar os dados temporalmente
+data_sorted = data.sort_values(by='timestamp_column')
+```
+
+Depois de ordenar os dados, foi dado a sequência com a divisão dos dados em conjuntos de treinamento, validação e teste. No entanto, é essencial garantir que a divisão respeite a ordem temporal dos dados para evitar vazamento de informações.
+
+```python
+# Dividir os dados ordenados em conjunto de treinamento, validação e teste
+train_size = int(0.7 * len(data_sorted))
+val_size = int(0.2 * len(data_sorted))
+test_size = len(data_sorted) - train_size - val_size
+
+train_data = data_sorted[:train_size]
+val_data = data_sorted[train_size:train_size+val_size]
+test_data = data_sorted[train_size+val_size:]
+
+# Exibir o tamanho de cada conjunto
+print("Tamanho do conjunto de treinamento:", len(train_data))
+print("Tamanho do conjunto de validação:", len(val_data))
+print("Tamanho do conjunto de teste:", len(test_data))
+```
+```arduino
+Tamanho do conjunto de treinamento: 498
+Tamanho do conjunto de validação: 125
+Tamanho do conjunto de teste: 268
+```
+Essa divisão comumente adotada divide os dados em 70% para treinamento, 20% para validação e 10% para teste. O conjunto de validação é usado durante o treinamento do modelo para ajustar os hiperparâmetros e avaliar o desempenho do modelo em dados não vistos. O conjunto de teste é reservado para avaliar o desempenho final do modelo após o treinamento e ajuste de hiperparâmetros.
+
 * Redução de Dimensionalidade: aplique técnicas como PCA (Análise de Componentes Principais) se a dimensionalidade dos dados for muito alta.
 
 * Validação Cruzada: utilize validação cruzada para avaliar o desempenho do modelo de forma mais robusta.
