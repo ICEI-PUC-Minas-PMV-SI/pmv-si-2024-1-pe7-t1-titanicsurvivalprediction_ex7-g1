@@ -1,4 +1,5 @@
 # Pergunta orientada a dados
+[Link do projeto 2ª parte, Preparação dos dados, construção e avaliação dos modelos propostos](/src/notebook-g1-titanicsp.md)
 
 Neste estudo, exploramos o conjunto de dados do Titanic para entender os fatores que influenciaram a sobrevivência dos passageiros durante o trágico naufrágio. Nosso objetivo é identificar quais atributos dos passageiros mais contribuíram para a probabilidade de sobrevivência, o que pode oferecer insights valiosos para aplicações em segurança e planejamento de resposta a emergências.
 
