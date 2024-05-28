@@ -15,13 +15,17 @@ from tabulate import tabulate
 from scipy.stats import chi2_contingency
 import warnings
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_iris
 from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import KFold
+from sklearn.model_selection import RepeatedKFold
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, classification_report
 ```
 
 # Preparação dos dados
@@ -79,7 +83,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -350,8 +366,11 @@ data['Fare'] = np.where(data['Fare'] > upper_limit, upper_limit, data['Fare'])
 ```python
 # Transformação de Dados
 # Normalização/Padronização
+#scaler = StandardScaler()
+#data[['Age', 'Fare']] = scaler.fit_transform(data[['Age', 'Fare']])
 
-scaler = StandardScaler()
+# Normalização/Padronização usando MinMaxScaler para evitar valores negativos
+scaler = MinMaxScaler()
 data[['Age', 'Fare']] = scaler.fit_transform(data[['Age', 'Fare']])
 
 ```
@@ -381,6 +400,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -408,11 +440,11 @@ data.head()
       <td>3</td>
       <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -424,11 +456,11 @@ data.head()
       <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
       <td>C</td>
       <td>1</td>
@@ -440,11 +472,11 @@ data.head()
       <td>3</td>
       <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -456,11 +488,11 @@ data.head()
       <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
       <td>S</td>
       <td>1</td>
@@ -472,11 +504,11 @@ data.head()
       <td>3</td>
       <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -517,18 +549,18 @@ print(data_final.head())
     4                      5                   0   
     
                                          remainder__Name remainder__Age  \
-    0                            Braund, Mr. Owen Harris      -0.565736   
-    1  Cumings, Mrs. John Bradley (Florence Briggs Th...       0.663861   
-    2                             Heikkinen, Miss. Laina      -0.258337   
-    3       Futrelle, Mrs. Jacques Heath (Lily May Peel)       0.433312   
-    4                           Allen, Mr. William Henry       0.433312   
+    0                            Braund, Mr. Owen Harris       0.271174   
+    1  Cumings, Mrs. John Bradley (Florence Briggs Th...       0.472229   
+    2                             Heikkinen, Miss. Laina       0.321438   
+    3       Futrelle, Mrs. Jacques Heath (Lily May Peel)       0.434531   
+    4                           Allen, Mr. William Henry       0.434531   
     
       remainder__SibSp remainder__Parch remainder__Ticket remainder__Fare  \
-    0                1                0         A/5 21171       -0.820552   
-    1                1                0          PC 17599        2.031623   
-    2                0                0  STON/O2. 3101282       -0.787578   
-    3                1                0            113803        1.419297   
-    4                0                0            373450       -0.781471   
+    0                1                0         A/5 21171         0.11046   
+    1                1                0          PC 17599             1.0   
+    2                0                0  STON/O2. 3101282        0.120745   
+    3                1                0            113803        0.809027   
+    4                0                0            373450        0.122649   
     
       remainder__Cabin remainder__Cabin_Known  
     0              NaN                      0  
@@ -570,6 +602,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -597,11 +642,11 @@ data.head()
       <td>3</td>
       <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -613,11 +658,11 @@ data.head()
       <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
       <td>C</td>
       <td>1</td>
@@ -629,11 +674,11 @@ data.head()
       <td>3</td>
       <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -645,11 +690,11 @@ data.head()
       <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
       <td>S</td>
       <td>1</td>
@@ -661,11 +706,11 @@ data.head()
       <td>3</td>
       <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -678,11 +723,10 @@ data.head()
 
 
 ```python
-# Transformação do Dataset **data_final=titanic_clean.csv** em **data=titanic_clean.csv**
 # Carregar o dataset limpo (titanic_clean.csv) para transformação.
 # Carregando o dataset limpo
  
-data_final = pd.read_csv('/kaggle/working/titanic_clean.csv') #Carregando com nome de data_final para teste-Luiz
+data_final = pd.read_csv('/kaggle/working/titanic_clean.csv') #Carregando com nome de data_final
 ```
 
 
@@ -695,6 +739,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -722,11 +779,11 @@ data.head()
       <td>3</td>
       <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -738,11 +795,11 @@ data.head()
       <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
       <td>C</td>
       <td>1</td>
@@ -754,11 +811,11 @@ data.head()
       <td>3</td>
       <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -770,11 +827,11 @@ data.head()
       <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
       <td>S</td>
       <td>1</td>
@@ -786,11 +843,11 @@ data.head()
       <td>3</td>
       <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -811,7 +868,19 @@ data_final.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -850,11 +919,11 @@ data_final.head()
       <td>1</td>
       <td>0</td>
       <td>Braund, Mr. Owen Harris</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
       <td>0</td>
     </tr>
@@ -871,11 +940,11 @@ data_final.head()
       <td>2</td>
       <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
       <td>1</td>
     </tr>
@@ -892,11 +961,11 @@ data_final.head()
       <td>3</td>
       <td>1</td>
       <td>Heikkinen, Miss. Laina</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
       <td>0</td>
     </tr>
@@ -913,11 +982,11 @@ data_final.head()
       <td>4</td>
       <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
       <td>1</td>
     </tr>
@@ -934,11 +1003,11 @@ data_final.head()
       <td>5</td>
       <td>0</td>
       <td>Allen, Mr. William Henry</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
       <td>0</td>
     </tr>
@@ -982,142 +1051,124 @@ preprocessor = ColumnTransformer(
 
 ```python
 # Visualização inicial do dataset
-data_final.head()
+data.head()
 ```
 
 
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>onehot__Embarked_C</th>
-      <th>onehot__Embarked_Q</th>
-      <th>onehot__Embarked_S</th>
-      <th>onehot__Sex_female</th>
-      <th>onehot__Sex_male</th>
-      <th>onehot__Pclass_1</th>
-      <th>onehot__Pclass_2</th>
-      <th>onehot__Pclass_3</th>
-      <th>remainder__PassengerId</th>
-      <th>remainder__Survived</th>
-      <th>remainder__Name</th>
-      <th>remainder__Age</th>
-      <th>remainder__SibSp</th>
-      <th>remainder__Parch</th>
-      <th>remainder__Ticket</th>
-      <th>remainder__Fare</th>
-      <th>remainder__Cabin</th>
-      <th>remainder__Cabin_Known</th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+      <th>Cabin_Known</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
       <td>1</td>
       <td>0</td>
+      <td>3</td>
       <td>Braund, Mr. Owen Harris</td>
-      <td>-0.565736</td>
+      <td>male</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
+      <td>S</td>
       <td>0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>2</td>
       <td>1</td>
+      <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
-      <td>0.663861</td>
+      <td>female</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
+      <td>C</td>
       <td>1</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
       <td>3</td>
       <td>1</td>
+      <td>3</td>
       <td>Heikkinen, Miss. Laina</td>
-      <td>-0.258337</td>
+      <td>female</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
+      <td>S</td>
       <td>0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>4</td>
       <td>1</td>
+      <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
-      <td>0.433312</td>
+      <td>female</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
+      <td>S</td>
       <td>1</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
       <td>5</td>
       <td>0</td>
+      <td>3</td>
       <td>Allen, Mr. William Henry</td>
-      <td>0.433312</td>
+      <td>male</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
+      <td>S</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1162,10 +1213,6 @@ X_transformed = preprocessor.fit_transform(data)
 # Obter os nomes das colunas das variáveis categóricas após a transformação.
 # Combinar os nomes das colunas numéricas com as colunas categóricas codificadas.
 # Criar um DataFrame com os dados transformados e os nomes das colunas.
-
-
-# column_names = preprocessor.transformers_[0][2] + list(preprocessor.named_transformers_['cat'].get_feature_names(categorical_features))
-# X_transformed_df = pd.DataFrame(X_transformed, columns=column_names)
 
 # Obtendo os nomes das colunas das variáveis categóricas após a transformação
 encoded_cat_columns = preprocessor.named_transformers_['cat'].get_feature_names_out(input_features=categorical_features)
@@ -1235,7 +1282,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1263,11 +1322,11 @@ data.head()
       <td>3</td>
       <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -1279,11 +1338,11 @@ data.head()
       <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
       <td>C</td>
       <td>1</td>
@@ -1295,11 +1354,11 @@ data.head()
       <td>3</td>
       <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
@@ -1311,11 +1370,11 @@ data.head()
       <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
       <td>S</td>
       <td>1</td>
@@ -1327,14 +1386,158 @@ data.head()
       <td>3</td>
       <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Objetivo: Extrair títulos (Sr., Sra., Miss, etc.) dos nomes dos passageiros como um indicador de status social, gênero e estado civil.
+# Racional: Títulos podem fornecer informações valiosas sobre o passageiro que não estão explícitas em outros atributos.
+# Ação: Utilizar a função apply e manipulação de strings para extrair o título do nome completo.
+
+data['Title'] = data['Name'].apply(lambda x: x.split(',')[1].split('.')[0].strip())
+```
+
+
+```python
+# Visualização inicial do dataset
+data.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+      <th>Cabin_Known</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>0.271174</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>0.110460</td>
+      <td>NaN</td>
+      <td>S</td>
+      <td>0</td>
+      <td>Mr</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>0.472229</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>1.000000</td>
+      <td>C85</td>
+      <td>C</td>
+      <td>1</td>
+      <td>Mrs</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>0.321438</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>0.120745</td>
+      <td>NaN</td>
+      <td>S</td>
+      <td>0</td>
+      <td>Miss</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>0.434531</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>0.809027</td>
+      <td>C123</td>
+      <td>S</td>
+      <td>1</td>
+      <td>Mrs</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>0.434531</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>0.122649</td>
+      <td>NaN</td>
+      <td>S</td>
+      <td>0</td>
+      <td>Mr</td>
     </tr>
   </tbody>
 </table>
@@ -1361,7 +1564,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1379,6 +1594,7 @@ data.head()
       <th>Cabin</th>
       <th>Embarked</th>
       <th>Cabin_Known</th>
+      <th>Title</th>
       <th>Family_Size</th>
     </tr>
   </thead>
@@ -1390,14 +1606,15 @@ data.head()
       <td>3</td>
       <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>2</td>
     </tr>
     <tr>
@@ -1407,14 +1624,15 @@ data.head()
       <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
       <td>C</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
     </tr>
     <tr>
@@ -1424,14 +1642,15 @@ data.head()
       <td>3</td>
       <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Miss</td>
       <td>1</td>
     </tr>
     <tr>
@@ -1441,14 +1660,15 @@ data.head()
       <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
       <td>S</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
     </tr>
     <tr>
@@ -1458,14 +1678,15 @@ data.head()
       <td>3</td>
       <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>1</td>
     </tr>
   </tbody>
@@ -1473,15 +1694,6 @@ data.head()
 </div>
 
 
-
-
-```python
-# Objetivo: Extrair títulos (Sr., Sra., Miss, etc.) dos nomes dos passageiros como um indicador de status social, gênero e estado civil.
-# Racional: Títulos podem fornecer informações valiosas sobre o passageiro que não estão explícitas em outros atributos.
-# Ação: Utilizar a função apply e manipulação de strings para extrair o título do nome completo.
-
-# data['Title'] = data['Name'].apply(lambda x: x.split(',')[1].split('.')[0].strip())
-```
 
 
 ```python
@@ -1496,22 +1708,27 @@ data['Age_Group'] = pd.cut(data['Age'], bins=bins, labels=labels, right=False)
 
 
 ```python
-# Visualizando o dataset com o novo atributo Family_Size
+# Visualizando o dataset com o novo atributo Family_Size, Title e Age_Group
 data.head()
-
-# Visualizando o dataset com o novo atributo Title
-data.head()
-
-# Visualizando o dataset com o novo atributo Age_Group
-data.head()
-
 ```
 
 
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1529,6 +1746,7 @@ data.head()
       <th>Cabin</th>
       <th>Embarked</th>
       <th>Cabin_Known</th>
+      <th>Title</th>
       <th>Family_Size</th>
       <th>Age_Group</th>
     </tr>
@@ -1541,16 +1759,17 @@ data.head()
       <td>3</td>
       <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>2</td>
-      <td>NaN</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1559,14 +1778,15 @@ data.head()
       <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
       <td>C</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
       <td>Child</td>
     </tr>
@@ -1577,16 +1797,17 @@ data.head()
       <td>3</td>
       <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Miss</td>
       <td>1</td>
-      <td>NaN</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1595,14 +1816,15 @@ data.head()
       <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
       <td>S</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
       <td>Child</td>
     </tr>
@@ -1613,14 +1835,15 @@ data.head()
       <td>3</td>
       <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>1</td>
       <td>Child</td>
     </tr>
@@ -1671,7 +1894,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1689,6 +1924,7 @@ data.head()
       <th>Cabin</th>
       <th>Embarked</th>
       <th>Cabin_Known</th>
+      <th>Title</th>
       <th>Family_Size</th>
       <th>Age_Group</th>
     </tr>
@@ -1701,16 +1937,17 @@ data.head()
       <td>3</td>
       <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
       <td>A/5 21171</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>2</td>
-      <td>NaN</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1719,14 +1956,15 @@ data.head()
       <td>1</td>
       <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
       <td>PC 17599</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C85</td>
       <td>C</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
       <td>Child</td>
     </tr>
@@ -1737,16 +1975,17 @@ data.head()
       <td>3</td>
       <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
       <td>STON/O2. 3101282</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Miss</td>
       <td>1</td>
-      <td>NaN</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1755,14 +1994,15 @@ data.head()
       <td>1</td>
       <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
       <td>113803</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>C123</td>
       <td>S</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
       <td>Child</td>
     </tr>
@@ -1773,14 +2013,15 @@ data.head()
       <td>3</td>
       <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
       <td>373450</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>NaN</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>1</td>
       <td>Child</td>
     </tr>
@@ -1800,13 +2041,6 @@ data.drop(['Ticket', 'Cabin', 'Name', 'PassengerId'], axis=1, inplace=True)
 
 
 ```python
-# Carregando os dados aqui
-#data = pd.read_csv('/kaggle/working/titanic_clean.csv')
-#data = pd.read_csv('/kaggle/input/dataset-g1pd/Titanic-Dataset.csv')
-```
-
-
-```python
 # Visualização inicial do dataset
 data.head()
 ```
@@ -1815,7 +2049,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1829,6 +2075,7 @@ data.head()
       <th>Fare</th>
       <th>Embarked</th>
       <th>Cabin_Known</th>
+      <th>Title</th>
       <th>Family_Size</th>
       <th>Age_Group</th>
     </tr>
@@ -1839,26 +2086,28 @@ data.head()
       <td>0</td>
       <td>3</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>2</td>
-      <td>NaN</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>1</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
       <td>Child</td>
     </tr>
@@ -1867,26 +2116,28 @@ data.head()
       <td>1</td>
       <td>3</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>S</td>
       <td>0</td>
+      <td>Miss</td>
       <td>1</td>
-      <td>NaN</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>3</th>
       <td>1</td>
       <td>1</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>S</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
       <td>Child</td>
     </tr>
@@ -1895,12 +2146,13 @@ data.head()
       <td>0</td>
       <td>3</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>1</td>
       <td>Child</td>
     </tr>
@@ -1976,7 +2228,7 @@ plt.show()
 
 
     
-![](/docs/img/output_57_0.png)
+![png](output_57_0.png)
     
 
 
@@ -2008,7 +2260,7 @@ plt.show()
 
 
     
-![](/docs/img/output_61_0.png)
+![png](output_61_0.png)
     
 
 
@@ -2039,7 +2291,7 @@ plt.show()
 
 
     
-![](/docs/img/output_64_0.png)
+![png](output_64_0.png)
     
 
 
@@ -2056,7 +2308,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2070,6 +2334,7 @@ data.head()
       <th>Fare</th>
       <th>Embarked</th>
       <th>Cabin_Known</th>
+      <th>Title</th>
       <th>Family_Size</th>
       <th>Age_Group</th>
     </tr>
@@ -2080,26 +2345,28 @@ data.head()
       <td>0</td>
       <td>3</td>
       <td>male</td>
-      <td>-0.565736</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
-      <td>-0.820552</td>
+      <td>0.110460</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>2</td>
-      <td>NaN</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>1</td>
       <td>female</td>
-      <td>0.663861</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
-      <td>2.031623</td>
+      <td>1.000000</td>
       <td>C</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
       <td>Child</td>
     </tr>
@@ -2108,26 +2375,28 @@ data.head()
       <td>1</td>
       <td>3</td>
       <td>female</td>
-      <td>-0.258337</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
-      <td>-0.787578</td>
+      <td>0.120745</td>
       <td>S</td>
       <td>0</td>
+      <td>Miss</td>
       <td>1</td>
-      <td>NaN</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>3</th>
       <td>1</td>
       <td>1</td>
       <td>female</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
-      <td>1.419297</td>
+      <td>0.809027</td>
       <td>S</td>
       <td>1</td>
+      <td>Mrs</td>
       <td>2</td>
       <td>Child</td>
     </tr>
@@ -2136,12 +2405,13 @@ data.head()
       <td>0</td>
       <td>3</td>
       <td>male</td>
-      <td>0.433312</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
-      <td>-0.781471</td>
+      <td>0.122649</td>
       <td>S</td>
       <td>0</td>
+      <td>Mr</td>
       <td>1</td>
       <td>Child</td>
     </tr>
@@ -2180,10 +2450,6 @@ print("Tamanho do conjunto de teste:", len(test_data))
     Tamanho do conjunto de validação: 178
     Tamanho do conjunto de teste: 90
     
-
-* Tamanho do conjunto de treinamento: 498
-* Tamanho do conjunto de validação: 125
-* Tamanho do conjunto de teste: 268
 
 Essa divisão comumente adotada divide os dados em 70% para treinamento, 20% para validação e 10% para teste. O conjunto de validação é usado durante o treinamento do modelo para ajustar os hiperparâmetros e avaliar o desempenho do modelo em dados não vistos. O conjunto de teste é reservado para avaliar o desempenho final do modelo após o treinamento e ajuste de hiperparâmetros.
 
@@ -2290,13 +2556,6 @@ Este resultado mostra que o primeiro componente principal explica aproximadament
 
 
 ```python
-# Carregar os dados
-
-data = pd.read_csv("/kaggle/input/dataset-g1pd/Titanic-Dataset.csv")
-```
-
-
-```python
 # Visualização inicial do dataset
 data.head()
 ```
@@ -2305,106 +2564,124 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>PassengerId</th>
       <th>Survived</th>
       <th>Pclass</th>
-      <th>Name</th>
       <th>Sex</th>
       <th>Age</th>
       <th>SibSp</th>
       <th>Parch</th>
-      <th>Ticket</th>
       <th>Fare</th>
-      <th>Cabin</th>
       <th>Embarked</th>
+      <th>Cabin_Known</th>
+      <th>Title</th>
+      <th>Family_Size</th>
+      <th>Age_Group</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
       <td>0</td>
       <td>3</td>
-      <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>22.0</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
-      <td>A/5 21171</td>
-      <td>7.2500</td>
-      <td>NaN</td>
+      <td>0.110460</td>
       <td>S</td>
+      <td>0</td>
+      <td>Mr</td>
+      <td>2</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2</td>
       <td>1</td>
       <td>1</td>
-      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>38.0</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
-      <td>PC 17599</td>
-      <td>71.2833</td>
-      <td>C85</td>
+      <td>1.000000</td>
       <td>C</td>
+      <td>1</td>
+      <td>Mrs</td>
+      <td>2</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3</td>
       <td>1</td>
       <td>3</td>
-      <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>26.0</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
-      <td>STON/O2. 3101282</td>
-      <td>7.9250</td>
-      <td>NaN</td>
+      <td>0.120745</td>
       <td>S</td>
+      <td>0</td>
+      <td>Miss</td>
+      <td>1</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4</td>
       <td>1</td>
       <td>1</td>
-      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>35.0</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
-      <td>113803</td>
-      <td>53.1000</td>
-      <td>C123</td>
+      <td>0.809027</td>
       <td>S</td>
+      <td>1</td>
+      <td>Mrs</td>
+      <td>2</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5</td>
       <td>0</td>
       <td>3</td>
-      <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>35.0</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
-      <td>373450</td>
-      <td>8.0500</td>
-      <td>NaN</td>
+      <td>0.122649</td>
       <td>S</td>
+      <td>0</td>
+      <td>Mr</td>
+      <td>1</td>
+      <td>Child</td>
     </tr>
   </tbody>
 </table>
 </div>
 
 
+
+
+```python
+# Carregar os dados
+# data = pd.read_csv("/kaggle/input/dataset-g1pd/Titanic-Dataset.csv")
+```
 
 
 ```python
@@ -2423,100 +2700,112 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>PassengerId</th>
       <th>Survived</th>
       <th>Pclass</th>
-      <th>Name</th>
       <th>Sex</th>
       <th>Age</th>
       <th>SibSp</th>
       <th>Parch</th>
-      <th>Ticket</th>
       <th>Fare</th>
-      <th>Cabin</th>
       <th>Embarked</th>
+      <th>Cabin_Known</th>
+      <th>Title</th>
+      <th>Family_Size</th>
+      <th>Age_Group</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
       <td>0</td>
       <td>3</td>
-      <td>Braund, Mr. Owen Harris</td>
       <td>male</td>
-      <td>22.0</td>
+      <td>0.271174</td>
       <td>1</td>
       <td>0</td>
-      <td>A/5 21171</td>
-      <td>7.2500</td>
-      <td>NaN</td>
+      <td>0.110460</td>
       <td>S</td>
+      <td>0</td>
+      <td>Mr</td>
+      <td>2</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2</td>
       <td>1</td>
       <td>1</td>
-      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
       <td>female</td>
-      <td>38.0</td>
+      <td>0.472229</td>
       <td>1</td>
       <td>0</td>
-      <td>PC 17599</td>
-      <td>71.2833</td>
-      <td>C85</td>
+      <td>1.000000</td>
       <td>C</td>
+      <td>1</td>
+      <td>Mrs</td>
+      <td>2</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3</td>
       <td>1</td>
       <td>3</td>
-      <td>Heikkinen, Miss. Laina</td>
       <td>female</td>
-      <td>26.0</td>
+      <td>0.321438</td>
       <td>0</td>
       <td>0</td>
-      <td>STON/O2. 3101282</td>
-      <td>7.9250</td>
-      <td>NaN</td>
+      <td>0.120745</td>
       <td>S</td>
+      <td>0</td>
+      <td>Miss</td>
+      <td>1</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4</td>
       <td>1</td>
       <td>1</td>
-      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
       <td>female</td>
-      <td>35.0</td>
+      <td>0.434531</td>
       <td>1</td>
       <td>0</td>
-      <td>113803</td>
-      <td>53.1000</td>
-      <td>C123</td>
+      <td>0.809027</td>
       <td>S</td>
+      <td>1</td>
+      <td>Mrs</td>
+      <td>2</td>
+      <td>Child</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5</td>
       <td>0</td>
       <td>3</td>
-      <td>Allen, Mr. William Henry</td>
       <td>male</td>
-      <td>35.0</td>
+      <td>0.434531</td>
       <td>0</td>
       <td>0</td>
-      <td>373450</td>
-      <td>8.0500</td>
-      <td>NaN</td>
+      <td>0.122649</td>
       <td>S</td>
+      <td>0</td>
+      <td>Mr</td>
+      <td>1</td>
+      <td>Child</td>
     </tr>
   </tbody>
 </table>
@@ -2597,12 +2886,12 @@ df_results = pd.DataFrame(results)
 print(tabulate(df_results, headers='keys', tablefmt='pretty'))
 ```
 
-    +---+--------------------------+----------------------+
-    |   |         Métrica          |        Valor         |
-    +---+--------------------------+----------------------+
-    | 0 |      Acurácia Média      |  0.9466666666666667  |
-    | 1 | Desvio Padrão dos Scores | 0.039999999999999994 |
-    +---+--------------------------+----------------------+
+    +---+--------------------------+---------------------+
+    |   |         Métrica          |        Valor        |
+    +---+--------------------------+---------------------+
+    | 0 |      Acurácia Média      | 0.9666666666666668  |
+    | 1 | Desvio Padrão dos Scores | 0.02108185106778919 |
+    +---+--------------------------+---------------------+
     
 
 1. Importamos cross_val_score do sklearn para realizar a validação cruzada.
@@ -2611,8 +2900,8 @@ print(tabulate(df_results, headers='keys', tablefmt='pretty'))
 4. Finalmente, imprimimos a média das acurácias dos folds e o desvio padrão dos scores para avaliar o desempenho médio e a consistência do modelo em diferentes conjuntos de dados de treinamento e teste.
 
 ```html
-Acurácia Média: 0.82
-Desvio Padrão dos Scores: 0.03
+Acurácia Média: 
+Desvio Padrão dos Scores: 
 ```
 
 **Acurácia Média:** Este valor é a média dos scores de acurácia obtidos em cada uma das 5 iterações da validação cruzada. O formato {:.2f} usado no format garante que o número seja mostrado com duas casas decimais. Assumindo um valor de 0.82, isso indicaria que, em média, o modelo foi capaz de prever corretamente a sobrevivência 82% das vezes.
@@ -2620,91 +2909,427 @@ Desvio Padrão dos Scores: 0.03
 **Desvio Padrão dos Scores:** Este número mostra o desvio padrão dos scores de acurácia obtidos, o que dá uma ideia da variação nos resultados do modelo entre os diferentes folds da validação cruzada. Um valor de 0.03, sugere que as variações entre os resultados de cada fold são relativamente pequenas, indicando que o modelo é estável.
 
 
-# Algoritmo Random Forest
+# Algoritmo Random Forest Classifier
 
 
 ```python
-# Carregar o dataset
 data = pd.read_csv('/kaggle/working/titanic_transformed.csv')
 ```
 
 
 ```python
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import classification_report
-
-# Codifique as variáveis categóricas usando one-hot encoding
-encoder = OneHotEncoder()
-X = encoder.fit_transform(data.drop('Survived', axis=1)).toarray()
-y = data['Survived']
-
-# Treino e Teste
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=99)
-
-# Corrigindo os valores NaN utilizando a mediana
-X_train = pd.DataFrame(X_train).fillna(pd.DataFrame(X_train).median())
-X_test = pd.DataFrame(X_test).fillna(pd.DataFrame(X_test).median())
-
-# RandomForest Classifier
-clf = RandomForestClassifier(criterion='gini', max_depth=8, min_samples_split=10, random_state=5)
-
-# Treinamendo do modelo
-clf.fit(X_train, y_train)
-
-# Avaliando o modelo de teste
-y_pred = clf.predict(X_test)
-
-# Exibir os resultados na tela
-print("Previsões do modelo:")
-print(y_pred)
-
-print("\nMatriz de Confusão:")
-print(confusion_matrix(y_test, y_pred))
-
-print("\nAcurácia do Modelo:")
-print(accuracy_score(y_test, y_pred))
-
-print("\nCross-Validation Score:")
-print(cross_val_score(clf, X_train, y_train, cv=10))
-
-print("\nRelatório de Classificação:")
-print(classification_report(y_pred, y_test))
+# Visualização inicial do dataset
+data.head()
 ```
 
-    Previsões do modelo:
-    [1 1 0 0 1 0 0 1 0 1 1 0 0 1 0 1 1 1 0 0 0 1 0 0 0 0 0 0 1 1 1 0 1 1 0 1 0
-     0 0 0 0 1 0 1 0 0 0 1 0 1 0 0 0 0 0 1 0 0 1 1 0 0 0 0 0 0 1 1 1 0 0 0 0 0
-     1 1 1 0 0 0 0 0 0 0 0 0 0 1 0 0 1 1 0 1 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0 1 1
-     0 0 1 0 0 1 0 0 0 1 1 0 1 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 1 0 1
-     0 0 0 0 0 0 0 0 1 0 0 1 1 0 0 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 0 0
-     0 0 1 0 0 0 0 1 1 0 1 0 0 0 0 0 1 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
-     0]
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Fare</th>
+      <th>Embarked</th>
+      <th>Cabin_Known</th>
+      <th>Title</th>
+      <th>Family_Size</th>
+      <th>Age_Group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>0.271174</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0.110460</td>
+      <td>S</td>
+      <td>0</td>
+      <td>Mr</td>
+      <td>2</td>
+      <td>Child</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>0.472229</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1.000000</td>
+      <td>C</td>
+      <td>1</td>
+      <td>Mrs</td>
+      <td>2</td>
+      <td>Child</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3</td>
+      <td>female</td>
+      <td>0.321438</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.120745</td>
+      <td>S</td>
+      <td>0</td>
+      <td>Miss</td>
+      <td>1</td>
+      <td>Child</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>female</td>
+      <td>0.434531</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0.809027</td>
+      <td>S</td>
+      <td>1</td>
+      <td>Mrs</td>
+      <td>2</td>
+      <td>Child</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>3</td>
+      <td>male</td>
+      <td>0.434531</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.122649</td>
+      <td>S</td>
+      <td>0</td>
+      <td>Mr</td>
+      <td>1</td>
+      <td>Child</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# data.shape
+# data.head()
+# data.tail()
+# data.info()
+# data.describe()
+# data.isnull()
+# data.isnull().sum()
+data['Survived'].value_counts()
+```
+
+
+
+
+    Survived
+    0    549
+    1    342
+    Name: count, dtype: int64
+
+
+
+
+```python
+sns.countplot(data=data, x="Survived")
+plt.xlabel("Survived")
+plt.ylabel("Count")
+plt.title("Survived variable count plot")
+plt.show()
+```
+
+
     
-    Matriz de Confusão:
-    [[128  17]
-     [ 29  49]]
+![png](output_96_0.png)
     
-    Acurácia do Modelo:
-    0.7937219730941704
+
+
+
+```python
+X = data.iloc[:, :-1]
+y = data.iloc[:, -1]
+
+# X.shape
+# y.shape
+```
+
+
+```python
+# Definir colunas categóricas e numéricas
+categorical_cols = ['Pclass', 'Sex', 'Embarked']
+numerical_cols = ['Age', 'SibSp', 'Parch', 'Fare']
+
+# Criar transformers para colunas numéricas e categóricas
+numerical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='median')),
+    ('scaler', StandardScaler())
+])
+
+categorical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+])
+
+# Criar o preprocessor utilizando ColumnTransformer
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numerical_transformer, numerical_cols),
+        ('cat', categorical_transformer, categorical_cols)
+    ])
+
+# Aplicar as transformações no dataset
+X = data.drop('Survived', axis=1)
+y = data['Survived']
+X = preprocessor.fit_transform(X)
+
+```
+
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(X, y,
+                                                    random_state=99)
+
+clf = RandomForestClassifier(criterion = 'gini',
+                            max_depth = 8,
+                            min_samples_split = 10,
+                            random_state = 5)
+
+clf.fit(X_train, y_train)
+```
+
+
+
+
+<style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(max_depth=8, min_samples_split=10, random_state=5)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(max_depth=8, min_samples_split=10, random_state=5)</pre></div></div></div></div></div>
+
+
+
+
+```python
+# clf.feature_importances_
+# data.columns
+```
+
+
+```python
+y_pred = clf.predict(X_test)
+# y_pred
+```
+
+
+```python
+# Dividir os dados em conjuntos de treinamento e teste
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Treinar o modelo
+clf = RandomForestClassifier(criterion='gini', max_depth=8, min_samples_split=10, random_state=5)
+clf.fit(X_train, y_train)
+
+# Fazer previsões
+y_pred = clf.predict(X_test)
+y_pred_proba = clf.predict_proba(X_test)
+
+# Calcular métricas de desempenho
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+roc_auc = roc_auc_score(y_test, y_pred_proba[:, 1])
+conf_matrix = confusion_matrix(y_test, y_pred)
+class_report = classification_report(y_test, y_pred)
+
+# Métricas e descrição
+# Accuracy: A proporção de previsões corretas entre o total de previsões.
+print("Accuracy:", accuracy)
+# Precision: A proporção de verdadeiros positivos entre o total de previsões positivas.
+print("Precision:", precision)
+# Recall or Sensitivity: A proporção de verdadeiros positivos entre o total de exemplos positivos reais.
+print("Recall:", recall)
+# F1-Score: A média harmônica da precisão e da revocação, proporcionando um equilíbrio entre ambos.
+print("F1 Score:", f1)
+# AUC-ROC: A área sob a curva ROC, que indica o desempenho do classificador em diferentes limiares de decisão.
+print("ROC AUC:", roc_auc)
+# Confusion Matrix: Mostra o número de verdadeiros positivos, verdadeiros negativos, falsos positivos e falsos negativos.
+print("Confusion Matrix:\n", conf_matrix)
+# Classification Report: Inclui precisão, revocação, F1-Score e suporte para cada classe.
+print("Classification Report:\n", class_report)
+```
+
+    Accuracy: 0.8324022346368715
+    Precision: 0.84375
+    Recall: 0.7297297297297297
+    F1 Score: 0.7826086956521738
+    ROC AUC: 0.8907979407979408
+    Confusion Matrix:
+     [[95 10]
+     [20 54]]
+    Classification Report:
+                   precision    recall  f1-score   support
     
-    Cross-Validation Score:
-    [0.73134328 0.79104478 0.76119403 0.86567164 0.8358209  0.86567164
-     0.86567164 0.70149254 0.75757576 0.8030303 ]
+               0       0.83      0.90      0.86       105
+               1       0.84      0.73      0.78        74
     
-    Relatório de Classificação:
+        accuracy                           0.83       179
+       macro avg       0.83      0.82      0.82       179
+    weighted avg       0.83      0.83      0.83       179
+    
+    
+
+
+```python
+cross_val_score(clf, X_train, y_train, cv=10)
+```
+
+
+
+
+    array([0.83333333, 0.79166667, 0.74647887, 0.92957746, 0.88732394,
+           0.77464789, 0.83098592, 0.77464789, 0.77464789, 0.90140845])
+
+
+
+
+```python
+features = data.columns
+importances = clf.feature_importances_
+indices = np.argsort(importances)
+
+plt.title('Feature Importances')
+plt.barh(range(len(indices)),importances[indices], color='b', align='center')
+plt.yticks(range(len(indices)), [features[i] for i in indices])
+plt.xlabel('Relative Importance')
+plt.show()
+```
+
+
+    
+![png](output_104_0.png)
+    
+
+
+# Algoritmo Regreção Logistica
+
+
+```python
+# Carregar o dataset
+data = pd.read_csv('titanic_transformed.csv')
+
+# Verificar as primeiras linhas do dataset para entender sua estrutura
+print(data.head())
+
+# Separar os recursos (features) e a variável alvo (target)
+X = data.drop('Survived', axis=1)  # Supondo que a coluna alvo seja 'Survived'
+y = data['Survived']
+
+# Identificar colunas categóricas e numéricas
+categorical_cols = X.select_dtypes(include=['object']).columns
+numeric_cols = X.select_dtypes(include=['number']).columns
+
+# Criar o pré-processador
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', 'passthrough', numeric_cols),
+        ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_cols)
+    ])
+
+# Criar o pipeline
+model = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('classifier', LogisticRegression(max_iter=1000, random_state=42))
+])
+
+# Dividir os dados em conjuntos de treinamento e teste
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Treinar o modelo
+model.fit(X_train, y_train)
+
+# Fazer previsões no conjunto de teste
+y_pred = model.predict(X_test)
+y_pred_proba = model.predict_proba(X_test)[:, 1]
+
+# Calcular as métricas de avaliação
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+roc_auc = roc_auc_score(y_test, y_pred_proba)
+conf_matrix = confusion_matrix(y_test, y_pred)
+class_report = classification_report(y_test, y_pred)
+
+# Exibir os resultados
+print(f"Accuracy: {accuracy}")
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
+print(f"ROC AUC: {roc_auc}")
+print("Confusion Matrix:")
+print(conf_matrix)
+print("Classification Report:")
+print(class_report)
+```
+
+       Survived  Pclass     Sex       Age  SibSp  Parch      Fare Embarked  \
+    0         0       3    male  0.271174      1      0  0.110460        S   
+    1         1       1  female  0.472229      1      0  1.000000        C   
+    2         1       3  female  0.321438      0      0  0.120745        S   
+    3         1       1  female  0.434531      1      0  0.809027        S   
+    4         0       3    male  0.434531      0      0  0.122649        S   
+    
+       Cabin_Known Title  Family_Size Age_Group  
+    0            0    Mr            2     Child  
+    1            1   Mrs            2     Child  
+    2            0  Miss            1     Child  
+    3            1   Mrs            2     Child  
+    4            0    Mr            1     Child  
+    Accuracy: 0.8268156424581006
+    Precision: 0.7866666666666666
+    Recall: 0.7972972972972973
+    F1 Score: 0.7919463087248321
+    ROC AUC: 0.8881595881595881
+    Confusion Matrix:
+    [[89 16]
+     [15 59]]
+    Classification Report:
                   precision    recall  f1-score   support
     
-               0       0.88      0.82      0.85       157
-               1       0.63      0.74      0.68        66
+               0       0.86      0.85      0.85       105
+               1       0.79      0.80      0.79        74
     
-        accuracy                           0.79       223
-       macro avg       0.76      0.78      0.76       223
-    weighted avg       0.81      0.79      0.80       223
+        accuracy                           0.83       179
+       macro avg       0.82      0.82      0.82       179
+    weighted avg       0.83      0.83      0.83       179
     
     
