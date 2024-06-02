@@ -3261,17 +3261,6 @@ weighted avg       0.83      0.83      0.83       179
 
 ```
 
-## Discussão dos resultados obtidos
-
-Comparando os resultados obtidos pelos dois modelos, observamos que ambos apresentam desempenhos similares em termos de acurácia e outras métricas. No entanto, o Random Forest Classifier
-obteve uma ligeira vantagem em algumas métricas:
-
-* Acurácia: O Random Forest Classifier teve uma acurácia ligeiramente maior (0.8324) em comparação com a Regressão Logística (0.8268).
-* Precisão: O Random Forest Classifier também teve uma precisão maior (0.8438) em comparação com a Regressão Logística (0.7867).
-* Recall: A Regressão Logística teve um recall ligeiramente melhor (0.7973) em comparação com o Random Forest Classifier (0.7297).
-* F1-Score: O F1-Score é ligeiramente maior para a Regressão Logística (0.7919) em comparação com o Random Forest Classifier (0.7826).
-* ROC AUC: O Random Forest Classifier teve um ROC AUC um pouco maior (0.8908) em comparação com a Regressão Logística (0.8882).
-
 Com base nesses resultados, o Random Forest Classifier pode ser considerado ligeiramente superior em termos de precisão e acurácia, enquanto a Regressão Logística apresentou um melhor 
 desempenho em termos de recall e F1-Score. 
 
