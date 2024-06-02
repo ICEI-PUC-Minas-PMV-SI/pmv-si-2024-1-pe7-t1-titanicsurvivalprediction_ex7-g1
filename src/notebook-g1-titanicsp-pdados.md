@@ -83,7 +83,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -388,7 +400,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -578,7 +602,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -703,7 +739,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -820,7 +868,19 @@ data_final.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -998,7 +1058,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1210,7 +1282,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1336,7 +1420,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1468,7 +1564,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1608,7 +1716,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1774,7 +1894,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1917,7 +2049,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2084,7 +2228,7 @@ plt.show()
 
 
     
-![](/docs/img/output_57_0.png)
+![png](output_57_0.png)
     
 
 
@@ -2116,7 +2260,7 @@ plt.show()
 
 
     
-![](/docs/img/output_61_0.png)
+![png](output_61_0.png)
     
 
 
@@ -2147,7 +2291,7 @@ plt.show()
 
 
     
-![](/docs/img/output_64_0.png)
+![png](output_64_0.png)
     
 
 
@@ -2164,7 +2308,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2408,7 +2564,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2532,7 +2700,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2746,7 +2926,19 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2880,7 +3072,7 @@ plt.show()
 
 
     
-![](/docs/img/output_96_0.png)
+![png](output_96_0.png)
     
 
 
@@ -2936,6 +3128,14 @@ clf = RandomForestClassifier(criterion = 'gini',
 
 clf.fit(X_train, y_train)
 ```
+
+
+
+
+<style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(max_depth=8, min_samples_split=10, random_state=5)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(max_depth=8, min_samples_split=10, random_state=5)</pre></div></div></div></div></div>
+
+
+
 
 ```python
 # clf.feature_importances_
@@ -3035,7 +3235,7 @@ plt.show()
 
 
     
-![](/docs/img/output_104_0.png)
+![png](output_104_0.png)
     
 
 
@@ -3133,3 +3333,128 @@ print(class_report)
     weighted avg       0.83      0.83      0.83       179
     
     
+
+## Análise de Sensibilidade a Classes Desbalanceadas em Algoritmos de Classificação
+
+#### Algoritmos Utilizados
+1. **Random Forest Classifier**
+2. **Regressão Logística**
+
+#### Dados Utilizados
+- Dataset do Titanic com a variável alvo `Survived`.
+- Desbalanceamento nas classes: 549 não sobreviveram (0) e 342 sobreviveram (1).
+
+### Métricas de Avaliação
+
+- **Accuracy**: Proporção de previsões corretas.
+- **Precision**: Proporção de verdadeiros positivos entre o total de previsões positivas.
+- **Recall (Sensibilidade)**: Proporção de verdadeiros positivos entre o total de exemplos positivos reais.
+- **F1-Score**: Média harmônica da precisão e recall.
+- **ROC AUC**: Área sob a curva ROC, que mede o desempenho do classificador em diferentes limiares de decisão.
+- **Confusion Matrix**: Mostra o número de verdadeiros positivos, verdadeiros negativos, falsos positivos e falsos negativos.
+- **Classification Report**: Inclui precisão, recall, F1-Score e suporte para cada classe.
+
+### Avaliação de Sensibilidade a Classes Desbalanceadas
+
+>## Random Forest Classifier
+>
+> ### Métricas de Avaliação
+>
+>- **Accuracy**: 0.8324022346368715
+>- **Precision**: 0.84375
+>- **Recall**: 0.7297297297297297
+>- **F1 Score**: 0.7826086956521738
+>- **ROC AUC**: 0.8907979407979408
+>
+>### Matriz de Confusão
+>
+>[[95 10]
+>[20 54]]
+>
+>           precision    recall  f1-score   support
+>
+>       0       0.83      0.90      0.86       105
+>       1       0.84      0.73      0.78        74
+>
+>accuracy                           0.83       179
+>
+>macro avg 0.83 0.82 0.82 179
+>weighted avg 0.83 0.83 0.83 179
+
+>## Algoritmo Regreção Logistica
+>
+>| Survived | Pclass | Sex    | Age      | SibSp | Parch | Fare     | Embarked | Cabin_Known | Title | Family_Size | Age_Group |
+>|----------|--------|--------|----------|-------|-------|----------|----------|-------------|-------|-------------|-----------|
+>| 0        | 3      | male   | 0.271174 | 1     | 0     | 0.110460 | S        | 0           | Mr    | 2           | Child     |
+>| 1        | 1      | female | 0.472229 | 1     | 0     | 1.000000 | C        | 1           | Mrs   | 2           | Child     |
+>| 1        | 3      | female | 0.321438 | 0     | 0     | 0.120745 | S        | 0           | Miss  | 1           | Child     |
+>| 1        | 1      | female | 0.434531 | 1     | 0     | 0.809027 | S        | 1           | Mrs   | 2           | Child     |
+>| 0        | 3      | male   | 0.434531 | 0     | 0     | 0.122649 | S        | 0           | Mr    | 1           | Child     |
+>
+>### Métricas de Avaliação
+>
+>- **Accuracy**: 0.8268156424581006
+>- **Precision**: 0.7866666666666666
+>- **Recall**: 0.7972972972972973
+>- **F1 Score**: 0.7919463087248321
+>- **ROC AUC**: 0.8881595881595881
+>
+>### Matriz de Confusão
+>[[89 16]
+>[15 59]]
+>
+>
+>### Classification Report
+>
+>          precision    recall  f1-score   support
+>
+>       0       0.86      0.85      0.85       105
+>       1       0.79      0.80      0.79        74
+>
+>accuracy                           0.83       179
+>
+>macro avg 0.82 0.82 0.82 179
+>weighted avg 0.83 0.83 0.83 179
+
+## Sensibilidade a Classes Desbalanceadas
+
+#### Random Forest Classifier
+
+- **Precision** e **Recall** são diferentes para as classes 0 e 1.
+  - Classe 0 (não sobreviveu): Alta precisão (0.83) e alto recall (0.90).
+  - Classe 1 (sobreviveu): Boa precisão (0.84) mas recall menor (0.73).
+- **F1-Score**: Classe 0 (0.86) é maior que a Classe 1 (0.78).
+- **ROC AUC**: 0.8908, indicando bom desempenho geral.
+
+#### Regressão Logística
+
+- **Precision** e **Recall** são também diferentes para as classes 0 e 1.
+  - Classe 0 (não sobreviveu): Alta precisão (0.86) e alto recall (0.85).
+  - Classe 1 (sobreviveu): Boa precisão (0.79) e recall similar (0.80).
+- **F1-Score**: Classe 0 (0.85) é maior que a Classe 1 (0.79).
+- **ROC AUC**: 0.8882, indicando bom desempenho geral.
+
+### Conclusão
+
+Ambos os algoritmos mostram um bom desempenho geral, mas há uma diferença notável entre as métricas das duas classes. Essa diferença sugere que os algoritmos são sensíveis ao desbalanceamento de classes, particularmente no recall da classe minoritária (sobreviveu).
+
+#### Impacto do Desbalanceamento
+
+- **Random Forest**: Tende a ter um recall menor para a classe minoritária.
+- **Regressão Logística**: Também mostra menor recall para a classe minoritária, mas um pouco melhor em balancear precision e recall.
+
+## Recomendações
+
+1. **Uso de Métricas Apropriadas**:
+   - Utilize a F1-Score e o ROC AUC para uma avaliação equilibrada.
+   - Considere a matriz de confusão para entender o desempenho em detalhes.
+
+2. **Estratégias de Balanceamento**:
+   - Aplicar técnicas como oversampling (SMOTE) ou undersampling.
+   - Ajustar pesos das classes no modelo (`class_weight='balanced'`).
+
+3. **Validação Cruzada**:
+   - Utilizar validação cruzada estratificada para garantir a representação de ambas as classes em cada fold.
+
+4. **Análise de Erros**:
+   - Examine os falsos negativos e falsos positivos para entender e melhorar o modelo.
