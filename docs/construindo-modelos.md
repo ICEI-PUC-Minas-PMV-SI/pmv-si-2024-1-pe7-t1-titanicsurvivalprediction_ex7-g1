@@ -3383,3 +3383,128 @@ print("Classification Report:\n", classification_report(y_test, y_pred))
 ```
 
 Com essas avaliações e comparações, podemos concluir que, apesar de ambos os modelos apresentarem desempenho similar, o Random Forest Classifier pode ser preferível devido à sua vantagem em precisão e acurácia.
+
+## Análise de Sensibilidade a Classes Desbalanceadas em Algoritmos de Classificação
+​
+#### Algoritmos Utilizados
+1. **Random Forest Classifier**
+2. **Regressão Logística**
+​
+#### Dados Utilizados
+- Dataset do Titanic com a variável alvo `Survived`.
+- Desbalanceamento nas classes: 549 não sobreviveram (0) e 342 sobreviveram (1).
+​
+### Métricas de Avaliação
+​
+- **Accuracy**: Proporção de previsões corretas.
+- **Precision**: Proporção de verdadeiros positivos entre o total de previsões positivas.
+- **Recall (Sensibilidade)**: Proporção de verdadeiros positivos entre o total de exemplos positivos reais.
+- **F1-Score**: Média harmônica da precisão e recall.
+- **ROC AUC**: Área sob a curva ROC, que mede o desempenho do classificador em diferentes limiares de decisão.
+- **Confusion Matrix**: Mostra o número de verdadeiros positivos, verdadeiros negativos, falsos positivos e falsos negativos.
+- **Classification Report**: Inclui precisão, recall, F1-Score e suporte para cada classe.
+​
+### Avaliação de Sensibilidade a Classes Desbalanceadas
+
+>## Random Forest Classifier
+>
+> ### Métricas de Avaliação
+>
+>- **Accuracy**: 0.8324022346368715
+>- **Precision**: 0.84375
+>- **Recall**: 0.7297297297297297
+>- **F1 Score**: 0.7826086956521738
+>- **ROC AUC**: 0.8907979407979408
+>
+>### Matriz de Confusão
+>
+>[[95 10]
+>[20 54]]
+>
+>           precision    recall  f1-score   support
+>
+>       0       0.83      0.90      0.86       105
+>       1       0.84      0.73      0.78        74
+>
+>accuracy                           0.83       179
+>
+>macro avg 0.83 0.82 0.82 179
+>weighted avg 0.83 0.83 0.83 179
+
+>## Algoritmo Regreção Logistica
+>
+>| Survived | Pclass | Sex    | Age      | SibSp | Parch | Fare     | Embarked | Cabin_Known | Title | Family_Size | Age_Group |
+>|----------|--------|--------|----------|-------|-------|----------|----------|-------------|-------|-------------|-----------|
+>| 0        | 3      | male   | 0.271174 | 1     | 0     | 0.110460 | S        | 0           | Mr    | 2           | Child     |
+>| 1        | 1      | female | 0.472229 | 1     | 0     | 1.000000 | C        | 1           | Mrs   | 2           | Child     |
+>| 1        | 3      | female | 0.321438 | 0     | 0     | 0.120745 | S        | 0           | Miss  | 1           | Child     |
+>| 1        | 1      | female | 0.434531 | 1     | 0     | 0.809027 | S        | 1           | Mrs   | 2           | Child     |
+>| 0        | 3      | male   | 0.434531 | 0     | 0     | 0.122649 | S        | 0           | Mr    | 1           | Child     |
+>
+>### Métricas de Avaliação
+>
+>- **Accuracy**: 0.8268156424581006
+>- **Precision**: 0.7866666666666666
+>- **Recall**: 0.7972972972972973
+>- **F1 Score**: 0.7919463087248321
+>- **ROC AUC**: 0.8881595881595881
+>
+>### Matriz de Confusão
+>[[89 16]
+>[15 59]]
+>
+>
+>### Classification Report
+>
+>          precision    recall  f1-score   support
+>
+>       0       0.86      0.85      0.85       105
+>       1       0.79      0.80      0.79        74
+>
+>accuracy                           0.83       179
+>
+>macro avg 0.82 0.82 0.82 179
+>weighted avg 0.83 0.83 0.83 179
+
+## Sensibilidade a Classes Desbalanceadas
+
+#### Random Forest Classifier
+
+- **Precision** e **Recall** são diferentes para as classes 0 e 1.
+  - Classe 0 (não sobreviveu): Alta precisão (0.83) e alto recall (0.90).
+  - Classe 1 (sobreviveu): Boa precisão (0.84) mas recall menor (0.73).
+- **F1-Score**: Classe 0 (0.86) é maior que a Classe 1 (0.78).
+- **ROC AUC**: 0.8908, indicando bom desempenho geral.
+
+#### Regressão Logística
+
+- **Precision** e **Recall** são também diferentes para as classes 0 e 1.
+  - Classe 0 (não sobreviveu): Alta precisão (0.86) e alto recall (0.85).
+  - Classe 1 (sobreviveu): Boa precisão (0.79) e recall similar (0.80).
+- **F1-Score**: Classe 0 (0.85) é maior que a Classe 1 (0.79).
+- **ROC AUC**: 0.8882, indicando bom desempenho geral.
+
+### Conclusão
+
+Ambos os algoritmos mostram um bom desempenho geral, mas há uma diferença notável entre as métricas das duas classes. Essa diferença sugere que os algoritmos são sensíveis ao desbalanceamento de classes, particularmente no recall da classe minoritária (sobreviveu).
+
+#### Impacto do Desbalanceamento
+
+- **Random Forest**: Tende a ter um recall menor para a classe minoritária.
+- **Regressão Logística**: Também mostra menor recall para a classe minoritária, mas um pouco melhor em balancear precision e recall.
+
+## Recomendações
+
+1. **Uso de Métricas Apropriadas**:
+   - Utilize a F1-Score e o ROC AUC para uma avaliação equilibrada.
+   - Considere a matriz de confusão para entender o desempenho em detalhes.
+
+2. **Estratégias de Balanceamento**:
+   - Aplicar técnicas como oversampling (SMOTE) ou undersampling.
+   - Ajustar pesos das classes no modelo (`class_weight='balanced'`).
+
+3. **Validação Cruzada**:
+   - Utilizar validação cruzada estratificada para garantir a representação de ambas as classes em cada fold.
+
+4. **Análise de Erros**:
+   - Examine os falsos negativos e falsos positivos para entender e melhorar o modelo.
