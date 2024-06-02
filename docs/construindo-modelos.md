@@ -2111,7 +2111,7 @@ Resumo das Etapas
 
 Com a introdução de novas variáveis e a criteriosa seleção de características relevantes, o dataset foi aprimorado significativamente para a modelagem preditiva. Essas modificações são essenciais para elevar a precisão dos modelos de machine learning, pois elas concentram a análise nas características mais informativas enquanto simplificam a estrutura do modelo. Esta abordagem não só melhora a eficácia dos modelos, mas também potencializa a interpretação dos resultados, contribuindo para insights mais claros e decisões baseadas em dados mais robustas.
 
-# Tratamento de dados desbalanceados: 
+# Tratamento de dados desbalanceados
 Lidar com dados desbalanceados é de suma importância em projetos de machine learning, sobretudo em tarefas de classificação. O desequilíbrio entre as classes pode resultar em modelos que favorecem a classe majoritária, comprometendo a eficácia do modelo na identificação da classe minoritária. Diante dessa realidade, foi utilizado técnicas de reamostragem e abordagens algorítmicas projetadas para equilibrar o dataset.
 
 * Avaliar o Desequilíbrio: Contando o número de instâncias de cada classe (sobreviventes e não sobreviventes).
@@ -3185,22 +3185,201 @@ print(class_report)
 
 # Descrição dos modelos
 
-Nesta seção, conhecendo os dados e de posse dos dados preparados, é hora de descrever os algoritmos de aprendizado de máquina selecionados para a construção dos modelos propostos. Inclua informações abrangentes sobre cada algoritmo implementado, aborde conceitos fundamentais, princípios de funcionamento, vantagens/limitações e justifique a escolha de cada um dos algoritmos. 
+Os dois modelos que escolhemos para fazer nossas previsões são amplamente conhecidos por resolver problemas de classificação: o Random Forest Classifier e a Regressão Logística. 
 
-Explore aspectos específicos, como o ajuste dos parâmetros livres de cada algoritmo. Lembre-se de experimentar parâmetros diferentes e principalmente, de justificar as escolhas realizadas.
+O Random Forest Classifier funciona como uma floresta repleta de árvores de decisão. Cada árvore é treinada com uma parte aleatória dos dados e, em seguida, todas votam na previsão final.
+Isso normalmente resulta em previsões precisas e pode lidar bem com conjuntos de dados complexos. No entanto, o processo de cálculo pode ser demorado, e compreender como cada árvore decide 
+pode ser desafiador.
 
-Como parte da comprovação de construção dos modelos, um vídeo de demonstração com todas as etapas de pré-processamento e de execução dos modelos deverá ser entregue. Este vídeo poderá ser do tipo _screencast_ e é imprescindível a narração contemplando a demonstração de todas as etapas realizadas.
+Por outro lado, a Regressão Logística é mais simples. Ela analisa se a relação entre as variáveis é linear ou não, o que é útil para entender as relações entre elas. É rápido e fácil de 
+usar, mas funciona melhor com dados que têm relações simples.
+
+Optamos por esses modelos porque acreditamos que são adequados para o nosso problema e conseguem lidar bem com nossos dados. Realizamos testes com diferentes configurações, como 
+profundidade máxima e regularização, para encontrar a combinação ideal para cada um.
 
 # Avaliação dos modelos criados
 
 ## Métricas utilizadas
 
-Nesta seção, as métricas utilizadas para avaliar os modelos desenvolvidos deverão ser apresentadas (p. ex.: acurácia, precisão, recall, F1-Score, MSE etc.). A escolha de cada métrica deverá ser justificada, pois esta escolha é essencial para avaliar de forma mais assertiva a qualidade do modelo construído. 
+Para avaliar os modelos criados, utilizamos várias métricas de desempenho apropriadas para problemas de classificação binária. As principais métricas consideradas foram: acurácia, precisão, recall, F1-Score e ROC AUC. Abaixo, apresentamos uma comparação detalhada dos resultados obtidos pelos dois modelos: Random Forest Classifier e Regressão Logística.
+
+* #### Random Forest Classifier
+  
+Métricas de Desempenho:
+
+* Acurácia: 0.8324
+* Precisão: 0.8438
+* Recall: 0.7297
+* F1-Score: 0.7826
+* ROC AUC: 0.8908
+
+
+Matriz de Confusão:
+```python
+[[95 10]
+ [20 54]]
+
+```
+Relatório de Classificação:
+```python
+              precision    recall  f1-score   support
+
+           0       0.83      0.90      0.86       105
+           1       0.84      0.73      0.78        74
+
+    accuracy                           0.83       179
+   macro avg       0.83      0.82      0.82       179
+weighted avg       0.83      0.83      0.83       179
+
+```
+* #### Regressão Logística
+
+Métricas de Desempenho:
+
+* Acurácia: 0.8268
+* Precisão: 0.7867
+* Recall: 0.7973
+* F1-Score: 0.7919
+* ROC AUC: 0.8882
+
+Matriz de Confusão:
+```python
+[[89 16]
+ [15 59]]
+```
+
+Relatório de Classificação:
+```python
+              precision    recall  f1-score   support
+
+           0       0.86      0.85      0.85       105
+           1       0.79      0.80      0.79        74
+
+    accuracy                           0.83       179
+   macro avg       0.82      0.82      0.82       179
+weighted avg       0.83      0.83      0.83       179
+
+```
 
 ## Discussão dos resultados obtidos
 
-Nesta seção, discuta os resultados obtidos pelos modelos construídos, no contexto prático em que os dados se inserem, promovendo uma compreensão abrangente e aprofundada da qualidade de cada um deles. Lembre-se de relacionar os resultados obtidos ao problema identificado, a questão de pesquisa levantada e estabelecendo relação com os objetivos previamente propostos. 
+Comparando os resultados obtidos pelos dois modelos, observamos que ambos apresentam desempenhos similares em termos de acurácia e outras métricas. No entanto, o Random Forest Classifier
+obteve uma ligeira vantagem em algumas métricas:
+
+* Acurácia: O Random Forest Classifier teve uma acurácia ligeiramente maior (0.8324) em comparação com a Regressão Logística (0.8268).
+* Precisão: O Random Forest Classifier também teve uma precisão maior (0.8438) em comparação com a Regressão Logística (0.7867).
+* Recall: A Regressão Logística teve um recall ligeiramente melhor (0.7973) em comparação com o Random Forest Classifier (0.7297).
+* F1-Score: O F1-Score é ligeiramente maior para a Regressão Logística (0.7919) em comparação com o Random Forest Classifier (0.7826).
+* ROC AUC: O Random Forest Classifier teve um ROC AUC um pouco maior (0.8908) em comparação com a Regressão Logística (0.8882).
+
+Com base nesses resultados, o Random Forest Classifier pode ser considerado ligeiramente superior em termos de precisão e acurácia, enquanto a Regressão Logística apresentou um melhor 
+desempenho em termos de recall e F1-Score. 
 
 # Pipeline de pesquisa e análise de dados
 
-Em pesquisa e experimentação em sistemas de informação, um pipeline de pesquisa e análise de dados refere-se a um conjunto organizado de processos e etapas que um profissional segue para realizar a coleta, preparação, análise e interpretação de dados durante a fase de pesquisa e desenvolvimento de modelos. Esse pipeline é essencial para extrair _insights_ significativos, entender a natureza dos dados e, construir modelos de aprendizado de máquina eficazes. 
+1. Especificação do Problema
+
+O problema é classificar se um passageiro do Titanic sobreviveu ou não com base em várias características (idade, sexo, classe, etc.).
+
+2. Etapas de Pré-processamento
+
+Carregar o Dataset: Leitura dos dados do Titanic.
+Divisão de Recursos e Alvo: Separação das variáveis independentes (features) e da variável dependente (target).
+Tratamento de Valores Faltantes: Uso de SimpleImputer para preencher valores faltantes.
+Escalonamento: Normalização dos dados numéricos utilizando StandardScaler.
+Codificação de Categorias: Transformação de variáveis categóricas usando OneHotEncoder.
+
+3. Treinamento
+
+Random Forest Classifier: Ajuste do modelo com hiperparâmetros especificados (critério de divisão, profundidade máxima, etc.).
+Regressão Logística: Ajuste do modelo com regularização e número máximo de iterações.
+
+4. Avaliação
+
+Divisão de Dados: Separação dos dados em conjuntos de treino e teste.
+Treinamento e Previsão: Ajuste dos modelos e previsão no conjunto de teste.
+Métricas de Desempenho: Cálculo de acurácia, precisão, recall, F1-Score, ROC AUC, matriz de confusão e relatório de classificação.
+
+* Código do Pipeline de Pesquisa e Análise de Dados
+
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, classification_report
+
+# Carregar o dataset
+data = pd.read_csv('/kaggle/working/titanic_transformed.csv')
+
+# Separar os recursos e a variável alvo
+X = data.drop('Survived', axis=1)
+y = data['Survived']
+
+# Identificar colunas categóricas e numéricas
+categorical_cols = ['Pclass', 'Sex', 'Embarked']
+numerical_cols = ['Age', 'SibSp', 'Parch', 'Fare']
+
+# Criar transformers para colunas numéricas e categóricas
+numerical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='median')),
+    ('scaler', StandardScaler())
+])
+
+categorical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+])
+
+# Criar o preprocessor utilizando ColumnTransformer
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numerical_transformer, numerical_cols),
+        ('cat', categorical_transformer, categorical_cols)
+    ])
+
+# Aplicar as transformações no dataset
+X = preprocessor.fit_transform(X)
+
+# Dividir os dados em conjuntos de treinamento e teste
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Treinar e avaliar o modelo Random Forest
+clf = RandomForestClassifier(criterion='gini', max_depth=8, min_samples_split=10, random_state=5)
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+y_pred_proba = clf.predict_proba(X_test)[:, 1]
+
+print("Random Forest Classifier")
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Precision:", precision_score(y_test, y_pred))
+print("Recall:", recall_score(y_test, y_pred))
+print("F1 Score:", f1_score(y_test, y_pred))
+print("ROC AUC:", roc_auc_score(y_test, y_pred_proba))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("Classification Report:\n", classification_report(y_test, y_pred))
+
+# Treinar e avaliar o modelo de Regressão Logística
+model = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('classifier', LogisticRegression(max_iter=1000, random_state=42))
+])
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+y_pred_proba = model.predict_proba(X_test)[:, 1]
+
+print("\nLogistic Regression")
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Precision:", precision_score(y_test, y_pred))
+print("Recall:", recall_score(y_test, y_pred))
+print("F1 Score:", f1_score(y_test, y_pred))
+print("ROC AUC:", roc_auc_score(y_test, y_pred_proba))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("Classification Report:\n", classification_report(y_test, y_pred))
+```
+
+Com essas avaliações e comparações, podemos concluir que, apesar de ambos os modelos apresentarem desempenho similar, o Random Forest Classifier pode ser preferível devido à sua vantagem em precisão e acurácia.
