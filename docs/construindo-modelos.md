@@ -3331,17 +3331,17 @@ preprocessor = ColumnTransformer(
         ('cat', categorical_transformer, categorical_cols)
     ])
 
-# Aplicar as transformações no dataset
-X = preprocessor.fit_transform(X)
-
 # Dividir os dados em conjuntos de treinamento e teste
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Treinar e avaliar o modelo Random Forest
-clf = RandomForestClassifier(criterion='gini', max_depth=8, min_samples_split=10, random_state=5)
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-y_pred_proba = clf.predict_proba(X_test)[:, 1]
+clf_pipeline = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('classifier', RandomForestClassifier(criterion='gini', max_depth=8, min_samples_split=10, random_state=5))
+])
+clf_pipeline.fit(X_train, y_train)
+y_pred = clf_pipeline.predict(X_test)
+y_pred_proba = clf_pipeline.predict_proba(X_test)[:, 1]
 
 print("Random Forest Classifier")
 print("Accuracy:", accuracy_score(y_test, y_pred))
@@ -3353,13 +3353,13 @@ print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 print("Classification Report:\n", classification_report(y_test, y_pred))
 
 # Treinar e avaliar o modelo de Regressão Logística
-model = Pipeline(steps=[
+model_pipeline = Pipeline(steps=[
     ('preprocessor', preprocessor),
     ('classifier', LogisticRegression(max_iter=1000, random_state=42))
 ])
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
-y_pred_proba = model.predict_proba(X_test)[:, 1]
+model_pipeline.fit(X_train, y_train)
+y_pred = model_pipeline.predict(X_test)
+y_pred_proba = model_pipeline.predict_proba(X_test)[:, 1]
 
 print("\nLogistic Regression")
 print("Accuracy:", accuracy_score(y_test, y_pred))
@@ -3370,6 +3370,44 @@ print("ROC AUC:", roc_auc_score(y_test, y_pred_proba))
 print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 print("Classification Report:\n", classification_report(y_test, y_pred))
 ```
+Random Forest Classifier
+Accuracy: 0.8268156424581006
+Precision: 0.8412698412698413
+Recall: 0.7162162162162162
+F1 Score: 0.7737226277372262
+ROC AUC: 0.8904118404118403
+Confusion Matrix:
+ [[95 10]
+ [21 53]]
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.82      0.90      0.86       105
+           1       0.84      0.72      0.77        74
+
+    accuracy                           0.83       179
+   macro avg       0.83      0.81      0.82       179
+weighted avg       0.83      0.83      0.82       179
+
+
+Logistic Regression
+Accuracy: 0.7932960893854749
+Precision: 0.7761194029850746
+Recall: 0.7027027027027027
+F1 Score: 0.7375886524822697
+ROC AUC: 0.8795366795366796
+Confusion Matrix:
+ [[90 15]
+ [22 52]]
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.80      0.86      0.83       105
+           1       0.78      0.70      0.74        74
+
+    accuracy                           0.79       179
+   macro avg       0.79      0.78      0.78       179
+weighted avg       0.79      0.79      0.79       179
 
 Com essas avaliações e comparações, podemos concluir que, apesar de ambos os modelos apresentarem desempenho similar, o Random Forest Classifier pode ser preferível devido à sua vantagem em precisão e acurácia.
 
