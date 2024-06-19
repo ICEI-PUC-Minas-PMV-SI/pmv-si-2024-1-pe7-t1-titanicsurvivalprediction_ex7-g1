@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão de Sobrevivência no Titanic</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Previsão de Sobrevivência no Titanic</h2>
+        <div class="form-group">
+            <label for="Pclass">Classe</label>
+            <select id="Pclass">
+                <option value="1">1ª Classe</option>
+                <option value="2">2ª Classe</option>
+                <option value="3">3ª Classe</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Sex">Sexo</label>
+            <select id="Sex">
+                <option value="male">Masculino</option>
+                <option value="female">Feminino</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Age">Idade</label>
+            <input type="number" id="Age" min="0" max="100" required>
+        </div>
+        <div class="form-group">
+            <label for="SibSp">Número de Irmãos/Cônjuges A Bordo</label>
+            <input type="number" id="SibSp" min="0" max="10" required>
+        </div>
+        <div class="form-group">
+            <label for="Parch">Número de Pais/Filhos A Bordo</label>
+            <input type="number" id="Parch" min="0" max="10" required>
+        </div>
+        <div class="form-group">
+            <label for="Fare">Tarifa</label>
+            <input type="number" id="Fare" min="0" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="Embarked">Porto de Embarque</label>
+            <select id="Embarked">
+                <option value="C">Cherbourg</option>
+                <option value="Q">Queenstown</option>
+                <option value="S">Southampton</option>
+            </select>
+        </div>
+        <button onclick="predict()">Verificar se Sobreviveu</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        async function predict() {
+            const data = {
+                Pclass: document.getElementById('Pclass').value,
+                Sex: document.getElementById('Sex').value,
+                Age: document.getElementById('Age').value,
+                SibSp: document.getElementById('SibSp').value,
+                Parch: document.getElementById('Parch').value,
+                Fare: document.getElementById('Fare').value,
+                Embarked: document.getElementById('Embarked').value
+            };
+
+            const response = await fetch('http://localhost:5000/predict', {  // Use 'localhost' or appropriate hostname
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = `Previsão: ${result.Prediction}\nProbabilidade: ${result.Probability.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
