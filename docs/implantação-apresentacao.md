@@ -1,7 +1,5 @@
 # Implantação da solução
 
-
-```markdown
 # Documentação do Serviço Web de Previsão de Sobrevivência no Titanic
 
 ## Descrição do Código
@@ -139,8 +137,6 @@ if __name__ == '__main__':
 ## Sumário
 
 Este código cria um serviço web que usa um modelo de machine learning para prever se uma pessoa sobreviveu ao naufrágio do Titanic com base em suas características. Ele recebe dados em formato JSON via requisições HTTP POST, faz a previsão usando um modelo RandomForest carregado e retorna a previsão junto com a probabilidade associada em formato JSON.
-```
-
 
 # Apresentação da solução
 
