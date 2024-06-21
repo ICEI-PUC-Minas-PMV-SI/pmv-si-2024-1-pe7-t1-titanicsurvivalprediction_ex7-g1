@@ -186,6 +186,14 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
+## Monitoramento e Manutenção
+
+Para garantir que o serviço web de previsão de sobrevivência no Titanic esteja sempre funcionando corretamente e para facilitar a manutenção, foram implementadas várias práticas e ferramentas de monitoramento e manutenção. Essas práticas são essenciais para identificar e resolver problemas rapidamente, além de garantir a continuidade do serviço. 
+
+Segue nosso Dashboard das Métricas selecionadas para monitoramento
+
+![](/docs/img/monitoramento_titanicsp.png)
+
 ## Sumário
 
 Este código cria um serviço web que usa um modelo de machine learning para prever se uma pessoa sobreviveu ao naufrágio do Titanic com base em suas características. Ele recebe dados em formato JSON via requisições HTTP POST, faz a previsão usando um modelo RandomForest carregado e retorna a previsão junto com a probabilidade associada em formato JSON.
