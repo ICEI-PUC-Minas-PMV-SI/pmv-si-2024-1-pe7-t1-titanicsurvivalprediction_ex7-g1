@@ -52,7 +52,7 @@ Implementação de monitoramento e logs para garantir que o serviço web esteja 
 
 Neste documento, detalhamos as etapas necessárias para a implantação de um serviço web de previsão de sobrevivência no Titanic, desde a escolha da plataforma de nuvem até o monitoramento da aplicação em produção. Utilizando Docker para containerização, Flask para desenvolvimento da API e Microsoft Azure para hospedagem, conseguimos construir e implantar uma solução robusta e escalável.
 
-# Descrição Técnica
+# Detalhamento Técnico
 
 ## Descrição do Código
 
