@@ -397,5 +397,4 @@ Este código cria um serviço web que usa um modelo de machine learning para pre
 
 # Apresentação da solução
 
-Nesta seção, um vídeo de, no máximo, 5 minutos onde deverá ser descrito o escopo todo do projeto, um resumo do trabalho desenvolvido, incluindo a comprovação de que a implantação foi realizada e, as conclusões alcançadas.
-
+[Apresentação da implantação - Grupo 1 - Titanic surviver prediction - ](https://drive.google.com/file/d/1KQVUomZgWuwfD7WzwnBfFUBgWQWypKFP/view?usp=sharing)
