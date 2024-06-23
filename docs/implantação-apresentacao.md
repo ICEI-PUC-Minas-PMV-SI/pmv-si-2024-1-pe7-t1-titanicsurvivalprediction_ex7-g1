@@ -379,7 +379,7 @@ O JavaScript coleta os dados do formulário, envia-os para a API e exibe a previ
 </body>
 </html>
 ```
-Arte Final
+### Arte Final
 
 ![](/docs/img/fe_titanicsp.png)
 
