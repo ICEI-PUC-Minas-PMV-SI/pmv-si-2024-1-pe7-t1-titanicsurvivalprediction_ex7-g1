@@ -186,6 +186,203 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
+# Front-end - Previsão de Sobrevivência no Titanic
+
+Este projeto é uma aplicação web simples que prevê a sobrevivência de um passageiro no Titanic com base em vários parâmetros de entrada. A aplicação consiste em um front-end desenvolvido em HTML e JavaScript, que se comunica com um back-end (API) para obter as previsões.
+
+## Tecnologias Utilizadas
+
+- **HTML**: Estruturação da página.
+- **CSS**: Estilização básica para uma interface amigável.
+- **JavaScript**: Lógica de interação do usuário e comunicação com a API.
+- **API**: Implementada em um servidor Flask (ou outra tecnologia), que processa os dados e retorna a previsão.
+
+## Estrutura do Projeto
+
+### 1. Interface do Usuário (HTML e CSS)
+
+A interface do usuário consiste em um formulário onde os usuários podem inserir os seguintes dados:
+
+- **Classe do Passageiro** (1ª Classe, 2ª Classe, 3ª Classe)
+- **Sexo** (Masculino, Feminino)
+- **Idade**
+- **Número de Irmãos/Cônjuges A Bordo**
+- **Número de Pais/Filhos A Bordo**
+- **Tarifa**
+- **Porto de Embarque** (Cherbourg, Queenstown, Southampton)
+
+### 2. Script JavaScript
+
+O JavaScript coleta os dados do formulário, envia-os para a API e exibe a previsão de sobrevivência e a probabilidade.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão de Sobrevivência no Titanic</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            color: #4a4a4a;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #737373;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: normal;
+            font-size: 13px;
+            color: #737373;
+        }
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            color: #2b2a2a;
+            font-size: 14px;
+        }
+        hr {
+            border: 1px solid #e2e2e2;
+        }
+        button {
+            padding: 12px;
+            background-color: #fb9438;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 4px;
+        }
+        button:hover {
+            background-color: #feb403;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2><small>PUCMinas - Grupo 1</small></h2>
+        <h2>Previsão de Sobrevivência no Titanic</h2>
+        <hr className="my-3">
+        <div class="form-group">
+            <label for="Pclass">Classe</label>
+            <select id="Pclass">
+                <option value="1">1ª Classe</option>
+                <option value="2">2ª Classe</option>
+                <option value="3">3ª Classe</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Sex">Sexo</label>
+            <select id="Sex">
+                <option value="male">Masculino</option>
+                <option value="female">Feminino</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Age">Idade</label>
+            <input type="number" id="Age" min="0" max="100" required>
+        </div>
+        <div class="form-group">
+            <label for="SibSp">Número de Irmãos/Cônjuges A Bordo</label>
+            <input type="number" id="SibSp" min="0" max="10" required>
+        </div>
+        <div class="form-group">
+            <label for="Parch">Número de Pais/Filhos A Bordo</label>
+            <input type="number" id="Parch" min="0" max="10" required>
+        </div>
+        <div class="form-group">
+            <label for="Fare">Tarifa</label>
+            <input type="number" id="Fare" min="0" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="Embarked">Porto de Embarque</label>
+            <select id="Embarked">
+                <option value="C">Cherbourg</option>
+                <option value="Q">Queenstown</option>
+                <option value="S">Southampton</option>
+            </select>
+        </div>
+        <hr className="my-3">
+        <button onclick="predict()">VERIFICAR SE SOBREVIVEU</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        async function predict() {
+            const data = {
+                Pclass: document.getElementById("Pclass").value,
+                Sex: document.getElementById("Sex").value,
+                Age: document.getElementById("Age").value,
+                SibSp: document.getElementById("SibSp").value,
+                Parch: document.getElementById("Parch").value,
+                Fare: document.getElementById("Fare").value,
+                Embarked: document.getElementById("Embarked").value,
+            };
+
+            try {
+                const response = await fetch("http://localhost:5000/predict", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                document.getElementById("result").innerText = `Previsão: ${result.Prediction}\nProbabilidade: ${result.Probability.toFixed(2)}`;
+            } catch (error) {
+                console.error('Fetch error:', error);
+                document.getElementById("result").innerText = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
+```
+Arte Final
+
+![](/docs/img/fe_titanicsp.png)
+
 ## Monitoramento e Manutenção
 
 Para garantir que o serviço web de previsão de sobrevivência no Titanic esteja sempre funcionando corretamente e para facilitar a manutenção, foram implementadas várias práticas e ferramentas de monitoramento e manutenção. Essas práticas são essenciais para identificar e resolver problemas rapidamente, além de garantir a continuidade do serviço. 
