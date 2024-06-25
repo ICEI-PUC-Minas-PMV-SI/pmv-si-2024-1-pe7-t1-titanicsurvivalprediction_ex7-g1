@@ -12,13 +12,13 @@ authors:
     given-names: Thainara Pereira
   - name-suffix: Professora
     affiliation: PUC Minas
-    family-names: Nardin
-    given-names: Luciana de 
+    family-names: De Nardin
+    given-names: Luciana
 keywords:
   - titanic
   - machine learning
   - sistemas de informacao
-repository-code:
+repository-code: https://github.com/ICEI-PUC-Minas-PMV-SI/pmv-si-2024-1-pe7-t1-titanicsurvivalprediction_ex7-g1
 license: CC-BY-4.0
 version: 1.0.0
 date-released: 2024-06-25
