@@ -1,29 +1,24 @@
 cff-version: 1.0.1
-message: Please cite this software using these metadata.
-title:
+message: Kaggle, Azure, Docker and github-pages.
+title: Titanic Survivel
 authors:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - family-names:
-    given-names:
-  - name-suffix: Professor XXXX
+  - family-names: Rocha
+    given-names: Cleverson Christian
+  - family-names: Muschioni
+    given-names: Luiz Carlos
+  - family-names: Santos
+    given-names: Maitê Luise Freitas de Almeida
+  - family-names: Dias
+    given-names: Thainara Pereira
+  - name-suffix: Professor Luciana de Nardin
     affiliation: PUC Minas
-    family-names:
-    given-names:
+    family-names: Nardin
+    given-names: Luciana de 
 keywords:
-  -
-  -
+  - titanic
+  - machine learning
+  - sistemas de informacao
 repository-code:
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2023-06-30
+date-released: 2024-06-25
